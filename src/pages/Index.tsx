@@ -1,12 +1,330 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect, useRef } from 'react';
+import { Search, Brain, Rocket } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import AnimatedSearchSuggestions from '@/components/AnimatedSearchSuggestions';
+import NeuralBackground from '@/components/NeuralBackground';
 
 const Index = () => {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.scroll-reveal');
+    elements.forEach((el) => observerRef.current?.observe(el));
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "Talent Acquisition Lead",
+      avatar: "SC",
+      quote: "Clura.ai revolutionized our hiring process. The AI-powered search is incredibly accurate.",
+      result: "Found 12 perfect candidates in 30 minutes"
+    },
+    {
+      name: "Marcus Rodriguez",
+      role: "Startup Founder",
+      avatar: "MR",
+      quote: "As a non-technical founder, Clura helped me find amazing engineers effortlessly.",
+      result: "Hired 3 senior developers in 2 weeks"
+    },
+    {
+      name: "Emily Watson",
+      role: "HR Director",
+      avatar: "EW",
+      quote: "The natural language search is a game-changer. No more complex Boolean queries.",
+      result: "Reduced hiring time by 70%"
+    }
+  ];
+
+  const features = [
+    {
+      icon: <Search className="w-6 h-6" />,
+      title: "Natural Language Search",
+      description: "Search using everyday language, no complex syntax needed"
+    },
+    {
+      icon: <Brain className="w-6 h-6" />,
+      title: "AI-Powered Filtering",
+      description: "Our AI understands context and finds the perfect matches"
+    },
+    {
+      icon: <Rocket className="w-6 h-6" />,
+      title: "200M+ Profiles",
+      description: "Access to the largest enriched professional database"
+    },
+    {
+      icon: <Search className="w-6 h-6" />,
+      title: "Instant Export",
+      description: "Export or contact top matches with one click"
+    }
+  ];
+
+  const pricingPlans = [
+    {
+      name: "Free",
+      price: "$0",
+      description: "Perfect for getting started",
+      features: ["5 searches per month", "Basic filters", "Email support"],
+      recommended: false
+    },
+    {
+      name: "Pro",
+      price: "$49",
+      description: "For growing teams",
+      features: ["Unlimited searches", "Advanced AI filters", "Priority support", "Export features"],
+      recommended: true
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      description: "For large organizations",
+      features: ["Custom integrations", "Dedicated support", "Advanced analytics", "Team management"],
+      recommended: false
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <NeuralBackground />
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 pt-20">
+          <div className="animate-fade-in">
+            <div className="mb-6">
+              <span className="inline-block px-4 py-2 bg-clura-500/10 border border-clura-500/20 rounded-full text-clura-400 text-sm font-medium">
+                NEXT GENERATION OF PEOPLE DISCOVERY
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-6">
+              Find Anyone with{' '}
+              <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                AI-Powered
+              </span>{' '}
+              Search
+            </h1>
+            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+              Clura.ai combines artificial intelligence with cutting-edge search
+              strategies to help you discover the perfect people with precision and ease.
+            </p>
+
+            {/* Search Bar */}
+            <div className="relative max-w-2xl mx-auto mb-8">
+              <div className="glass-card p-4">
+                <div className="flex items-center space-x-4">
+                  <Search className="w-5 h-5 text-clura-400" />
+                  <input
+                    type="text"
+                    placeholder="Describe who you're looking for..."
+                    className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none"
+                  />
+                  <button className="neuro-button px-6 py-2 text-sm font-medium text-foreground hover:text-clura-400 transition-colors">
+                    Search
+                  </button>
+                </div>
+              </div>
+              <div className="mt-4">
+                <AnimatedSearchSuggestions />
+              </div>
+            </div>
+
+            <button className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 animate-glow">
+              Get Started Free
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured In Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-12">
+            <h2 className="text-sm font-medium text-muted-foreground tracking-wide uppercase">Featured In</h2>
+          </div>
+          <div className="scroll-reveal flex items-center justify-center space-x-12 opacity-50">
+            {['TechCrunch', 'Forbes', 'Wired', 'Bloomberg', 'Reuters'].map((company) => (
+              <div key={company} className="text-2xl font-bold text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                {company}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">How It Works</h2>
+            <p className="text-xl text-muted-foreground">Three simple steps to find anyone</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: Search, title: "Type Your Query", description: "Describe who you're looking for in natural language" },
+              { icon: Brain, title: "AI Interprets & Enriches", description: "Our AI understands context and enriches your search" },
+              { icon: Rocket, title: "Get Results Instantly", description: "Receive curated matches in seconds" }
+            ].map((step, index) => (
+              <div key={index} className="scroll-reveal glass-card p-8 text-center group hover:bg-white/10 transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                  <step.icon className="w-8 h-8 text-clura-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">{step.title}</h3>
+                <p className="text-muted-foreground">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Powerful Features</h2>
+            <p className="text-xl text-muted-foreground">Everything you need to find the right people</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="scroll-reveal glass-card p-8 group hover:bg-white/10 transition-all duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">What Our Users Say</h2>
+            <p className="text-xl text-muted-foreground">Trusted by thousands of professionals</p>
+          </div>
+          <div className="scroll-reveal overflow-x-auto">
+            <div className="flex space-x-6 pb-4">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
+                  <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Statement */}
+      <section className="py-20 relative">
+        <div className="absolute inset-0 neural-bg opacity-30" />
+        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal">
+            <h2 className="text-5xl font-light tracking-tight text-foreground leading-tight">
+              "To make people discovery{' '}
+              <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                effortless, intelligent, and accessible
+              </span>{' '}
+              for everyone."
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Simple Pricing</h2>
+            <p className="text-xl text-muted-foreground">Choose the plan that works for you</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pricingPlans.map((plan, index) => (
+              <div key={index} className={`scroll-reveal glass-card p-8 relative ${plan.recommended ? 'ring-2 ring-clura-400' : ''}`}>
+                {plan.recommended && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-clura-400 to-clura-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                      Recommended
+                    </span>
+                  </div>
+                )}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-semibold text-foreground mb-2">{plan.name}</h3>
+                  <div className="text-4xl font-light text-foreground mb-2">
+                    {plan.price}<span className="text-lg text-muted-foreground">/month</span>
+                  </div>
+                  <p className="text-muted-foreground">{plan.description}</p>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center text-muted-foreground">
+                      <div className="w-2 h-2 bg-clura-400 rounded-full mr-3" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button className="w-full neuro-button py-3 text-foreground hover:text-clura-400 transition-colors">
+                  Get Started
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-muted-foreground">Everything you need to know</p>
+          </div>
+          <div className="space-y-4">
+            {[
+              { q: "How accurate is the AI search?", a: "Our AI has a 95% accuracy rate in matching queries to relevant profiles." },
+              { q: "What data sources do you use?", a: "We aggregate data from public professional networks, company websites, and verified databases." },
+              { q: "Is my search data private?", a: "Yes, all searches are encrypted and we never share your query data with third parties." },
+              { q: "Can I export search results?", a: "Pro and Enterprise users can export results in CSV, Excel, or integrate via API." },
+              { q: "Do you offer team accounts?", a: "Yes, Enterprise plans include team management and collaboration features." },
+              { q: "What's the difference between plans?", a: "Plans differ in search volume, advanced features, and support levels." }
+            ].map((faq, index) => (
+              <div key={index} className="scroll-reveal glass-card p-6">
+                <h4 className="font-semibold text-foreground mb-2">{faq.q}</h4>
+                <p className="text-muted-foreground">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
