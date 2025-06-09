@@ -42,7 +42,7 @@ const BlogPost = () => {
 
         ## The Clura.ai Advantage
 
-        At Clura.ai, we've built our AI to understand the nuances of professional relationships and career progression. Our system doesn't just match keywords – it understands intent, context, and potential.
+        At Clura.ai, we have built our AI to understand the nuances of professional relationships and career progression. Our system does not just match keywords – it understands intent, context, and potential.
 
         ## Looking Forward
 
@@ -70,9 +70,9 @@ const BlogPost = () => {
 
         ## Enter Natural Language Search
 
-        Natural language search allows users to describe what they're looking for in plain English:
+        Natural language search allows users to describe what they are looking for in plain English:
 
-        Instead of: `(Python OR "machine learning" OR ML) AND (senior OR lead OR principal) AND startup`
+        Instead of: (Python OR "machine learning" OR ML) AND (senior OR lead OR principal) AND startup
 
         You can simply say: "Senior Python developer with machine learning experience at a startup"
 
@@ -81,7 +81,7 @@ const BlogPost = () => {
         Our natural language processing system:
 
         ### 1. Understands Intent
-        The AI interprets what you're really looking for, not just the words you use.
+        The AI interprets what you are really looking for, not just the words you use.
 
         ### 2. Expands Context
         It automatically considers related terms, skills, and experiences.
@@ -90,7 +90,7 @@ const BlogPost = () => {
         The system can disambiguate terms based on context (e.g., "Ruby" the programming language vs. "Ruby" the gemstone).
 
         ### 4. Learns from Feedback
-        Every search helps improve the system's understanding.
+        Every search helps improve the system understanding.
 
         ## Real-World Impact
 
@@ -108,7 +108,7 @@ const BlogPost = () => {
       readTime: '6 min read',
       category: 'Diversity & Inclusion',
       content: `
-        Diversity and inclusion in hiring isn't just a moral imperative – it's a business advantage. Companies with diverse teams consistently outperform their peers in innovation, decision-making, and financial performance. However, traditional recruitment methods often perpetuate existing biases. AI offers a path toward more equitable hiring practices.
+        Diversity and inclusion in hiring is not just a moral imperative – it is a business advantage. Companies with diverse teams consistently outperform their peers in innovation, decision-making, and financial performance. However, traditional recruitment methods often perpetuate existing biases. AI offers a path toward more equitable hiring practices.
 
         ## The Bias Problem in Traditional Hiring
 
@@ -137,7 +137,7 @@ const BlogPost = () => {
 
         ## Our Approach at Clura.ai
 
-        We've implemented several measures to promote diversity:
+        We have implemented several measures to promote diversity:
 
         - **Bias testing** of our algorithms across different demographic groups
         - **Diverse training data** that represents a wide range of backgrounds
@@ -168,9 +168,9 @@ const BlogPost = () => {
 
         ## The Future of Inclusive Hiring
 
-        AI represents a powerful tool in the fight against hiring bias, but it's not a silver bullet. Success requires thoughtful implementation, continuous monitoring, and a genuine commitment to diversity and inclusion.
+        AI represents a powerful tool in the fight against hiring bias, but it is not a silver bullet. Success requires thoughtful implementation, continuous monitoring, and a genuine commitment to diversity and inclusion.
 
-        The goal isn't to eliminate human judgment from hiring – it's to ensure that technology amplifies our best intentions while minimizing our unconscious biases.
+        The goal is not to eliminate human judgment from hiring – it is to ensure that technology amplifies our best intentions while minimizing our unconscious biases.
       `
     },
     'data-privacy-people-search': {
@@ -179,13 +179,13 @@ const BlogPost = () => {
       readTime: '7 min read',
       category: 'Privacy & Security',
       content: `
-        In an era where personal data is increasingly valuable, building a people search engine requires navigating complex privacy considerations. At Clura.ai, we believe that powerful search capabilities and strong privacy protections aren't mutually exclusive – they're both essential.
+        In an era where personal data is increasingly valuable, building a people search engine requires navigating complex privacy considerations. At Clura.ai, we believe that powerful search capabilities and strong privacy protections are not mutually exclusive – they are both essential.
 
         ## The Privacy Challenge
 
         People search engines face unique privacy challenges:
 
-        - **Public vs. Private Information** – Determining what's appropriate to surface
+        - **Public vs. Private Information** – Determining what is appropriate to surface
         - **Consent and Control** – Ensuring people have agency over their information
         - **Data Accuracy** – Preventing the spread of outdated or incorrect information
         - **Purpose Limitation** – Ensuring data is used only for legitimate purposes
@@ -260,14 +260,14 @@ const BlogPost = () => {
         We provide robust controls for both searchers and individuals in results.
 
         ### Transparency
-        We're open about our data practices and privacy protections.
+        We are open about our data practices and privacy protections.
 
         ### Continuous Improvement
         We regularly review and enhance our privacy protections as technology and regulations evolve.
 
         ## Looking Forward
 
-        Privacy technology continues to evolve, and we're committed to staying at the forefront. We're exploring:
+        Privacy technology continues to evolve, and we are committed to staying at the forefront. We are exploring:
 
         - **Differential privacy** techniques to protect individual information while enabling useful insights
         - **Federated learning** approaches that could enable search without centralizing data
@@ -275,9 +275,9 @@ const BlogPost = () => {
 
         ## Our Commitment
 
-        Privacy isn't just a compliance requirement for us – it's a core value. We believe that trust is earned through transparency, consistency, and a genuine commitment to protecting the people we serve.
+        Privacy is not just a compliance requirement for us – it is a core value. We believe that trust is earned through transparency, consistency, and a genuine commitment to protecting the people we serve.
 
-        If you have questions about our privacy practices or want to learn more about how we protect your information, please don't hesitate to reach out to our privacy team at privacy@clura.ai.
+        If you have questions about our privacy practices or want to learn more about how we protect your information, please do not hesitate to reach out to our privacy team at privacy@clura.ai.
       `
     }
   };
