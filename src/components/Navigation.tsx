@@ -30,14 +30,17 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-clura-400 to-clura-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">C</span>
-            </div>
+            <img 
+              src="/lovable-uploads/a2913029-c512-474b-a974-bf1b208f5cea.png" 
+              alt="Clura.ai Logo" 
+              className="w-8 h-8 filter brightness-0 saturate-100"
+              style={{ filter: 'brightness(0) saturate(100%) invert(45%) sepia(69%) saturate(1756%) hue-rotate(215deg) brightness(101%) contrast(101%)' }}
+            />
             <span className="text-xl font-semibold text-foreground">Clura.ai</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -52,6 +55,9 @@ const Navigation = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-clura-400 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+          </div>
+
+          <div className="hidden md:block">
             <Link
               to="/contact"
               className="neuro-button px-4 py-2 text-sm font-medium text-foreground hover:text-clura-400"

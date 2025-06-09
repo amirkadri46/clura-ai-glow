@@ -4,12 +4,19 @@ import { Search, Brain, Rocket } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import AnimatedSearchSuggestions from '@/components/AnimatedSearchSuggestions';
+import AnimatedUserQueries from '@/components/AnimatedUserQueries';
 import NeuralBackground from '@/components/NeuralBackground';
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    // Page enter animation
+    document.body.classList.add('page-enter');
+    setTimeout(() => {
+      document.body.classList.add('page-enter-active');
+    }, 100);
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -54,22 +61,22 @@ const Index = () => {
   const features = [
     {
       icon: <Search className="w-6 h-6" />,
-      title: "Natural Language Search",
+      title: "Search by Natural Language",
       description: "Search using everyday language, no complex syntax needed"
     },
     {
       icon: <Brain className="w-6 h-6" />,
-      title: "AI-Powered Filtering",
+      title: "Instant Filtering with AI",
       description: "Our AI understands context and finds the perfect matches"
     },
     {
       icon: <Rocket className="w-6 h-6" />,
-      title: "200M+ Profiles",
+      title: "200M+ Enriched Profiles",
       description: "Access to the largest enriched professional database"
     },
     {
       icon: <Search className="w-6 h-6" />,
-      title: "Instant Export",
+      title: "Export or Contact Top Matches",
       description: "Export or contact top matches with one click"
     }
   ];
@@ -105,7 +112,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <NeuralBackground />
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 pt-20">
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 pt-20">
           <div className="animate-fade-in">
             <div className="mb-6">
               <span className="inline-block px-4 py-2 bg-clura-500/10 border border-clura-500/20 rounded-full text-clura-400 text-sm font-medium">
@@ -124,70 +131,39 @@ const Index = () => {
               strategies to help you discover the perfect people with precision and ease.
             </p>
 
-            {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto mb-8">
-              <div className="glass-card p-4">
-                <div className="flex items-center space-x-4">
-                  <Search className="w-5 h-5 text-clura-400" />
+            {/* Large Search Card */}
+            <div className="relative max-w-4xl mx-auto mb-8">
+              <div className="search-card p-8">
+                <div className="flex items-center space-x-4 mb-4">
+                  <Search className="w-6 h-6 text-clura-400" />
                   <input
                     type="text"
                     placeholder="Describe who you're looking for..."
-                    className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none"
+                    className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-lg"
                   />
-                  <button className="neuro-button px-6 py-2 text-sm font-medium text-foreground hover:text-clura-400 transition-colors">
+                  <button className="neuro-button px-6 py-3 text-sm font-medium text-foreground hover:text-clura-400 transition-colors">
                     Search
                   </button>
                 </div>
-              </div>
-              <div className="mt-4">
-                <AnimatedSearchSuggestions />
+                <div className="mt-6">
+                  <AnimatedSearchSuggestions />
+                </div>
               </div>
             </div>
 
-            <button className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 animate-glow">
+            <button className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 animate-glow mb-16">
               Get Started Free
             </button>
           </div>
         </div>
       </section>
 
-      {/* Featured In Section */}
+      {/* User Queries Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="scroll-reveal text-center mb-12">
-            <h2 className="text-sm font-medium text-muted-foreground tracking-wide uppercase">Featured In</h2>
-          </div>
-          <div className="scroll-reveal flex items-center justify-center space-x-12 opacity-50">
-            {['TechCrunch', 'Forbes', 'Wired', 'Bloomberg', 'Reuters'].map((company) => (
-              <div key={company} className="text-2xl font-bold text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                {company}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="scroll-reveal text-center mb-16">
-            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">How It Works</h2>
-            <p className="text-xl text-muted-foreground">Three simple steps to find anyone</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: Search, title: "Type Your Query", description: "Describe who you're looking for in natural language" },
-              { icon: Brain, title: "AI Interprets & Enriches", description: "Our AI understands context and enriches your search" },
-              { icon: Rocket, title: "Get Results Instantly", description: "Receive curated matches in seconds" }
-            ].map((step, index) => (
-              <div key={index} className="scroll-reveal glass-card p-8 text-center group hover:bg-white/10 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <step.icon className="w-8 h-8 text-clura-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
-              </div>
-            ))}
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-8">Realistic User Queries</h2>
+            <AnimatedUserQueries />
           </div>
         </div>
       </section>
@@ -201,43 +177,14 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="scroll-reveal glass-card p-8 group hover:bg-white/10 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div key={index} className="scroll-reveal glass-card p-8 feature-card group">
+                <div className="w-12 h-12 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-xl flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-4">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="scroll-reveal text-center mb-16">
-            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">What Our Users Say</h2>
-            <p className="text-xl text-muted-foreground">Trusted by thousands of professionals</p>
-          </div>
-          <div className="scroll-reveal overflow-x-auto">
-            <div className="flex space-x-6 pb-4">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
-                  <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -295,6 +242,35 @@ const Index = () => {
                 </button>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="scroll-reveal text-center mb-16">
+            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">What Our Users Say</h2>
+            <p className="text-xl text-muted-foreground">Trusted by thousands of professionals</p>
+          </div>
+          <div className="scroll-reveal overflow-x-auto">
+            <div className="flex space-x-6 pb-4">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
+                  <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

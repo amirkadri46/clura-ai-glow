@@ -9,9 +9,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-clura-400 to-clura-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
+              <img 
+                src="/lovable-uploads/a2913029-c512-474b-a974-bf1b208f5cea.png" 
+                alt="Clura.ai Logo" 
+                className="w-8 h-8"
+                style={{ filter: 'brightness(0) saturate(100%) invert(45%) sepia(69%) saturate(1756%) hue-rotate(215deg) brightness(101%) contrast(101%)' }}
+              />
               <span className="text-xl font-semibold text-foreground">Clura.ai</span>
             </div>
             <p className="text-muted-foreground max-w-md">
