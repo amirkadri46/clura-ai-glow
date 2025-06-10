@@ -27,7 +27,7 @@ const SpaceBackground = () => {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
+        size: Math.random() * 0.8 + 0.2, // Reduced from 2 + 0.5 to 0.8 + 0.2
         opacity: Math.random() * 0.8 + 0.2,
         twinkleSpeed: Math.random() * 0.02 + 0.01,
       });
@@ -104,15 +104,15 @@ const SpaceBackground = () => {
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
         ctx.fill();
 
-        // Add sparkle effect for larger stars
-        if (star.size > 1.5) {
+        // Add sparkle effect for larger stars (adjusted threshold)
+        if (star.size > 0.6) { // Reduced from 1.5 to 0.6
           ctx.beginPath();
-          ctx.moveTo(star.x - star.size * 2, star.y);
-          ctx.lineTo(star.x + star.size * 2, star.y);
-          ctx.moveTo(star.x, star.y - star.size * 2);
-          ctx.lineTo(star.x, star.y + star.size * 2);
+          ctx.moveTo(star.x - star.size * 1.5, star.y); // Reduced multiplier
+          ctx.lineTo(star.x + star.size * 1.5, star.y);
+          ctx.moveTo(star.x, star.y - star.size * 1.5);
+          ctx.lineTo(star.x, star.y + star.size * 1.5);
           ctx.strokeStyle = `rgba(255, 255, 255, ${star.opacity * 0.5})`;
-          ctx.lineWidth = 0.5;
+          ctx.lineWidth = 0.3; // Reduced from 0.5
           ctx.stroke();
         }
       });
