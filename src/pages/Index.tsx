@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SearchCard from '@/components/SearchCard';
 import AnimatedUserQueries from '@/components/AnimatedUserQueries';
-import NeuralBackground from '@/components/NeuralBackground';
+import SpaceBackground from '@/components/SpaceBackground';
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -111,7 +111,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <NeuralBackground />
+        <SpaceBackground />
         <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 pt-20">
           <div className="animate-fade-in">
             <div className="mb-6">
@@ -141,9 +141,9 @@ const Index = () => {
       </section>
 
       {/* User Queries Section */}
-      <section className="py-16">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="scroll-reveal text-center mb-12">
+          <div className="scroll-reveal text-center mb-8">
             <h2 className="text-4xl font-light tracking-tight text-foreground mb-8">Realistic User Queries</h2>
             <AnimatedUserQueries />
           </div>

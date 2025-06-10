@@ -10,12 +10,12 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="/lovable-uploads/859ef611-5cc5-4f21-99b9-4aa8eb4fff30.png" 
+                src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
                 alt="Clura.ai Icon" 
                 className="w-8 h-8"
               />
               <img 
-                src="/lovable-uploads/92f533f4-c884-4f41-bf98-8f32eea83a20.png" 
+                src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png" 
                 alt="Clura" 
                 className="h-6"
               />
@@ -29,6 +29,7 @@ const Footer = () => {
             <h4 className="font-semibold text-foreground mb-4">Navigation</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link></li>
+              <li><Link to="/search" className="text-muted-foreground hover:text-foreground transition-colors">Search</Link></li>
               <li><Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
               <li><Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link></li>

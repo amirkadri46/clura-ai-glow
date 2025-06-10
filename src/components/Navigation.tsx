@@ -18,6 +18,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
+    { name: 'Search', href: '/search' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
     { name: 'Blog', href: '/blog' },
@@ -31,12 +32,12 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/859ef611-5cc5-4f21-99b9-4aa8eb4fff30.png" 
+              src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
               alt="Clura.ai Icon" 
               className="w-8 h-8"
             />
             <img 
-              src="/lovable-uploads/92f533f4-c884-4f41-bf98-8f32eea83a20.png" 
+              src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png" 
               alt="Clura" 
               className="h-6"
             />
