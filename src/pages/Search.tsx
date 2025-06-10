@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, ArrowRight, Filter, User, MapPin, Building, Calendar } from 'lucide-react';
+import { Search as SearchIcon, ArrowRight, Filter, User, MapPin, Building, Calendar } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import ParticleBackground from '@/components/ParticleBackground';
 
@@ -72,7 +72,7 @@ const Search = () => {
           <div className="mb-8">
             <div className="glass-card p-6 bg-slate-900/60 border border-clura-500/30 shadow-2xl shadow-clura-500/20">
               <div className="flex items-center space-x-4">
-                <Search className="w-5 h-5 text-clura-400 flex-shrink-0" />
+                <SearchIcon className="w-5 h-5 text-clura-400 flex-shrink-0" />
                 <input
                   type="text"
                   value={query}
