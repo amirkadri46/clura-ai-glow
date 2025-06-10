@@ -31,12 +31,15 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/a2913029-c512-474b-a974-bf1b208f5cea.png" 
-              alt="Clura.ai Logo" 
-              className="w-8 h-8 filter brightness-0 saturate-100"
-              style={{ filter: 'brightness(0) saturate(100%) invert(45%) sepia(69%) saturate(1756%) hue-rotate(215deg) brightness(101%) contrast(101%)' }}
+              src="/lovable-uploads/859ef611-5cc5-4f21-99b9-4aa8eb4fff30.png" 
+              alt="Clura.ai Icon" 
+              className="w-8 h-8"
             />
-            <span className="text-xl font-semibold text-foreground">Clura.ai</span>
+            <img 
+              src="/lovable-uploads/92f533f4-c884-4f41-bf98-8f32eea83a20.png" 
+              alt="Clura" 
+              className="h-6"
+            />
           </Link>
 
           {/* Desktop Navigation - Centered */}

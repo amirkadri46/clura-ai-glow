@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { Search, Brain, Rocket } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import AnimatedSearchSuggestions from '@/components/AnimatedSearchSuggestions';
+import SearchCard from '@/components/SearchCard';
 import AnimatedUserQueries from '@/components/AnimatedUserQueries';
 import NeuralBackground from '@/components/NeuralBackground';
 
@@ -131,25 +131,7 @@ const Index = () => {
               strategies to help you discover the perfect people with precision and ease.
             </p>
 
-            {/* Large Search Card */}
-            <div className="relative max-w-4xl mx-auto mb-8">
-              <div className="search-card p-8">
-                <div className="flex items-center space-x-4 mb-4">
-                  <Search className="w-6 h-6 text-clura-400" />
-                  <input
-                    type="text"
-                    placeholder="Describe who you're looking for..."
-                    className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-lg"
-                  />
-                  <button className="neuro-button px-6 py-3 text-sm font-medium text-foreground hover:text-clura-400 transition-colors">
-                    Search
-                  </button>
-                </div>
-                <div className="mt-6">
-                  <AnimatedSearchSuggestions />
-                </div>
-              </div>
-            </div>
+            <SearchCard />
 
             <button className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 animate-glow mb-16">
               Get Started Free
@@ -159,7 +141,7 @@ const Index = () => {
       </section>
 
       {/* User Queries Section */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="scroll-reveal text-center mb-12">
             <h2 className="text-4xl font-light tracking-tight text-foreground mb-8">Realistic User Queries</h2>
@@ -169,7 +151,7 @@ const Index = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="scroll-reveal text-center mb-16">
             <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Powerful Features</h2>
@@ -177,7 +159,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="scroll-reveal glass-card p-8 feature-card group">
+              <div key={index} className="scroll-reveal glass-card p-8 feature-card group hover:scale-105 hover:shadow-2xl hover:shadow-clura-500/30 hover:border-clura-400/50 transition-all duration-300">
                 <div className="w-12 h-12 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-xl flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
@@ -214,7 +196,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
-              <div key={index} className={`scroll-reveal glass-card p-8 relative ${plan.recommended ? 'ring-2 ring-clura-400' : ''}`}>
+              <div key={index} className={`scroll-reveal glass-card p-8 relative transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-clura-500/30 group ${plan.recommended ? 'ring-2 ring-clura-400' : ''}`}>
                 {plan.recommended && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-gradient-to-r from-clura-400 to-clura-600 text-white px-4 py-1 rounded-full text-sm font-medium">
@@ -222,24 +204,27 @@ const Index = () => {
                     </span>
                   </div>
                 )}
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-semibold text-foreground mb-2">{plan.name}</h3>
-                  <div className="text-4xl font-light text-foreground mb-2">
-                    {plan.price}<span className="text-lg text-muted-foreground">/month</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-clura-400/10 via-transparent to-clura-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                <div className="relative">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-semibold text-foreground mb-2">{plan.name}</h3>
+                    <div className="text-4xl font-light text-foreground mb-2">
+                      {plan.price}<span className="text-lg text-muted-foreground">/month</span>
+                    </div>
+                    <p className="text-muted-foreground">{plan.description}</p>
                   </div>
-                  <p className="text-muted-foreground">{plan.description}</p>
+                  <ul className="space-y-4 mb-8">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-muted-foreground">
+                        <div className="w-2 h-2 bg-clura-400 rounded-full mr-3" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <button className={`w-full neuro-button py-3 text-foreground hover:text-clura-400 transition-colors ${plan.name === 'Free' ? 'bg-slate-800/50' : ''}`}>
+                    Get Started
+                  </button>
                 </div>
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-muted-foreground">
-                      <div className="w-2 h-2 bg-clura-400 rounded-full mr-3" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="w-full neuro-button py-3 text-foreground hover:text-clura-400 transition-colors">
-                  Get Started
-                </button>
               </div>
             ))}
           </div>
@@ -247,27 +232,37 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-clura-500/5 via-transparent to-clura-500/5"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="scroll-reveal text-center mb-16">
             <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">What Our Users Say</h2>
             <p className="text-xl text-muted-foreground">Trusted by thousands of professionals</p>
           </div>
-          <div className="scroll-reveal overflow-x-auto">
-            <div className="flex space-x-6 pb-4">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                      {testimonial.avatar}
+          <div className="scroll-reveal overflow-hidden">
+            <div className="flex space-x-6 animate-slide">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300 relative"
+                  style={{
+                    animationDelay: `${(index % testimonials.length) * 3}s`,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-clura-400/10 via-transparent to-clura-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  <div className="relative">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
+                    <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
+                    <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
                   </div>
-                  <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
-                  <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
                 </div>
               ))}
             </div>

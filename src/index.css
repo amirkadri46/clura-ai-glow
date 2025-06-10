@@ -111,13 +111,21 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .feature-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-  }
-
   .search-card {
     @apply bg-slate-900/80 backdrop-blur-md border border-clura-500/20 rounded-3xl
            shadow-2xl shadow-clura-500/10;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-slide {
+    animation: slide 15s linear infinite;
   }
 }
