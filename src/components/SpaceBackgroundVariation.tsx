@@ -14,7 +14,7 @@ const SpaceBackgroundVariation = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Create stars
+    // Create stars only (removed nebula particles)
     const stars: Array<{
       x: number;
       y: number;
@@ -33,69 +33,12 @@ const SpaceBackgroundVariation = () => {
       });
     }
 
-    // Create nebula particles with purple/pink theme
-    const nebulaParticles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      alpha: number;
-      color: string;
-    }> = [];
-
-    const nebulaColors = [
-      'rgba(147, 51, 234, ',  // purple-600
-      'rgba(168, 85, 247, ',  // purple-500
-      'rgba(236, 72, 153, ',  // pink-500
-      'rgba(219, 39, 119, ',  // pink-600
-      'rgba(99, 102, 241, ',  // indigo-500
-    ];
-
-    for (let i = 0; i < 40; i++) {
-      nebulaParticles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        size: Math.random() * 120 + 60,
-        alpha: Math.random() * 0.08 + 0.03,
-        color: nebulaColors[Math.floor(Math.random() * nebulaColors.length)],
-      });
-    }
-
     let animationFrame = 0;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw nebula clouds
-      nebulaParticles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < -particle.size) particle.x = canvas.width + particle.size;
-        if (particle.x > canvas.width + particle.size) particle.x = -particle.size;
-        if (particle.y < -particle.size) particle.y = canvas.height + particle.size;
-        if (particle.y > canvas.height + particle.size) particle.y = -particle.size;
-
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size
-        );
-        gradient.addColorStop(0, particle.color + particle.alpha + ')');
-        gradient.addColorStop(1, particle.color + '0)');
-
-        ctx.fillStyle = gradient;
-        ctx.fillRect(
-          particle.x - particle.size,
-          particle.y - particle.size,
-          particle.size * 2,
-          particle.size * 2
-        );
-      });
-
-      // Draw twinkling stars
+      // Draw twinkling stars only
       stars.forEach((star) => {
         star.opacity += Math.sin(animationFrame * star.twinkleSpeed) * 0.1;
         star.opacity = Math.max(0.2, Math.min(1, star.opacity));
