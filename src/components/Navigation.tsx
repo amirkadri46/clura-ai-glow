@@ -26,11 +26,23 @@ const Navigation = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
       isScrolled 
-        ? 'transform translate-y-0 backdrop-blur-xl bg-white/90 border-b border-gray-200/50 shadow-lg' 
+        ? 'transform translate-y-0 backdrop-blur-xl bg-white/70 border-b border-gray-200/30 shadow-lg' 
         : 'transform translate-y-0 bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className={`flex justify-between items-center h-16 transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-white/60 backdrop-blur-md border border-gray-200/40 rounded-full mx-4 px-6 mt-2 mb-2' 
+            : ''
+        }`} style={isScrolled ? {
+          borderLeftStyle: 'solid',
+          borderRightStyle: 'solid',
+          borderLeftWidth: '2px',
+          borderRightWidth: '2px',
+          borderRadius: '50px',
+          borderLeftColor: 'rgba(229, 231, 235, 0.4)',
+          borderRightColor: 'rgba(229, 231, 235, 0.4)'
+        } : {}}>
           <Link to="/" className="flex items-center space-x-2">
             <img 
               src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
