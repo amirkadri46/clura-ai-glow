@@ -89,24 +89,35 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Enhanced moving background gradients */}
+      {/* Enhanced vibrant moving background gradients */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-        <div className="absolute top-0 left-0 w-[400%] h-[400%] animate-pulse">
-          <div className="absolute top-1/4 left-1/4 w-[800px] h-[800px] bg-gradient-radial from-blue-500/20 via-blue-400/10 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 60s ease-in-out infinite'
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
+        
+        {/* Large blue gradient orb */}
+        <div className="absolute top-0 left-0 w-[500%] h-[500%]">
+          <div className="absolute top-1/5 left-1/5 w-[1200px] h-[1200px] bg-gradient-radial from-blue-500/40 via-blue-400/25 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 80s ease-in-out infinite'
           }}></div>
         </div>
-        <div className="absolute top-0 right-0 w-[400%] h-[400%]">
-          <div className="absolute top-1/3 right-1/3 w-[700px] h-[700px] bg-gradient-radial from-purple-500/15 via-purple-400/8 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 80s ease-in-out infinite reverse'
+        
+        {/* Large purple gradient orb */}
+        <div className="absolute top-0 right-0 w-[500%] h-[500%]">
+          <div className="absolute top-1/4 right-1/4 w-[1000px] h-[1000px] bg-gradient-radial from-purple-500/35 via-purple-400/20 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 100s ease-in-out infinite reverse'
           }}></div>
         </div>
-        <div className="absolute bottom-0 left-0 w-[400%] h-[400%]">
-          <div className="absolute bottom-1/4 left-1/2 w-[600px] h-[600px] bg-gradient-radial from-indigo-500/12 via-indigo-400/6 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 100s ease-in-out infinite'
+        
+        {/* Large cyan/teal gradient orb */}
+        <div className="absolute bottom-0 left-0 w-[500%] h-[500%]">
+          <div className="absolute bottom-1/4 left-1/2 w-[900px] h-[900px] bg-gradient-radial from-cyan-500/30 via-teal-400/15 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 120s ease-in-out infinite'
           }}></div>
         </div>
+        
+        {/* Additional pink accent */}
+        <div className="absolute top-1/2 right-1/3 w-[800px] h-[800px] bg-gradient-radial from-pink-500/25 via-pink-400/12 to-transparent rounded-full blur-3xl" style={{
+          animation: 'float 90s ease-in-out infinite reverse'
+        }}></div>
       </div>
 
       <div className="relative z-10">
@@ -121,12 +132,16 @@ const Index = () => {
                   NEXT GENERATION OF PEOPLE DISCOVERY
                 </span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
-                Find Anyone with{' '}
-                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent font-bold">
+              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12">
+                <span className="bg-gradient-to-r from-white via-blue-200 to-slate-300 bg-clip-text text-transparent">
+                  Find Anyone with{' '}
+                </span>
+                <span className="bg-gradient-to-r from-clura-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">
                   AI-Powered
                 </span>{' '}
-                Search
+                <span className="bg-gradient-to-r from-white via-blue-200 to-slate-300 bg-clip-text text-transparent">
+                  Search
+                </span>
               </h1>
 
               {/* Search Interface */}
