@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -73,9 +74,12 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-slate-700 text-white hover:bg-slate-600"
+              className="relative px-6 py-2 text-sm font-medium bg-black hover:bg-gray-900 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg overflow-hidden group"
             >
-              Sign up →
+              <span className="relative z-10">Sign up →</span>
+              <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
+                <div className="absolute inset-[2px] bg-black rounded-lg"></div>
+              </div>
             </Link>
           </div>
 
@@ -104,10 +108,13 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="block mt-6 bg-slate-700 hover:bg-slate-600 px-4 py-3 text-center text-white rounded-lg transition-colors"
+            className="relative block mt-6 bg-black hover:bg-gray-900 px-4 py-3 text-center text-white rounded-lg transition-colors overflow-hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Sign up →
+            <span className="relative z-10">Sign up →</span>
+            <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
+              <div className="absolute inset-[2px] bg-black rounded-lg"></div>
+            </div>
           </Link>
         </div>
       </div>

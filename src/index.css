@@ -140,6 +140,21 @@
            shadow-2xl shadow-purple-500/10;
   }
 
+  .glow-text {
+    color: #FFFFFF;
+    text-shadow: 
+      0 0 10px #60A5FA,
+      0 0 20px #60A5FA,
+      0 0 30px #60A5FA;
+  }
+
+  .glow-text-subtle {
+    color: #FFFFFF;
+    text-shadow: 
+      0 0 5px #60A5FA,
+      0 0 10px #60A5FA;
+  }
+
   @keyframes slide {
     0% {
       transform: translateX(0);

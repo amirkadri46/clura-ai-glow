@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import BackgroundGradients from '@/components/BackgroundGradients';
+import DynamicBlueBackground from '@/components/DynamicBlueBackground';
 import HeroSection from '@/components/HeroSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import MissionSection from '@/components/MissionSection';
@@ -38,7 +38,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      <BackgroundGradients />
+      <DynamicBlueBackground />
 
       <div className="relative z-10">
         <Navigation />
