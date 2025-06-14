@@ -1,3 +1,4 @@
+
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -12,7 +13,7 @@ const Contact = () => {
         <div className="pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center mb-16">
-              <h1 className="text-5xl font-light tracking-tight text-white mb-4">
+              <h1 className="text-5xl font-light tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">
                 Contact{' '}
                 <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
                   Us

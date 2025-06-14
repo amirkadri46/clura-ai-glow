@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
 import Navigation from '@/components/Navigation';
-import SpaceBackground from '@/components/SpaceBackground';
+import ParticleBackground from '@/components/ParticleBackground';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -37,14 +37,14 @@ const Login = () => {
 
   return (
     <div className="min-h-screen relative">
-      <SpaceBackground />
+      <ParticleBackground />
       <Navigation />
       
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
         <div className="max-w-md w-full">
           <div className="glass-card p-8 bg-slate-900/70 border border-clura-500/40 shadow-2xl shadow-clura-500/30 rounded-3xl backdrop-blur-lg">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-light text-foreground mb-2">Welcome Back</h2>
+              <h2 className="text-3xl font-light mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">Welcome Back</h2>
               <p className="text-muted-foreground">Sign in to your Clura.ai account</p>
             </div>
 
