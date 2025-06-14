@@ -1,106 +1,117 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Palette } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const isVariation = location.pathname === '/variation';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Search', href: '/search' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'Blog', href: '/blog' },
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'backdrop-blur-md bg-background/80 border-b border-white/10' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
-            Clura.ai
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
+              alt="Clura.ai Icon" 
+              className="w-8 h-8"
+            />
+            <img 
+              src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png" 
+              alt="Clura" 
+              className="h-6"
+            />
           </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/about" className="text-slate-300 hover:text-clura-400 transition-colors">
-              About
-            </Link>
-            <Link to="/blog" className="text-slate-300 hover:text-clura-400 transition-colors">
-              Blog
-            </Link>
-            <Link to="/contact" className="text-slate-300 hover:text-clura-400 transition-colors">
-              Contact
-            </Link>
-            
-            {/* Design Toggle */}
-            <Link 
-              to={isVariation ? "/" : "/variation"} 
-              className="flex items-center space-x-2 px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-slate-300 hover:text-clura-400 hover:border-clura-500/50 transition-all duration-300"
-            >
-              <Palette className="w-4 h-4" />
-              <span>{isVariation ? "Original" : "Variation"}</span>
-            </Link>
-            
-            <Link 
-              to="/search" 
-              className="bg-gradient-to-r from-clura-500 to-clura-600 text-white px-6 py-2 rounded-lg hover:from-clura-600 hover:to-clura-700 transition-all duration-300"
+
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`relative text-sm font-medium transition-colors duration-200 ${
+                  location.pathname === link.href
+                    ? 'text-clura-400'
+                    : 'text-muted-foreground hover:text-foreground'
+                } group`}
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-clura-400 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden md:block">
+            <Link
+              to="/contact"
+              className="neuro-button px-4 py-2 text-sm font-medium text-foreground hover:text-clura-400"
             >
               Get Started
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-slate-300 hover:text-clura-400 transition-colors"
+            className="md:hidden p-2 text-foreground"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-slate-700/50">
-            <div className="flex flex-col space-y-4">
-              <Link 
-                to="/about" 
-                className="text-slate-300 hover:text-clura-400 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                to="/blog" 
-                className="text-slate-300 hover:text-clura-400 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link 
-                to="/contact" 
-                className="text-slate-300 hover:text-clura-400 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-              
-              {/* Mobile Design Toggle */}
-              <Link 
-                to={isVariation ? "/" : "/variation"} 
-                className="flex items-center space-x-2 px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-slate-300 hover:text-clura-400 hover:border-clura-500/50 transition-all duration-300 w-fit"
-                onClick={() => setIsOpen(false)}
-              >
-                <Palette className="w-4 h-4" />
-                <span>{isVariation ? "Original Design" : "Variation Design"}</span>
-              </Link>
-              
-              <Link 
-                to="/search" 
-                className="bg-gradient-to-r from-clura-500 to-clura-600 text-white px-6 py-2 rounded-lg hover:from-clura-600 hover:to-clura-700 transition-all duration-300 w-fit"
-                onClick={() => setIsOpen(false)}
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Menu */}
+      <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-background/95 backdrop-blur-md border-l border-white/10 transform transition-transform duration-300 ${
+        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        <div className="pt-20 px-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.href}
+              className="block py-3 text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            to="/contact"
+            className="block mt-6 neuro-button px-4 py-3 text-center text-foreground hover:text-clura-400"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Get Started
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </nav>
   );
 };

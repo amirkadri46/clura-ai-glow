@@ -1,10 +1,10 @@
+
 import { useEffect, useRef } from 'react';
-import { Search, Users, MapPin, Building, Plus, Minus } from 'lucide-react';
+import { Search, Users, MapPin, Building } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SearchCardVariation from '@/components/SearchCardVariation';
 import SpaceBackgroundVariation from '@/components/SpaceBackgroundVariation';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const IndexVariation = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -80,29 +80,6 @@ const IndexVariation = () => {
     }
   ];
 
-  const faqData = [
-    {
-      question: "How does AI-powered talent discovery work?",
-      answer: "Our advanced AI algorithms analyze millions of professional profiles, skills, and experiences to match you with the perfect candidates based on your natural language queries."
-    },
-    {
-      question: "Can I search for specific skills and locations?",
-      answer: "Absolutely! You can search for professionals with specific technical skills, soft skills, certifications, and filter by location, remote work preferences, or availability."
-    },
-    {
-      question: "How accurate are the search results?",
-      answer: "Our AI achieves 95%+ accuracy in matching candidates to requirements, continuously learning from user feedback and industry trends to improve results."
-    },
-    {
-      question: "Do you support team building features?",
-      answer: "Yes! Our platform includes intelligent team composition tools that help you build balanced teams with complementary skills and experience levels."
-    },
-    {
-      question: "What about data privacy and security?",
-      answer: "We maintain the highest standards of data protection with end-to-end encryption, GDPR compliance, and strict access controls to protect all user information."
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-slate-950">
       <Navigation />
@@ -171,68 +148,6 @@ const IndexVariation = () => {
               </span>{' '}
               with exceptional talent."
             </h2>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section with Line Effect */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent" />
-        
-        {/* Curved Line Effect */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-full max-w-6xl h-px relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/60 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-400/40 to-transparent blur-sm"></div>
-            <svg
-              className="absolute inset-0 w-full h-32 -top-16"
-              viewBox="0 0 800 128"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 64C200 20, 400 20, 800 64"
-                stroke="url(#gradient)"
-                strokeWidth="2"
-                fill="none"
-                className="animate-pulse"
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="transparent" />
-                  <stop offset="25%" stopColor="#a855f7" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#ec4899" stopOpacity="1" />
-                  <stop offset="75%" stopColor="#6366f1" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="transparent" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="scroll-reveal text-center mb-20">
-            <h2 className="text-5xl font-light tracking-tight text-white mb-6">Frequently Asked Questions</h2>
-            <p className="text-xl text-slate-300">Everything you need to know about our platform</p>
-          </div>
-          
-          <div className="scroll-reveal">
-            <Accordion type="single" collapsible className="space-y-6">
-              {faqData.map((faq, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`}
-                  className="glass-card-variation border-purple-400/20 rounded-2xl px-8 py-2"
-                >
-                  <AccordionTrigger className="text-white hover:text-purple-300 text-lg font-medium py-6 hover:no-underline">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-slate-300 text-base leading-relaxed pb-6">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
           </div>
         </div>
       </section>
