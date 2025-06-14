@@ -18,7 +18,7 @@ const ParticleBackground = () => {
     };
     setCanvasSize();
 
-    // Generate visible, extremely tiny, subtle particles
+    // Generate visible, vibrant, larger particles for greater visibility on all backgrounds
     const particles: Array<{
       x: number;
       y: number;
@@ -27,30 +27,30 @@ const ParticleBackground = () => {
       size: number;
       alpha: number;
     }> = [];
-    const numParticles = 80; // keep tiny
+    const numParticles = 120; // slightly more for good coverage
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.1,
-        vy: (Math.random() - 0.5) * 0.1,
-        size: Math.random() * 0.7 + 0.3,        // slightly larger minimum for visibility
-        alpha: Math.random() * 0.18 + 0.09,     // slightly higher min opacity
+        vx: (Math.random() - 0.5) * 0.18, // more motion for visibility
+        vy: (Math.random() - 0.5) * 0.18,
+        size: Math.random() * 1.2 + 0.7,        // much larger minimum for visibility
+        alpha: Math.random() * 0.36 + 0.44,     // much higher min/max opacity for brightness
       });
     }
 
     const animate = () => {
-      // Draw transparent, glowy background for visibility against black/transparent
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Optionally a faint blue haze
+
+      // Faint glowy blue haze background, subtle
       ctx.save();
-      ctx.globalAlpha = 0.20;
+      ctx.globalAlpha = 0.28;
       const gradient = ctx.createRadialGradient(
-        canvas.width/2, canvas.height/2, canvas.width*0.15,
-        canvas.width/2, canvas.height/2, canvas.width*0.8
+        canvas.width/2, canvas.height/2, canvas.width*0.09,
+        canvas.width/2, canvas.height/2, canvas.width*0.99
       );
-      gradient.addColorStop(0, "#7DD3FC22");
+      gradient.addColorStop(0, "#89CFF055");
       gradient.addColorStop(1, "transparent");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -60,15 +60,15 @@ const ParticleBackground = () => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // bounce at edges softly
+        // bounce softly at edges
         if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
         if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139, 207, 240, ${particle.alpha})`; // soft blue
-        ctx.shadowColor = "rgba(139, 207, 240, .33)";
-        ctx.shadowBlur = 5; // subtle glow
+        ctx.fillStyle = `rgba(137, 207, 240, ${particle.alpha})`; // Vivid blue
+        ctx.shadowColor = "rgba(137, 207, 240, 0.98)";
+        ctx.shadowBlur = 15; // more glow for visibility
         ctx.fill();
         ctx.shadowBlur = 0;
       });
@@ -96,7 +96,6 @@ const ParticleBackground = () => {
         width: "100vw",
         height: "100vh",
         zIndex: 0,
-        // in case of stacking issues
         pointerEvents: "none"
       }}
       aria-hidden="true"
