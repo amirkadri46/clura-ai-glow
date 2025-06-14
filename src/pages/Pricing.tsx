@@ -86,34 +86,27 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className="flex flex-col justify-between items-center bg-[#181f2d] rounded-xl border border-[#334c94] max-w-[360px] min-w-[300px] w-full px-6 py-8 shadow-md mb-6 min-h-[540px] md:min-h-[620px] h-[620px] md:h-[620px]"
-              style={{
-                // fallback for browsers without min/max-h
-                height: '620px',
-                minHeight: '540px',
-              }}
+              className="flex flex-col bg-[#181f2d] rounded-xl border border-[#334c94] max-w-[360px] min-w-[300px] w-full px-6 py-8 shadow-md mb-6"
             >
-              <div className="flex flex-col items-center text-center w-full flex-1">
-                <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
-                <div className="mb-2">
-                  <span className="text-3xl font-extrabold text-white">
-                    {plan.price}
-                    <span className="ml-2 text-base font-medium text-white/80">
-                      {plan.period}
-                    </span>
+              <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
+              <div className="mb-2">
+                <span className="text-3xl font-extrabold text-white">
+                  {plan.price}
+                  <span className="ml-2 text-base font-medium text-white/80">
+                    {plan.period}
                   </span>
-                </div>
-                <p className="text-xs text-white/80 mb-4">{plan.description}</p>
-                <ul className="mb-4 space-y-2 text-sm flex-1 flex flex-col items-center">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center">
-                      <Check className="w-4 h-4 text-blue-400 mr-2" />
-                      <span className="text-white">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                </span>
               </div>
-              <Button variant="outline" className="border-blue-500 text-white font-semibold mt-2 w-full">
+              <p className="text-xs text-white/80 mb-4">{plan.description}</p>
+              <ul className="mb-4 space-y-2 text-sm">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center">
+                    <Check className="w-4 h-4 text-blue-400 mr-2" />
+                    <span className="text-white">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button variant="outline" className="border-blue-500 text-white font-semibold mt-2">
                 Get Started
               </Button>
             </div>
