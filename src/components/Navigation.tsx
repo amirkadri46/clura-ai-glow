@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
-// Add a utility to handle hover state for demo (could use a className utility or scoped CSS)
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,17 +32,9 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className={`flex justify-between items-center h-16 transition-all duration-500 ${
           isScrolled 
-            ? 'bg-white/70 backdrop-blur-md border border-gray-200/20 rounded-full mx-4 px-6 mt-2 mb-2' 
+            ? 'bg-slate-900/70 backdrop-blur-md border border-slate-700/50 rounded-full mx-4 px-6 mt-2 mb-2' 
             : ''
-        }`} style={isScrolled ? {
-          borderLeftStyle: 'solid',
-          borderRightStyle: 'solid',
-          borderLeftWidth: '2px',
-          borderRightWidth: '2px',
-          borderRadius: '50px',
-          borderLeftColor: 'rgba(229, 231, 235, 0.2)',
-          borderRightColor: 'rgba(229, 231, 235, 0.2)'
-        } : {}}>
+        }`}>
           <Link to="/" className="flex items-center space-x-2">
             <img 
               src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
@@ -65,12 +56,12 @@ const Navigation = () => {
                 to={link.href}
                 className={`relative text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.href
-                    ? isScrolled ? 'text-clura-600' : 'text-clura-400'
-                    : isScrolled ? 'text-gray-700 hover:text-clura-600' : 'text-muted-foreground hover:text-foreground'
+                    ? 'text-blue-400'
+                    : 'text-gray-300 hover:text-white'
                 } group`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-clura-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
@@ -78,20 +69,13 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               to="/login"
-              className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full login-signup-btn ${
-                isScrolled ? 'text-gray-700 hover:text-white' : 'text-muted-foreground hover:text-white'
-              }`}
-              style={{}}
+              className="text-sm font-medium transition-all duration-300 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800"
             >
               Log in
             </Link>
             <Link
               to="/signup"
-              className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 login-signup-btn ${
-                isScrolled 
-                  ? 'bg-black text-white hover:bg-black'
-                  : 'neuro-button text-foreground hover:text-white'
-              }`}
+              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white hover:bg-black"
             >
               Sign up →
             </Link>
@@ -99,9 +83,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden p-2 transition-colors duration-300 ${
-              isScrolled ? 'text-gray-700' : 'text-foreground'
-            }`}
+            className="md:hidden p-2 transition-colors duration-300 text-gray-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -110,7 +92,7 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-background/95 backdrop-blur-md border-l border-white/10 transform transition-transform duration-300 ${
+      <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900/95 backdrop-blur-md border-l border-slate-700/50 transform transition-transform duration-300 ${
         isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="pt-20 px-6">
@@ -118,7 +100,7 @@ const Navigation = () => {
             <Link
               key={link.name}
               to={link.href}
-              className="block py-3 text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="block py-3 text-lg font-medium text-gray-300 hover:text-white transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
@@ -126,7 +108,7 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="block mt-6 neuro-button px-4 py-3 text-center text-foreground hover:text-white login-signup-btn"
+            className="block mt-6 bg-blue-600 hover:bg-black px-4 py-3 text-center text-white rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Sign up →
@@ -141,23 +123,6 @@ const Navigation = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
-
-      {/* Button Hover Style */}
-      <style>
-        {`
-        .login-signup-btn {
-          position: relative;
-          z-index: 1;
-          transition: background 0.23s, color 0.23s;
-        }
-        .login-signup-btn:hover, 
-        .login-signup-btn:focus-visible {
-          background: #191919 !important;
-          color: #fff !important;
-          box-shadow: 0 3px 12px 0 rgba(25,25,25,0.15);
-        }
-        `}
-      </style>
     </nav>
   );
 };
