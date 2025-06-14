@@ -143,16 +143,16 @@
   .glow-text {
     color: #FFFFFF;
     text-shadow: 
-      0 0 10px #60A5FA,
-      0 0 20px #60A5FA,
-      0 0 30px #60A5FA;
+      0 0 10px #89CFF0,
+      0 0 20px #89CFF0,
+      0 0 30px #89CFF0;
   }
 
   .glow-text-subtle {
     color: #FFFFFF;
     text-shadow: 
-      0 0 5px #60A5FA,
-      0 0 10px #60A5FA;
+      0 0 5px #89CFF0,
+      0 0 10px #89CFF0;
   }
 
   @keyframes slide {

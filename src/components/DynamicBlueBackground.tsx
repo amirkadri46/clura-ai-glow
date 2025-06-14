@@ -8,7 +8,7 @@ const DynamicBlueBackground = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Create multiple gradient orbs
+    // Create multiple gradient orbs with white borders
     const orbs = Array.from({ length: 6 }, (_, i) => {
       const orb = document.createElement('div');
       orb.className = 'gradient-orb';
@@ -20,17 +20,18 @@ const DynamicBlueBackground = () => {
         pointer-events: none;
         animation: float-${i} ${15 + i * 3}s ease-in-out infinite;
         animation-delay: ${i * 2}s;
+        border: 1px solid #FFFFFF;
       `;
       
-      // Different sizes and colors for each orb
+      // Different sizes and colors for each orb using the specific blue shades
       const sizes = [300, 400, 250, 350, 200, 450];
       const colors = [
-        'radial-gradient(circle, #1E3A8A 0%, #3B82F6 50%, transparent 100%)',
-        'radial-gradient(circle, #1E40AF 0%, #60A5FA 50%, transparent 100%)',
-        'radial-gradient(circle, #1D4ED8 0%, #93C5FD 50%, transparent 100%)',
-        'radial-gradient(circle, #2563EB 0%, #DBEAFE 50%, transparent 100%)',
-        'radial-gradient(circle, #1E3A8A 0%, #BFDBFE 50%, transparent 100%)',
-        'radial-gradient(circle, #1D4ED8 0%, #3B82F6 50%, transparent 100%)'
+        'radial-gradient(circle, #1A3157 0%, #4B6CB7 50%, transparent 100%)',
+        'radial-gradient(circle, #1A3157 0%, #89CFF0 50%, transparent 100%)',
+        'radial-gradient(circle, #4B6CB7 0%, #89CFF0 50%, transparent 100%)',
+        'radial-gradient(circle, #1A3157 0%, #4B6CB7 50%, transparent 100%)',
+        'radial-gradient(circle, #4B6CB7 0%, #89CFF0 50%, transparent 100%)',
+        'radial-gradient(circle, #1A3157 0%, #89CFF0 50%, transparent 100%)'
       ];
       
       orb.style.width = `${sizes[i]}px`;

@@ -45,7 +45,7 @@ const HeroSection = () => {
                 People Discovery
               </span>
               <span className="block text-5xl md:text-7xl mt-4 text-gray-300">
-                Integration Suite
+                Search Engine
               </span>
             </h1>
 
