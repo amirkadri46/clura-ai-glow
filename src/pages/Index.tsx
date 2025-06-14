@@ -34,30 +34,6 @@ const Index = () => {
     return () => observerRef.current?.disconnect();
   }, []);
 
-  const testimonials = [
-    {
-      name: "Sarah Chen",
-      role: "Talent Acquisition Lead",
-      avatar: "SC",
-      quote: "Clura.ai revolutionized our hiring process. The AI-powered search is incredibly accurate.",
-      result: "Found 12 perfect candidates in 30 minutes"
-    },
-    {
-      name: "Marcus Rodriguez",
-      role: "Startup Founder",
-      avatar: "MR",
-      quote: "As a non-technical founder, Clura helped me find amazing engineers effortlessly.",
-      result: "Hired 3 senior developers in 2 weeks"
-    },
-    {
-      name: "Emily Watson",
-      role: "HR Director",
-      avatar: "EW",
-      quote: "The natural language search is a game-changer. No more complex Boolean queries.",
-      result: "Reduced hiring time by 70%"
-    }
-  ];
-
   const features = [
     {
       icon: <Search className="w-6 h-6" />,
@@ -81,30 +57,6 @@ const Index = () => {
     }
   ];
 
-  const pricingPlans = [
-    {
-      name: "Free",
-      price: "$0",
-      description: "Perfect for getting started",
-      features: ["5 searches per month", "Basic filters", "Email support"],
-      recommended: false
-    },
-    {
-      name: "Pro",
-      price: "$49",
-      description: "For growing teams",
-      features: ["Unlimited searches", "Advanced AI filters", "Priority support", "Export features"],
-      recommended: true
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      description: "For large organizations",
-      features: ["Custom integrations", "Dedicated support", "Advanced analytics", "Team management"],
-      recommended: false
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -119,17 +71,13 @@ const Index = () => {
                 NEXT GENERATION OF PEOPLE DISCOVERY
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-6">
+            <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12">
               Find Anyone with{' '}
               <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
                 AI-Powered
               </span>{' '}
               Search
             </h1>
-            <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              Clura.ai combines artificial intelligence with cutting-edge search
-              strategies to help you discover the perfect people with precision and ease.
-            </p>
 
             <SearchCard />
 
@@ -183,89 +131,6 @@ const Index = () => {
               </span>{' '}
               for everyone."
             </h2>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="scroll-reveal text-center mb-16">
-            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Simple Pricing</h2>
-            <p className="text-xl text-muted-foreground">Choose the plan that works for you</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className={`scroll-reveal glass-card p-8 relative transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-clura-500/30 group ${plan.recommended ? 'ring-2 ring-clura-400' : ''}`}>
-                {plan.recommended && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-clura-400 to-clura-600 text-white px-4 py-1 rounded-full text-sm font-medium">
-                      Recommended
-                    </span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-r from-clura-400/10 via-transparent to-clura-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                <div className="relative">
-                  <div className="text-center mb-8">
-                    <h3 className="text-2xl font-semibold text-foreground mb-2">{plan.name}</h3>
-                    <div className="text-4xl font-light text-foreground mb-2">
-                      {plan.price}<span className="text-lg text-muted-foreground">/month</span>
-                    </div>
-                    <p className="text-muted-foreground">{plan.description}</p>
-                  </div>
-                  <ul className="space-y-4 mb-8">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-muted-foreground">
-                        <div className="w-2 h-2 bg-clura-400 rounded-full mr-3" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <button className={`w-full neuro-button py-3 text-foreground hover:text-clura-400 transition-colors ${plan.name === 'Free' ? 'bg-slate-800/50' : ''}`}>
-                    Get Started
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-clura-500/5 via-transparent to-clura-500/5"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="scroll-reveal text-center mb-16">
-            <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">What Our Users Say</h2>
-            <p className="text-xl text-muted-foreground">Trusted by thousands of professionals</p>
-          </div>
-          <div className="scroll-reveal overflow-hidden">
-            <div className="flex space-x-6 animate-slide">
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                <div 
-                  key={index} 
-                  className="glass-card p-8 min-w-[400px] group hover:bg-white/10 transition-all duration-300 relative"
-                  style={{
-                    animationDelay: `${(index % testimonials.length) * 3}s`,
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-clura-400/10 via-transparent to-clura-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                  <div className="relative">
-                    <div className="flex items-center mb-6">
-                      <div className="w-12 h-12 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                        {testimonial.avatar}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
-                    <p className="text-clura-400 text-sm font-medium">{testimonial.result}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
