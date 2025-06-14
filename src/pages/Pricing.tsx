@@ -72,10 +72,10 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-[#0C1020]">
       <Navigation />
-      <div className="pt-20 flex flex-col items-center">
+      <div className="pt-20 flex flex-col items-center fixed inset-0 overflow-y-auto">
         <div className="w-full flex flex-col items-center justify-center py-10 px-2">
           <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-white">
+            <h1 className="text-3xl md:text-4xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">
               Choose what works for you
             </h1>
             <div className="flex items-center justify-center gap-2 mt-3">
@@ -105,7 +105,7 @@ export default function Pricing() {
                 className="flex flex-col bg-[#181f2d] rounded-xl border border-[#334c94] max-w-[360px] min-w-[300px] w-full px-6 py-8 shadow-md h-[650px]"
               >
                 <div className="flex flex-col flex-1">
-                  <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
+                  <h3 className="text-lg font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">{plan.name}</h3>
                   <div className="mb-2">
                     <span className="text-3xl font-extrabold text-white">
                       {getDisplayPrice(plan)}
