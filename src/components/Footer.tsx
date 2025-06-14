@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import { Mail } from 'lucide-react';
 
@@ -20,12 +19,7 @@ const Footer = () => {
                 placeholder="name@email.com"
                 className="flex-1 px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
               />
-              <button 
-                className="bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] text-white px-6 py-3 rounded-lg font-medium border border-[#89CFF0] shadow-[0_0_10px_#89CFF0] hover:shadow-[0_0_15px_#89CFF0] transition-all duration-300 flex items-center"
-                style={{
-                  textShadow: '0 0 5px rgba(255, 255, 255, 0.8)'
-                }}
-              >
+              <button className="bg-transparent text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center">
                 <Mail className="w-5 h-5 mr-2" />
                 Subscribe
               </button>
@@ -105,12 +99,7 @@ const Footer = () => {
                 placeholder="name@email.com"
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-clura-400 focus:border-transparent"
               />
-              <button 
-                className="bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] text-white px-6 py-3 rounded-lg font-medium border border-[#89CFF0] shadow-[0_0_10px_#89CFF0] hover:shadow-[0_0_15px_#89CFF0] transition-all duration-300 flex items-center"
-                style={{
-                  textShadow: '0 0 5px rgba(255, 255, 255, 0.8)'
-                }}
-              >
+              <button className="bg-transparent text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center">
                 <Mail className="w-5 h-5 mr-2" />
                 Subscribe
               </button>
