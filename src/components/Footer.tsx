@@ -16,7 +16,7 @@ const Footer = () => {
                 placeholder="name@email.com"
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-clura-400 focus:border-transparent"
               />
-              <button className="bg-gradient-to-r from-clura-500 to-clura-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:from-clura-600 hover:to-clura-700 flex items-center">
+              <button className="bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:from-[#3A5BA6] hover:to-[#78BBE0] flex items-center">
                 <Mail className="w-5 h-5 mr-2" />
                 Subscribe
               </button>

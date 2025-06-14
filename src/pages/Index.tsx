@@ -8,6 +8,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import MissionSection from '@/components/MissionSection';
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
+import AnimatedUserQueries from '@/components/AnimatedUserQueries';
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -43,6 +44,17 @@ const Index = () => {
       <div className="relative z-10">
         <Navigation />
         <HeroSection />
+        
+        {/* User Queries Section */}
+        <section className="py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="scroll-reveal text-center mb-8">
+              <h2 className="text-4xl font-light tracking-tight text-white mb-8">Realistic User Queries</h2>
+              <AnimatedUserQueries />
+            </div>
+          </div>
+        </section>
+
         <FeaturesSection />
         <MissionSection />
         <FAQSection />
