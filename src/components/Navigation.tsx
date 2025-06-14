@@ -75,12 +75,9 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="relative px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-black text-white hover:bg-gray-900 overflow-hidden group"
+              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white hover:bg-blue-700"
             >
-              <span className="relative z-10">Sign up →</span>
-              <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
-                <div className="absolute inset-[1px] bg-black rounded-lg"></div>
-              </div>
+              Sign up →
             </Link>
           </div>
 
@@ -111,13 +108,10 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="relative block mt-6 bg-black hover:bg-gray-900 px-4 py-3 text-center text-white rounded-lg transition-colors overflow-hidden group"
+            className="block mt-6 bg-blue-600 hover:bg-blue-700 px-4 py-3 text-center text-white rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <span className="relative z-10">Sign up →</span>
-            <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
-              <div className="absolute inset-[1px] bg-black rounded-lg"></div>
-            </div>
+            Sign up →
           </Link>
         </div>
       </div>
