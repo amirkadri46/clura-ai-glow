@@ -92,19 +92,19 @@ const Index = () => {
       {/* Enhanced moving background gradients */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-        <div className="absolute top-0 left-0 w-[200%] h-[200%] animate-pulse">
-          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-radial from-blue-500/30 via-blue-400/20 to-transparent rounded-full blur-3xl animate-pulse" style={{
-            animation: 'float 40s ease-in-out infinite'
-          }}></div>
-        </div>
-        <div className="absolute top-0 right-0 w-[200%] h-[200%]">
-          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-gradient-radial from-purple-500/25 via-purple-400/15 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 50s ease-in-out infinite reverse'
-          }}></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-[200%] h-[200%]">
-          <div className="absolute bottom-1/4 left-1/2 w-[450px] h-[450px] bg-gradient-radial from-indigo-500/20 via-indigo-400/10 to-transparent rounded-full blur-3xl" style={{
+        <div className="absolute top-0 left-0 w-[400%] h-[400%] animate-pulse">
+          <div className="absolute top-1/4 left-1/4 w-[800px] h-[800px] bg-gradient-radial from-blue-500/20 via-blue-400/10 to-transparent rounded-full blur-3xl" style={{
             animation: 'float 60s ease-in-out infinite'
+          }}></div>
+        </div>
+        <div className="absolute top-0 right-0 w-[400%] h-[400%]">
+          <div className="absolute top-1/3 right-1/3 w-[700px] h-[700px] bg-gradient-radial from-purple-500/15 via-purple-400/8 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 80s ease-in-out infinite reverse'
+          }}></div>
+        </div>
+        <div className="absolute bottom-0 left-0 w-[400%] h-[400%]">
+          <div className="absolute bottom-1/4 left-1/2 w-[600px] h-[600px] bg-gradient-radial from-indigo-500/12 via-indigo-400/6 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 100s ease-in-out infinite'
           }}></div>
         </div>
       </div>
@@ -121,7 +121,7 @@ const Index = () => {
                   NEXT GENERATION OF PEOPLE DISCOVERY
                 </span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent animate-pulse">
+              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
                 Find Anyone with{' '}
                 <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent font-bold">
                   AI-Powered
@@ -154,13 +154,6 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-
-              <button 
-                onClick={handleStartSearching}
-                className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 animate-glow mb-16 transform hover:scale-105 transition-all duration-300"
-              >
-                Start Searching People
-              </button>
             </div>
           </div>
         </section>
@@ -236,6 +229,18 @@ const Index = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* CTA Section - Moved to the end */}
+        <section className="py-20 text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button 
+              onClick={handleStartSearching}
+              className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 transform hover:scale-105 transition-all duration-300"
+            >
+              Start Searching People
+            </button>
           </div>
         </section>
 
