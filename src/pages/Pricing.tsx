@@ -7,7 +7,8 @@ import Navigation from '@/components/Navigation'
 const plans = [
   {
     name: 'Basic',
-    price: '$0',
+    monthlyPrice: 0,
+    annualPrice: 0,
     period: '/month',
     description: 'For businesses looking to start with AI and automations.',
     features: [
@@ -19,7 +20,8 @@ const plans = [
   },
   {
     name: 'Professional',
-    price: '$500',
+    monthlyPrice: 500,
+    annualPrice: 400, // 20% discount
     period: '/month',
     description:
       'For businesses looking to outperform their competition with AI and automations.',
@@ -34,7 +36,8 @@ const plans = [
   },
   {
     name: 'Enterprise',
-    price: '$5000',
+    monthlyPrice: 5000,
+    annualPrice: 4000, // 20% discount
     period: '/month',
     description:
       'For businesses looking to fully leverage AI and automations to become an industry leader.',
@@ -55,6 +58,16 @@ const plans = [
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false);
+
+  const getDisplayPrice = (plan: typeof plans[0]) => {
+    if (plan.monthlyPrice === 0) return '$0';
+    const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
+    return `$${price}`;
+  };
+
+  const getPeriodText = () => {
+    return isAnnual ? '/month (billed annually)' : '/month';
+  };
 
   return (
     <div className="min-h-screen bg-[#0C1020]">
@@ -89,17 +102,23 @@ export default function Pricing() {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className="flex flex-col bg-[#181f2d] rounded-xl border border-[#334c94] max-w-[360px] min-w-[300px] w-full px-6 py-8 shadow-md h-[600px]"
+                className="flex flex-col bg-[#181f2d] rounded-xl border border-[#334c94] max-w-[360px] min-w-[300px] w-full px-6 py-8 shadow-md h-[650px]"
               >
                 <div className="flex flex-col flex-1">
                   <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
                   <div className="mb-2">
                     <span className="text-3xl font-extrabold text-white">
-                      {plan.price}
+                      {getDisplayPrice(plan)}
                       <span className="ml-2 text-base font-medium text-white/80">
-                        {plan.period}
+                        {getPeriodText()}
                       </span>
                     </span>
+                    {isAnnual && plan.monthlyPrice > 0 && (
+                      <div className="text-sm text-white/60 mt-1">
+                        <span className="line-through">${plan.monthlyPrice}/month</span>
+                        <span className="ml-2 text-green-400">Save 20%</span>
+                      </div>
+                    )}
                   </div>
                   <p className="text-xs text-white/80 mb-4">{plan.description}</p>
                   <ul className="mb-4 space-y-2 text-sm flex-1">
