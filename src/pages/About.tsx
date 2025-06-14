@@ -5,57 +5,57 @@ import { Brain, Search, Rocket } from 'lucide-react';
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: '#1A252F' }}>
       <Navigation />
       
       <div className="pt-20">
         {/* Hero Section */}
         <section className="py-20">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl md:text-6xl font-light tracking-tight text-foreground mb-6">
+            <h1 className="text-5xl md:text-6xl font-light tracking-tight text-white mb-6">
               About{' '}
               <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
                 Clura.ai
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl text-gray-400 leading-relaxed">
               We're revolutionizing how people discover and connect with professionals
               through the power of artificial intelligence.
             </p>
           </div>
         </section>
 
-        {/* Mission */}
+        {/* Mission, Vision, About Us Boxes */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl font-light tracking-tight text-foreground mb-6">Our Mission</h2>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  Traditional people search is broken. Complex Boolean queries, scattered results, 
-                  and outdated information make finding the right people a frustrating experience.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Clura.ai changes that. We believe everyone should be able to find the right people 
-                  using natural language, powered by AI that understands context and intent.
-                </p>
-              </div>
-              <div className="glass-card p-8">
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-3xl font-bold text-clura-400 mb-2">200M+</div>
-                    <div className="text-sm text-muted-foreground">Profiles</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-clura-400 mb-2">95%</div>
-                    <div className="text-sm text-muted-foreground">Accuracy</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-clura-400 mb-2">10K+</div>
-                    <div className="text-sm text-muted-foreground">Users</div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Mission",
+                  content: "Our mission is to revolutionize people discovery through AI-powered search technology, making it easier for professionals to connect and collaborate across industries and geographies."
+                },
+                {
+                  title: "Vision", 
+                  content: "We envision a world where finding the right people is as simple as asking a question in natural language, powered by intelligent algorithms that understand context and intent."
+                },
+                {
+                  title: "About Us",
+                  content: "Founded by a team of AI experts and former tech leaders, Clura.ai combines cutting-edge technology with deep understanding of professional networking to create the future of people search."
+                }
+              ].map((box, index) => (
+                <div 
+                  key={index}
+                  className="rounded-2xl border p-8 transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    backgroundColor: '#1A252F',
+                    borderColor: '#4B6CB7',
+                    boxShadow: '0 0 10px #89CFF0'
+                  }}
+                >
+                  <h3 className="text-2xl font-semibold text-white mb-6">{box.title}</h3>
+                  <p className="text-gray-400 leading-relaxed">{box.content}</p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -64,8 +64,8 @@ const About = () => {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Our Values</h2>
-              <p className="text-xl text-muted-foreground">What drives us every day</p>
+              <h2 className="text-4xl font-light tracking-tight text-white mb-4">Our Values</h2>
+              <p className="text-xl text-gray-400">What drives us every day</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -85,12 +85,20 @@ const About = () => {
                   description: "We're constantly pushing the boundaries of what's possible"
                 }
               ].map((value, index) => (
-                <div key={index} className="glass-card p-8 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div 
+                  key={index} 
+                  className="rounded-2xl border p-8 text-center transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    backgroundColor: '#1A252F',
+                    borderColor: '#4B6CB7',
+                    boxShadow: '0 0 10px #89CFF0'
+                  }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-blue-400">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-4">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-4">{value.title}</h3>
+                  <p className="text-gray-400">{value.description}</p>
                 </div>
               ))}
             </div>
@@ -101,8 +109,8 @@ const About = () => {
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Our Team</h2>
-              <p className="text-xl text-muted-foreground">The minds behind Clura.ai</p>
+              <h2 className="text-4xl font-light tracking-tight text-white mb-4">Our Team</h2>
+              <p className="text-xl text-gray-400">The minds behind Clura.ai</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
@@ -110,12 +118,20 @@ const About = () => {
                 { name: "Sarah Kim", role: "CTO & Co-founder", avatar: "SK" },
                 { name: "Michael Rodriguez", role: "Head of AI", avatar: "MR" }
               ].map((member, index) => (
-                <div key={index} className="glass-card p-8 text-center">
+                <div 
+                  key={index} 
+                  className="rounded-2xl border p-8 text-center transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    backgroundColor: '#1A252F',
+                    borderColor: '#4B6CB7',
+                    boxShadow: '0 0 10px #89CFF0'
+                  }}
+                >
                   <div className="w-20 h-20 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4">
                     {member.avatar}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">{member.name}</h3>
-                  <p className="text-muted-foreground">{member.role}</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{member.name}</h3>
+                  <p className="text-gray-400">{member.role}</p>
                 </div>
               ))}
             </div>
@@ -125,9 +141,16 @@ const About = () => {
         {/* Story */}
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-12">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-8 text-center">Our Story</h2>
-              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <div 
+              className="rounded-2xl border p-12"
+              style={{ 
+                backgroundColor: '#1A252F',
+                borderColor: '#4B6CB7',
+                boxShadow: '0 0 10px #89CFF0'
+              }}
+            >
+              <h2 className="text-4xl font-light tracking-tight text-white mb-8 text-center">Our Story</h2>
+              <div className="space-y-6 text-lg text-gray-400 leading-relaxed">
                 <p>
                   Clura.ai was born from a simple frustration: finding the right people shouldn't be this hard. 
                   Our founders, having worked at top tech companies, experienced firsthand the pain of traditional 
