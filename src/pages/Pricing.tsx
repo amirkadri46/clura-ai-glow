@@ -1,8 +1,10 @@
+
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import { Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -98,52 +100,53 @@ const Pricing = () => {
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-10">
             {plans.map((plan, index) => (
               <div 
                 key={index}
-                className="relative rounded-2xl border transition-all duration-300 hover:scale-105"
-                style={{ 
-                  backgroundColor: '#1A252F',
-                  borderColor: '#4B6CB7',
-                  boxShadow: '0 0 10px #89CFF0'
+                className={`relative flex flex-col h-[585px] md:h-[540px] rounded-2xl border transition-all duration-300 hover:scale-[1.03] bg-[#1A252F]`}
+                style={{
+                  borderColor: plan.isPopular ? '#718efc' : '#4B6CB7',
+                  boxShadow: plan.isPopular
+                    ? '0 0 18px #818cf8'
+                    : '0 0 10px #89CFF0'
                 }}
               >
                 {plan.isPopular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow shadow-blue-500/30">
                       Most Popular
                     </span>
                   </div>
                 )}
                 
-                <div className="p-8">
+                <div className="flex flex-col flex-1 px-7 pt-8 pb-5">
                   {/* Plan Name */}
-                  <div className="mb-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">
+                  <div className="mb-3">
+                    <h3 className="text-xl font-semibold text-white mb-1">
                       {plan.name}
                     </h3>
                   </div>
 
                   {/* Price */}
-                  <div className="mb-6">
+                  <div className="mb-3">
                     <div className="flex items-baseline">
                       <span className="text-4xl font-bold text-white">
                         {plan.price}
                       </span>
-                      <span className="text-gray-400 ml-1">
+                      <span className="text-gray-400 ml-1 text-xl font-normal">
                         {plan.period}
                       </span>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-400 mb-8 leading-relaxed">
+                  <p className="text-gray-400 mb-5 leading-relaxed text-base min-h-[40px]">
                     {plan.description}
                   </p>
 
                   {/* Features */}
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start">
                         <Check className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0 mt-0.5" />
@@ -152,10 +155,22 @@ const Pricing = () => {
                     ))}
                   </ul>
 
-                  {/* Button */}
-                  <button className="w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white">
-                    Choose this plan
-                  </button>
+                  {/* Push footer button to the base */}
+                  <div className="flex-1 flex items-end">
+                    <Button
+                      variant={plan.isPopular ? "default" : "outline"}
+                      size="lg"
+                      className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300
+                        border-2 ${
+                          plan.isPopular
+                            ? "bg-gradient-to-r from-blue-600 to-violet-500 text-white border-blue-500 hover:from-blue-500 hover:to-violet-600 shadow-blue-500/30 shadow-md"
+                            : "border-blue-600 text-blue-400 bg-transparent hover:bg-blue-600 hover:text-white"
+                        }
+                      `}
+                    >
+                      Choose this plan
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -168,3 +183,4 @@ const Pricing = () => {
 };
 
 export default Pricing;
+

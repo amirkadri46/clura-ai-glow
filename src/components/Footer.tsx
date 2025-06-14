@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
+// Import Separator from shadcn/ui
+import { Separator } from "@/components/ui/separator";
 
 const Footer = () => {
   return (
     <footer className="relative z-10">
+      {/* Slim Separator line */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Separator className="mb-10 mt-0 bg-white/30" />
+      </div>
       {/* Newsletter Section with transparent background */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-0">
         <div className="text-center">
           <h3 className="text-2xl font-semibold text-white mb-4">Get the Clura.ai newsletter</h3>
           <div className="max-w-md mx-auto flex gap-4">
