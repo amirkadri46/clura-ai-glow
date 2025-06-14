@@ -23,15 +23,15 @@ const DynamicBlueBackground = () => {
         border: 1px solid #FFFFFF;
       `;
       
-      // Different sizes and colors for each orb using the specific blue shades
+      // Different sizes and colors for each orb using darker aqua blue shades
       const sizes = [300, 400, 250, 350, 200, 450];
       const colors = [
-        'radial-gradient(circle, #1A3157 0%, #4B6CB7 50%, transparent 100%)',
-        'radial-gradient(circle, #1A3157 0%, #89CFF0 50%, transparent 100%)',
-        'radial-gradient(circle, #4B6CB7 0%, #89CFF0 50%, transparent 100%)',
-        'radial-gradient(circle, #1A3157 0%, #4B6CB7 50%, transparent 100%)',
-        'radial-gradient(circle, #4B6CB7 0%, #89CFF0 50%, transparent 100%)',
-        'radial-gradient(circle, #1A3157 0%, #89CFF0 50%, transparent 100%)'
+        'radial-gradient(circle, #0F2027 0%, #203A43 50%, transparent 100%)',
+        'radial-gradient(circle, #134E5E 0%, #71B280 50%, transparent 100%)',
+        'radial-gradient(circle, #2C5364 0%, #0F4C75 50%, transparent 100%)',
+        'radial-gradient(circle, #0F3460 0%, #16537e 50%, transparent 100%)',
+        'radial-gradient(circle, #1B4F72 0%, #2874A6 50%, transparent 100%)',
+        'radial-gradient(circle, #1A252F 0%, #2C3E50 50%, transparent 100%)'
       ];
       
       orb.style.width = `${sizes[i]}px`;
