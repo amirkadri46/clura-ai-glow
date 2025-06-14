@@ -5,34 +5,65 @@ import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAtTop, setIsAtTop] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+      const atTop = currentScrollY < 10;
+      
+      setIsScrolled(currentScrollY > 50);
+      setIsScrollingUp(scrollingUp);
+      setIsAtTop(atTop);
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Pricing', href: '/pricing' },
+    { name: 'Blogs', href: '/blog' },
     { name: 'Contact Us', href: '/contact' },
   ];
 
+  const getNavbarBackground = () => {
+    if (isAtTop) {
+      return 'bg-transparent';
+    }
+    return 'bg-white/70 backdrop-blur-md border border-white/20';
+  };
+
+  const getTextColor = () => {
+    if (isAtTop) {
+      return 'text-gray-300';
+    }
+    return 'text-gray-800';
+  };
+
+  const getHoverTextColor = () => {
+    if (isAtTop) {
+      return 'hover:text-white';
+    }
+    return 'hover:text-gray-600';
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-      isScrolled 
-        ? 'transform translate-y-0' 
-        : 'transform translate-y-0 bg-transparent'
+      isScrollingUp || isAtTop ? 'transform translate-y-0' : 'transform -translate-y-full'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className={`flex justify-between items-center h-16 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-slate-900/70 backdrop-blur-md border border-slate-700/50 rounded-full mx-4 px-6 mt-2 mb-2' 
+          isScrolled && !isAtTop
+            ? `${getNavbarBackground()} rounded-full mx-4 px-6 mt-2 mb-2` 
             : ''
         }`}>
           <Link to="/" className="flex items-center space-x-2">
@@ -55,12 +86,14 @@ const Navigation = () => {
                 to={link.href}
                 className={`relative text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.href
-                    ? 'text-blue-400'
-                    : 'text-gray-300 hover:text-white'
+                    ? isAtTop ? 'text-blue-400' : 'text-blue-600'
+                    : `${getTextColor()} ${getHoverTextColor()}`
                 } group`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 ${
+                  isAtTop ? 'bg-blue-400' : 'bg-blue-600'
+                } transition-all duration-300 group-hover:w-full`}></span>
               </Link>
             ))}
           </div>
@@ -68,7 +101,7 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               to="/login"
-              className="text-sm font-medium transition-all duration-300 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800"
+              className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-lg ${getTextColor()} ${getHoverTextColor()}`}
             >
               Log in
             </Link>
@@ -84,7 +117,7 @@ const Navigation = () => {
           </div>
 
           <button
-            className="md:hidden p-2 transition-colors duration-300 text-gray-300"
+            className={`md:hidden p-2 transition-colors duration-300 ${getTextColor()}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -92,7 +125,7 @@ const Navigation = () => {
         </div>
       </div>
 
-      <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900/95 backdrop-blur-md border-l border-slate-700/50 transform transition-transform duration-300 ${
+      <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-white/95 backdrop-blur-md border-l border-gray-200/50 transform transition-transform duration-300 ${
         isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="pt-20 px-6">
@@ -100,7 +133,7 @@ const Navigation = () => {
             <Link
               key={link.name}
               to={link.href}
-              className="block py-3 text-lg font-medium text-gray-300 hover:text-white transition-colors"
+              className="block py-3 text-lg font-medium text-gray-800 hover:text-gray-600 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
