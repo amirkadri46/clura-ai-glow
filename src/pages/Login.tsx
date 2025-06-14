@@ -28,6 +28,8 @@ const Login = () => {
     // Simulate login process
     setTimeout(() => {
       setIsLoading(false);
+      // Set login status in localStorage
+      localStorage.setItem('isLoggedIn', 'true');
       // Redirect to search page after login
       navigate('/search');
     }, 1500);
@@ -108,7 +110,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full neuro-button px-6 py-4 text-lg font-medium text-foreground hover:text-clura-400 transition-all duration-300 group disabled:opacity-50"
+                className="w-full neuro-button px-6 py-4 text-lg font-medium text-foreground hover:text-clura-400 transition-all duration-300 group disabled:opacity-50 transform hover:scale-105"
               >
                 {isLoading ? (
                   <span>Signing In...</span>
