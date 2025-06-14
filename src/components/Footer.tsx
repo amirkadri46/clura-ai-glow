@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Newsletter Section with transparent background */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h3 className="text-2xl font-semibold text-white mb-4">Get the Clura newsletter</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">Get the Clura.ai newsletter</h3>
             <div className="max-w-md mx-auto flex gap-4">
               <input
                 type="email"
@@ -34,10 +34,10 @@ const Footer = () => {
             <div className="col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span className="text-xl font-semibold text-white">Clura</span>
+                <span className="text-xl font-semibold text-white">Clura.ai</span>
               </div>
               <p className="text-white/80 max-w-md">
-                The next generation of people discovery. Find anyone with AI-powered search.
+                The next generation of people discovery. Find anyone on the internet with AI-powered search.
               </p>
             </div>
 
@@ -72,7 +72,7 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li className="text-white/80">hello@clura.ai</li>
                 <li className="text-white/80">+1 (555) 123-4567</li>
-                <li className="text-white/80">San Francisco, CA</li>
+                <li className="text-white/80">India</li>
               </ul>
             </div>
           </div>
