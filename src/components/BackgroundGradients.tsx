@@ -1,56 +1,50 @@
 
 const BackgroundGradients = () => {
   return (
-    <div className="fixed inset-0 z-0">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
-      
-      {/* Large blue gradient orb */}
-      <div className="absolute top-0 left-0 w-[600%] h-[600%]">
-        <div className="absolute top-1/6 left-1/6 w-[1800px] h-[1800px] bg-gradient-radial from-blue-500/50 via-blue-400/30 to-transparent rounded-full blur-3xl" style={{
-          animation: 'float 100s ease-in-out infinite'
-        }}></div>
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#05090e] via-[#101c29] to-[#040a14] transition-all duration-1000" />
+      {/* Main Halo Glow */}
+      <div className="absolute left-[-30vw] top-[-25vh] animate-bg-float pointer-events-none">
+        <div className="w-[1200px] h-[1200px] bg-[#45aaff] opacity-[0.38] rounded-full blur-[170px]" />
       </div>
-      
-      {/* Large purple gradient orb */}
-      <div className="absolute top-0 right-0 w-[600%] h-[600%]">
-        <div className="absolute top-1/5 right-1/5 w-[1600px] h-[1600px] bg-gradient-radial from-purple-500/45 via-purple-400/25 to-transparent rounded-full blur-3xl" style={{
-          animation: 'float 130s ease-in-out infinite reverse'
-        }}></div>
+      {/* Second Halo Glow */}
+      <div className="absolute right-[-18vw] top-[5vh] animate-bg-float2 pointer-events-none">
+        <div className="w-[950px] h-[900px] bg-[#2196f3] opacity-[0.25] rounded-full blur-[140px]" />
       </div>
-      
-      {/* Large cyan/teal gradient orb */}
-      <div className="absolute bottom-0 left-0 w-[600%] h-[600%]">
-        <div className="absolute bottom-1/5 left-1/2 w-[1400px] h-[1400px] bg-gradient-radial from-cyan-500/40 via-teal-400/20 to-transparent rounded-full blur-3xl" style={{
-          animation: 'float 160s ease-in-out infinite'
-        }}></div>
+      {/* Lower Left Halo */}
+      <div className="absolute left-[-15vw] bottom-[-30vh] animate-bg-float3 pointer-events-none">
+        <div className="w-[850px] h-[800px] bg-[#00baff] opacity-[0.22] rounded-full blur-[120px]" />
       </div>
-      
-      {/* Additional pink accent */}
-      <div className="absolute top-1/2 right-1/3 w-[1200px] h-[1200px] bg-gradient-radial from-pink-500/35 via-pink-400/18 to-transparent rounded-full blur-3xl" style={{
-        animation: 'float 120s ease-in-out infinite reverse'
-      }}></div>
-      
-      {/* Additional yellow accent */}
-      <div className="absolute bottom-1/3 left-1/4 w-[1000px] h-[1000px] bg-gradient-radial from-yellow-500/30 via-orange-400/15 to-transparent rounded-full blur-3xl" style={{
-        animation: 'float 140s ease-in-out infinite'
-      }}></div>
-
+      {/* Bottom Right Small Accent */}
+      <div className="absolute right-[-7vw] bottom-[-12vh] animate-bg-float4 pointer-events-none">
+        <div className="w-[600px] h-[600px] bg-[#40bbff] opacity-[0.18] rounded-full blur-[100px]" />
+      </div>
       <style>
         {`
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px) translateX(0px) scale(1);
-            }
-            25% {
-              transform: translateY(-40px) translateX(30px) scale(1.15);
-            }
-            50% {
-              transform: translateY(20px) translateX(-20px) scale(0.9);
-            }
-            75% {
-              transform: translateY(-10px) translateX(40px) scale(1.05);
-            }
-          }
+        @keyframes bg-float {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -25px) scale(1.02);}
+          66% { transform: translate(-24px, 36px) scale(0.97);}
+        }
+        @keyframes bg-float2 {
+          0%, 100% { transform: translate(0px, 0px) scale(1);}
+          40% { transform: translate(-28px, 18px) scale(0.98);}
+          80% { transform: translate(22px, -20px) scale(1.02);}
+        }
+        @keyframes bg-float3 {
+          0%, 100% { transform: translate(0px, 0px) scale(1);}
+          35% { transform: translate(34px, -18px) scale(1.05);}
+          71% { transform: translate(-21px, 24px) scale(0.96);}
+        }
+        @keyframes bg-float4 {
+          0%, 100% { transform: translate(0px, 0px) scale(1);}
+          25% { transform: translate(-12px, 20px) scale(1.01);}
+          84% { transform: translate(13px, -16px) scale(0.98);}
+        }
+        .animate-bg-float { animation: bg-float 20s ease-in-out infinite; }
+        .animate-bg-float2 { animation: bg-float2 28s ease-in-out infinite; }
+        .animate-bg-float3 { animation: bg-float3 32s ease-in-out infinite; }
+        .animate-bg-float4 { animation: bg-float4 38s ease-in-out infinite; }
         `}
       </style>
     </div>

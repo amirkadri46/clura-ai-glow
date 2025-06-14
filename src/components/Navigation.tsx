@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
+// Add a utility to handle hover state for demo (could use a className utility or scoped CSS)
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -77,18 +78,19 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               to="/login"
-              className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full hover:bg-clura-500/10 ${
-                isScrolled ? 'text-gray-700 hover:text-clura-600' : 'text-muted-foreground hover:text-foreground'
+              className={`text-sm font-medium transition-all duration-300 px-4 py-2 rounded-full login-signup-btn ${
+                isScrolled ? 'text-gray-700 hover:text-white' : 'text-muted-foreground hover:text-white'
               }`}
+              style={{}}
             >
               Log in
             </Link>
             <Link
               to="/signup"
-              className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 ${
+              className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 login-signup-btn ${
                 isScrolled 
-                  ? 'bg-black text-white hover:bg-gray-800 hover:shadow-lg' 
-                  : 'neuro-button text-foreground hover:text-clura-400 hover:shadow-xl hover:shadow-clura-500/25'
+                  ? 'bg-black text-white hover:bg-black'
+                  : 'neuro-button text-foreground hover:text-white'
               }`}
             >
               Sign up →
@@ -124,7 +126,7 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="block mt-6 neuro-button px-4 py-3 text-center text-foreground hover:text-clura-400"
+            className="block mt-6 neuro-button px-4 py-3 text-center text-foreground hover:text-white login-signup-btn"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Sign up →
@@ -139,6 +141,23 @@ const Navigation = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
+
+      {/* Button Hover Style */}
+      <style>
+        {`
+        .login-signup-btn {
+          position: relative;
+          z-index: 1;
+          transition: background 0.23s, color 0.23s;
+        }
+        .login-signup-btn:hover, 
+        .login-signup-btn:focus-visible {
+          background: #191919 !important;
+          color: #fff !important;
+          box-shadow: 0 3px 12px 0 rgba(25,25,25,0.15);
+        }
+        `}
+      </style>
     </nav>
   );
 };
