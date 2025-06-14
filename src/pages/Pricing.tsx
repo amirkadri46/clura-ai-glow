@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -56,7 +57,29 @@ const plans = [
 ]
 
 const cardBase =
-  'relative flex flex-col items-center bg-[#181f2d] rounded-xl border max-w-[350px] min-w-[320px] w-full h-[580px] px-6 py-8 shadow-lg'
+  'relative flex flex-col items-center justify-between bg-[#181f2d] rounded-xl border border-[#232943] max-w-[350px] min-w-[320px] w-full h-[580px] px-6 py-8 shadow-lg overflow-hidden'
+
+// Used to render a gradient+shadow on the top OUTSIDE of the card
+function CardTopGlow() {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: -16,
+        left: 0,
+        right: 0,
+        height: 28,
+        zIndex: 20,
+        pointerEvents: 'none',
+        borderTopLeftRadius: '0.75rem',
+        borderTopRightRadius: '0.75rem',
+        background: 'rgba(137, 207, 240, 0.22)',
+        boxShadow: '0 -5px 10px #89CFF0',
+        filter: 'blur(0px)',
+      }}
+    />
+  )
+}
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false)
@@ -130,11 +153,13 @@ export default function Pricing() {
               position: 'relative',
               marginTop: 16,
               marginBottom: 16,
-              borderColor: 'rgba(137, 207, 240, 0.2)',
-              boxShadow: '0 0 20px rgba(137, 207, 240, 0.3)',
+              // Remove any internal pseudo-glow!
             }}
           >
-            <div className="flex flex-col items-center w-full z-20 relative text-center">
+            {/* Top outer glow */}
+            <CardTopGlow />
+
+            <div className="flex flex-col items-center w-full z-20 relative">
               <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
               <div className="flex items-baseline gap-1 mb-1">
                 <span
@@ -163,22 +188,13 @@ export default function Pricing() {
               </div>
               <p className="text-xs text-white/80 mb-4 text-center">{plan.description}</p>
             </div>
-            <ul className="space-y-2 text-sm mb-2 z-20">
-              {plan.features.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex items-start">
-                  <Check className="w-4 h-4 text-blue-400 mr-2 mt-1 flex-shrink-0" />
-                  <span className="text-white">{feature}</span>
-                </li>
-              ))}
-            </ul>
             <Button
               variant="outline"
               className={
-                'border rounded-md py-2 w-full font-semibold text-lg mt-auto mb-4 transition relative z-20 bg-transparent'
+                'border border-blue-500 rounded-md py-2 w-full font-semibold text-lg mt-auto mb-4 transition relative z-20 overflow-hidden bg-transparent'
               }
               style={{
-                borderColor: 'rgba(137, 207, 240, 0.5)',
-                boxShadow: '0 0 8px rgba(137, 207, 240, 0.3)',
+                borderColor: '#2563eb',
                 background: 'transparent',
                 position: 'relative',
               }}
@@ -194,6 +210,14 @@ export default function Pricing() {
                 Get Started
               </span>
             </Button>
+            <ul className="w-full space-y-2 text-sm mb-2 z-20">
+              {plan.features.map((feature, featureIndex) => (
+                <li key={featureIndex} className="flex items-start">
+                  <Check className="w-4 h-4 text-blue-400 mr-2 mt-1 flex-shrink-0" />
+                  <span className="text-white">{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
