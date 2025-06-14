@@ -19,9 +19,12 @@ const Footer = () => {
                 placeholder="name@email.com"
                 className="flex-1 px-4 py-3 rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent"
               />
-              <button className="bg-transparent text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center">
-                <Mail className="w-5 h-5 mr-2" />
-                Subscribe
+              <button className="shining-btn px-6 py-3 rounded-lg font-medium flex items-center" style={{ boxShadow: "0 0 10px #0002" }}>
+                <span className="flex items-center">
+                  <Mail className="w-5 h-5 mr-2" />
+                  Subscribe
+                </span>
+                <div className="shine"></div>
               </button>
             </div>
           </div>
@@ -99,9 +102,12 @@ const Footer = () => {
                 placeholder="name@email.com"
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-clura-400 focus:border-transparent"
               />
-              <button className="bg-transparent text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center">
-                <Mail className="w-5 h-5 mr-2" />
-                Subscribe
+              <button className="shining-btn px-6 py-3 rounded-lg font-medium flex items-center" style={{ boxShadow: "0 0 10px #0002" }}>
+                <span className="flex items-center">
+                  <Mail className="w-5 h-5 mr-2" />
+                  Subscribe
+                </span>
+                <div className="shine"></div>
               </button>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Brain, Search, Rocket } from 'lucide-react';
 
 const About = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#1A252F' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#000000' }}>
       <Navigation />
       
       <div className="pt-20">

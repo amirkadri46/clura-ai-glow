@@ -106,9 +106,11 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="px-6 py-2 text-sm font-medium text-white rounded-lg bg-transparent transition-all duration-300"
+              className="shining-btn px-6 py-2 text-sm font-medium"
+              style={{ boxShadow: "0 0 10px #0002" }}
             >
-              Sign up →
+              <span>Sign up →</span>
+              <div className="shine"></div>
             </Link>
           </div>
 
@@ -137,10 +139,12 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="relative block mt-6 px-4 py-3 text-center text-white rounded-lg bg-transparent transition-all duration-300"
+            className="shining-btn block mt-6 px-4 py-3 text-center text-white font-medium"
+            style={{ boxShadow: "0 0 10px #0002" }}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Sign up →
+            <span>Sign up →</span>
+            <div className="shine"></div>
           </Link>
         </div>
       </div>
