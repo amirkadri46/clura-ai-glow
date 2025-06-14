@@ -25,10 +25,7 @@ const CTASection = () => {
           </p>
           <button 
             onClick={handleStartSearching}
-            className="px-8 py-4 text-lg font-medium text-white rounded-lg bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] border border-[#89CFF0] shadow-[0_0_10px_#89CFF0] hover:shadow-[0_0_15px_#89CFF0] transition-all duration-300 transform hover:scale-105"
-            style={{
-              textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
-            }}
+            className="px-8 py-4 text-lg font-medium text-white rounded-lg bg-transparent transition-all duration-300"
           >
             Start Searching People
           </button>
