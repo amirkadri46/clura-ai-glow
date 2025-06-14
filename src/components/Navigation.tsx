@@ -17,18 +17,19 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Search', href: '/search' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'How it works', href: '/about' },
+    { name: 'Use cases', href: '/blog' },
+    { name: 'Help', href: '/contact' },
+    { name: 'Careers', href: '/contact' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'backdrop-blur-md bg-background/80 border-b border-white/10' : 'bg-transparent'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+      isScrolled 
+        ? 'transform translate-y-0 backdrop-blur-xl bg-white/90 border-b border-gray-200/50 shadow-lg' 
+        : 'transform translate-y-0 bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <img 
@@ -44,15 +45,15 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
-                className={`relative text-sm font-medium transition-colors duration-200 ${
+                className={`relative text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.href
-                    ? 'text-clura-400'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? isScrolled ? 'text-clura-600' : 'text-clura-400'
+                    : isScrolled ? 'text-gray-700 hover:text-clura-600' : 'text-muted-foreground hover:text-foreground'
                 } group`}
               >
                 {link.name}
@@ -61,18 +62,32 @@ const Navigation = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-4">
             <Link
               to="/contact"
-              className="neuro-button px-4 py-2 text-sm font-medium text-foreground hover:text-clura-400"
+              className={`text-sm font-medium transition-colors duration-300 ${
+                isScrolled ? 'text-gray-700 hover:text-clura-600' : 'text-muted-foreground hover:text-foreground'
+              }`}
             >
-              Get Started
+              Log in
+            </Link>
+            <Link
+              to="/contact"
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                isScrolled 
+                  ? 'bg-black text-white hover:bg-gray-800' 
+                  : 'neuro-button text-foreground hover:text-clura-400'
+              }`}
+            >
+              Sign up →
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className={`md:hidden p-2 transition-colors duration-300 ${
+              isScrolled ? 'text-gray-700' : 'text-foreground'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -100,7 +115,7 @@ const Navigation = () => {
             className="block mt-6 neuro-button px-4 py-3 text-center text-foreground hover:text-clura-400"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Get Started
+            Sign up →
           </Link>
         </div>
       </div>
