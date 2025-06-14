@@ -4,95 +4,104 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ParticleBackground from '@/components/ParticleBackground';
 import { Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
 
+  // Sample prices and features as per second reference
   const plans = [
     {
       name: 'Basic',
-      price: isAnnual ? '$0' : '$0',
+      price: isAnnual ? '€7,200' : '€750',
       period: '/month',
       description: 'For businesses looking to start with AI and automations.',
       features: [
-        '10 AI searches per month',
-        'Basic profile insights',
-        'Email support',
-        'Standard search filters'
+        '1 developer',
+        'Basic chatbots & LLMs',
+        '5 monthly workflow automations',
+        '50 monthly content creation requests',
+        'Cancel & pause anytime',
       ],
-      isPopular: false
+      isPopular: false,
     },
     {
       name: 'Professional',
-      price: isAnnual ? '$400' : '$500',
+      price: isAnnual ? '€14,400' : '€1,500',
       period: '/month',
-      description: 'For businesses looking to outperform their competition with AI and automations.',
+      description:
+        'For businesses looking to outperform their competition with AI and automations.',
       features: [
-        '500 AI searches per month',
-        'Full enriched profile data',
-        'Priority support',
-        'Advanced AI search filters',
-        'Export unlimited contacts',
-        'Real-time data updates'
+        '2 developers',
+        'Custom chatbots & LLMs',
+        '15 monthly workflow automations',
+        '100 monthly content creation requests',
+        'Cancel & pause anytime',
       ],
-      isPopular: true
+      isPopular: true,
     },
     {
       name: 'Enterprise',
-      price: isAnnual ? '$4000' : '$5000',
+      price: isAnnual ? '€28,800' : '€3,000',
       period: '/month',
-      description: 'For businesses looking to fully leverage AI and automations to become an industry leader.',
+      description:
+        'For businesses looking to fully leverage AI and automations to become an industry leader.',
       features: [
-        'Unlimited AI searches',
-        'Complete profile enrichment',
-        '24/7 dedicated support',
-        'All premium search features',
-        'Bulk operations & export',
-        'Full API access',
-        'Team management dashboard',
-        'Custom integrations',
-        'GDPR compliance tools',
-        'Advanced analytics'
+        '3 developers',
+        'Custom chatbots & LLMs',
+        'Unlimited workflow automations',
+        'Unlimited content creation requests',
+        'Cancel & pause anytime',
       ],
-      isPopular: false
-    }
+      isPopular: false,
+    },
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen bg-black overflow-hidden">
       <ParticleBackground />
       <div className="relative z-10">
         <Navigation />
-        <div className="pt-20 pb-20">
+        <div className="pt-16 pb-20 max-w-6xl mx-auto px-4">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-light tracking-tight mb-4 text-white">
+          <div className="text-center mb-14">
+            <h1
+              className="text-6xl md:text-7xl font-bold tracking-tight mb-4"
+              style={{
+                color: '#81A7FF',
+                letterSpacing: '-.03em',
+                lineHeight: '1.07',
+                textShadow:
+                  '0 0 24px #81a7ff88, 0 2px 14px #000b, 0 0 1px #fff2',
+              }}
+            >
               Subscriptions
             </h1>
-            <p className="text-xl text-gray-400 mb-8">
-              Three different subscriptions to match your companies' needs.
+            <p className="text-lg md:text-xl text-white/70 mb-8">
+              Three different subscriptions to match your companies&apos; needs.
             </p>
-            
             {/* Toggle */}
-            <div className="flex items-center justify-center space-x-4 mb-12">
+            <div className="flex items-center justify-center gap-1.5 mb-4">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-6 py-2 rounded-full border transition-all duration-300 ${
-                  !isAnnual 
-                    ? 'bg-blue-600 text-white border-blue-600' 
-                    : 'bg-transparent text-gray-400 border-gray-600 hover:text-white'
-                }`}
+                className={`px-6 py-2 rounded-lg font-medium border transition-all duration-250
+                  ${
+                    !isAnnual
+                      ? 'bg-[#151a20] text-blue-400 border-blue-500 shadow-sm'
+                      : 'bg-[#11151a] text-white/50 border-[#222531] hover:text-blue-400'
+                  }
+                `}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-6 py-2 rounded-full border transition-all duration-300 ${
-                  isAnnual 
-                    ? 'bg-blue-600 text-white border-blue-600' 
-                    : 'bg-transparent text-gray-400 border-gray-600 hover:text-white'
-                }`}
+                className={`px-6 py-2 rounded-lg font-medium border transition-all duration-250
+                  ${
+                    isAnnual
+                      ? 'bg-[#151a20] text-blue-400 border-blue-500 shadow-sm'
+                      : 'bg-[#11151a] text-white/50 border-[#222531] hover:text-blue-400'
+                  }
+                `}
               >
                 Annually (-20%)
               </button>
@@ -100,77 +109,83 @@ const Pricing = () => {
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-10">
-            {plans.map((plan, index) => (
-              <div 
-                key={index}
-                className={`relative flex flex-col h-[585px] md:h-[540px] rounded-2xl border transition-all duration-300 hover:scale-[1.03] bg-[#1A252F]`}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {plans.map((plan, idx) => (
+              <div
+                key={plan.name}
+                className={`
+                  flex flex-col w-full h-full bg-white/5 border border-white/10 backdrop-blur-lg rounded-2xl transition-all duration-200
+                  ${plan.isPopular ? 'border-blue-500 shadow-[0_2px_32px_0_rgba(80,202,255,0.08)]' : ''}
+                  hover:scale-[1.02]
+                `}
                 style={{
-                  borderColor: plan.isPopular ? '#718efc' : '#4B6CB7',
+                  minHeight: 500,
                   boxShadow: plan.isPopular
-                    ? '0 0 18px #818cf8'
-                    : '0 0 10px #89CFF0'
+                    ? '0 6px 40px 0 #81A7FF22'
+                    : '0 2px 24px 0 #222c440f',
+                  position: 'relative',
                 }}
               >
+                {/* "Most Popular" badge */}
                 {plan.isPopular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow shadow-blue-500/30">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-blue-500 text-white px-5 py-0.5 rounded-full text-xs font-bold shadow shadow-blue-500/30 border border-blue-300/50">
                       Most Popular
                     </span>
                   </div>
                 )}
-                
-                <div className="flex flex-col flex-1 px-7 pt-8 pb-5">
+
+                <div className="flex flex-col flex-1 px-9 pt-10 pb-6">
                   {/* Plan Name */}
-                  <div className="mb-3">
-                    <h3 className="text-xl font-semibold text-white mb-1">
-                      {plan.name}
-                    </h3>
+                  <div>
+                    <h3 className="text-lg font-medium text-white mb-6">{plan.name}</h3>
                   </div>
-
                   {/* Price */}
-                  <div className="mb-3">
-                    <div className="flex items-baseline">
-                      <span className="text-4xl font-bold text-white">
-                        {plan.price}
-                      </span>
-                      <span className="text-gray-400 ml-1 text-xl font-normal">
-                        {plan.period}
-                      </span>
-                    </div>
+                  <div className="flex items-end space-x-1 mb-3">
+                    <span className="text-4xl md:text-5xl font-bold text-blue-400">
+                      {plan.price}
+                    </span>
+                    <span className="text-lg text-white/60 font-light ml-1">{plan.period}</span>
                   </div>
-
                   {/* Description */}
-                  <p className="text-gray-400 mb-5 leading-relaxed text-base min-h-[40px]">
+                  <p className="text-white/60 leading-relaxed text-base mb-7 min-h-[50px]">
                     {plan.description}
                   </p>
-
+                  {/* Button */}
+                  <div className="mb-7">
+                    <button
+                      className={`
+                        w-full py-3 rounded-lg border border-white/20
+                        text-white font-semibold transition-all duration-200
+                        bg-transparent hover:text-blue-400 hover:bg-white/5 hover:border-blue-300/40
+                        focus:outline-none focus:ring-2 focus:ring-blue-500/40
+                        text-base
+                      `}
+                      style={{
+                        boxShadow: plan.isPopular
+                          ? '0 0 6px #81A7FF44'
+                          : undefined,
+                      }}
+                    >
+                      Choose this plan
+                    </button>
+                  </div>
+                  {/* Divider */}
+                  <div className="w-full h-px bg-white/10 mb-4" />
                   {/* Features */}
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start">
-                        <Check className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300">{feature}</span>
+                  <ul className="space-y-3 mt-0 text-base">
+                    {plan.features.map((feature, featureIdx) => (
+                      <li
+                        key={featureIdx}
+                        className="flex items-center space-x-3 text-white/90"
+                      >
+                        <Check className="w-5 h-5 text-blue-400 mr-1.5" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-
-                  {/* Push footer button to the base */}
-                  <div className="flex-1 flex items-end">
-                    <Button
-                      variant={plan.isPopular ? "default" : "outline"}
-                      size="lg"
-                      className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300
-                        border-2 ${
-                          plan.isPopular
-                            ? "bg-gradient-to-r from-blue-600 to-violet-500 text-white border-blue-500 hover:from-blue-500 hover:to-violet-600 shadow-blue-500/30 shadow-md"
-                            : "border-blue-600 text-blue-400 bg-transparent hover:bg-blue-600 hover:text-white"
-                        }
-                      `}
-                    >
-                      Choose this plan
-                    </Button>
-                  </div>
+                  {/* Spacer to push content to align bottom */}
+                  <div className="flex-1" />
                 </div>
               </div>
             ))}
@@ -183,4 +198,3 @@ const Pricing = () => {
 };
 
 export default Pricing;
-
