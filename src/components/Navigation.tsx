@@ -107,12 +107,12 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="relative px-6 py-2 text-sm font-medium bg-black hover:bg-gray-900 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg overflow-hidden group"
+              className="px-6 py-2 text-sm font-medium text-white rounded-lg bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] border border-[#89CFF0] shadow-[0_0_10px_#89CFF0] hover:shadow-[0_0_15px_#89CFF0] transition-all duration-300 transform hover:scale-105"
+              style={{
+                textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
+              }}
             >
-              <span className="relative z-10">Sign up →</span>
-              <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
-                <div className="absolute inset-[2px] bg-black rounded-lg"></div>
-              </div>
+              Sign up →
             </Link>
           </div>
 
@@ -141,13 +141,13 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="relative block mt-6 bg-black hover:bg-gray-900 px-4 py-3 text-center text-white rounded-lg transition-colors overflow-hidden"
+            className="relative block mt-6 px-4 py-3 text-center text-white rounded-lg bg-gradient-to-r from-[#4B6CB7] to-[#89CFF0] border border-[#89CFF0] shadow-[0_0_10px_#89CFF0] hover:shadow-[0_0_15px_#89CFF0] transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
+            style={{
+              textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
+            }}
           >
-            <span className="relative z-10">Sign up →</span>
-            <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
-              <div className="absolute inset-[2px] bg-black rounded-lg"></div>
-            </div>
+            Sign up →
           </Link>
         </div>
       </div>
