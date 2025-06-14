@@ -1,17 +1,16 @@
 
-import { useEffect, useRef, useState } from 'react';
-import { Search, Brain, Rocket, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import SearchCard from '@/components/SearchCard';
-import AnimatedUserQueries from '@/components/AnimatedUserQueries';
-import SpaceBackground from '@/components/SpaceBackground';
+import BackgroundGradients from '@/components/BackgroundGradients';
+import HeroSection from '@/components/HeroSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import MissionSection from '@/components/MissionSection';
+import FAQSection from '@/components/FAQSection';
+import CTASection from '@/components/CTASection';
 
 const Index = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [query, setQuery] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Page enter animation
@@ -37,246 +36,19 @@ const Index = () => {
     return () => observerRef.current?.disconnect();
   }, []);
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      // Check if user is logged in (simulate with localStorage for now)
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (isLoggedIn) {
-        navigate(`/search?q=${encodeURIComponent(query)}`);
-      } else {
-        navigate('/login');
-      }
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
-  const handleStartSearching = () => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn) {
-      navigate('/search');
-    } else {
-      navigate('/login');
-    }
-  };
-
-  const features = [
-    {
-      icon: <Search className="w-6 h-6" />,
-      title: "Search by Natural Language",
-      description: "Search using everyday language, no complex syntax needed"
-    },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: "Instant Filtering with AI",
-      description: "Our AI understands context and finds the perfect matches"
-    },
-    {
-      icon: <Rocket className="w-6 h-6" />,
-      title: "200M+ Enriched Profiles",
-      description: "Access to the largest enriched professional database"
-    },
-    {
-      icon: <Search className="w-6 h-6" />,
-      title: "Export or Contact Top Matches",
-      description: "Export or contact top matches with one click"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Enhanced vibrant moving background gradients */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"></div>
-        
-        {/* Large blue gradient orb */}
-        <div className="absolute top-0 left-0 w-[500%] h-[500%]">
-          <div className="absolute top-1/5 left-1/5 w-[1200px] h-[1200px] bg-gradient-radial from-blue-500/40 via-blue-400/25 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 80s ease-in-out infinite'
-          }}></div>
-        </div>
-        
-        {/* Large purple gradient orb */}
-        <div className="absolute top-0 right-0 w-[500%] h-[500%]">
-          <div className="absolute top-1/4 right-1/4 w-[1000px] h-[1000px] bg-gradient-radial from-purple-500/35 via-purple-400/20 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 100s ease-in-out infinite reverse'
-          }}></div>
-        </div>
-        
-        {/* Large cyan/teal gradient orb */}
-        <div className="absolute bottom-0 left-0 w-[500%] h-[500%]">
-          <div className="absolute bottom-1/4 left-1/2 w-[900px] h-[900px] bg-gradient-radial from-cyan-500/30 via-teal-400/15 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 120s ease-in-out infinite'
-          }}></div>
-        </div>
-        
-        {/* Additional pink accent */}
-        <div className="absolute top-1/2 right-1/3 w-[800px] h-[800px] bg-gradient-radial from-pink-500/25 via-pink-400/12 to-transparent rounded-full blur-3xl" style={{
-          animation: 'float 90s ease-in-out infinite reverse'
-        }}></div>
-      </div>
+      <BackgroundGradients />
 
       <div className="relative z-10">
         <Navigation />
-
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <div className="relative z-10 max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 pt-20">
-            <div className="animate-fade-in">
-              <div className="mb-6">
-                <span className="inline-block px-4 py-2 bg-clura-500/10 border border-clura-500/20 rounded-full text-clura-400 text-sm font-medium">
-                  NEXT GENERATION OF PEOPLE DISCOVERY
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12">
-                <span className="bg-gradient-to-r from-white via-blue-200 to-slate-300 bg-clip-text text-transparent">
-                  Find Anyone with{' '}
-                </span>
-                <span className="bg-gradient-to-r from-clura-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-bold">
-                  AI-Powered
-                </span>{' '}
-                <span className="bg-gradient-to-r from-white via-blue-200 to-slate-300 bg-clip-text text-transparent">
-                  Search
-                </span>
-              </h1>
-
-              {/* Search Interface */}
-              <div className="relative max-w-4xl mx-auto mb-8">
-                <div className="glass-card p-8 bg-slate-900/70 border-2 border-clura-500/40 shadow-2xl shadow-clura-500/30 rounded-2xl backdrop-blur-lg relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-clura-500/10 via-transparent to-clura-600/10 opacity-50"></div>
-                  <div className="relative z-10">
-                    <div className="flex items-center space-x-4">
-                      <Search className="w-6 h-6 text-clura-400 flex-shrink-0" />
-                      <input
-                        type="text"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        placeholder="Describe who you're looking for..."
-                        className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-xl py-3 font-light"
-                      />
-                      <button 
-                        onClick={handleSearch}
-                        className="neuro-button px-6 py-3 text-base font-medium text-foreground hover:text-clura-400 transition-all duration-300 group hover:scale-105"
-                      >
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* User Queries Section */}
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="scroll-reveal text-center mb-8">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-8">Realistic User Queries</h2>
-              <AnimatedUserQueries />
-            </div>
-          </div>
-        </section>
-
-        {/* Features */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="scroll-reveal text-center mb-16">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
-                Powerful Features
-              </h2>
-              <p className="text-xl text-muted-foreground">Everything you need to find the right people</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {features.map((feature, index) => (
-                <div key={index} className="scroll-reveal glass-card p-8 feature-card group hover:scale-105 hover:shadow-2xl hover:shadow-clura-500/30 hover:border-clura-400/50 transition-all duration-300">
-                  <div className="w-12 h-12 bg-gradient-to-br from-clura-400/20 to-clura-600/20 rounded-xl flex items-center justify-center mb-6">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Mission Statement */}
-        <section className="py-20 relative">
-          <div className="absolute inset-0 neural-bg opacity-30" />
-          <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <div className="scroll-reveal">
-              <h2 className="text-5xl font-light tracking-tight text-foreground leading-tight">
-                "To make people discovery{' '}
-                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent font-bold">
-                  effortless, intelligent, and accessible
-                </span>{' '}
-                for everyone."
-              </h2>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="scroll-reveal text-center mb-16">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Frequently Asked Questions</h2>
-              <p className="text-xl text-muted-foreground">Everything you need to know</p>
-            </div>
-            <div className="space-y-4">
-              {[
-                { q: "How accurate is the AI search?", a: "Our AI has a 95% accuracy rate in matching queries to relevant profiles." },
-                { q: "What data sources do you use?", a: "We aggregate data from public professional networks, company websites, and verified databases." },
-                { q: "Is my search data private?", a: "Yes, all searches are encrypted and we never share your query data with third parties." },
-                { q: "Can I export search results?", a: "Pro and Enterprise users can export results in CSV, Excel, or integrate via API." },
-                { q: "Do you offer team accounts?", a: "Yes, Enterprise plans include team management and collaboration features." },
-                { q: "What's the difference between plans?", a: "Plans differ in search volume, advanced features, and support levels." }
-              ].map((faq, index) => (
-                <div key={index} className="scroll-reveal glass-card p-6">
-                  <h4 className="font-semibold text-foreground mb-2">{faq.q}</h4>
-                  <p className="text-muted-foreground">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section - Moved to the end */}
-        <section className="py-20 text-center">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <button 
-              onClick={handleStartSearching}
-              className="neuro-button px-8 py-4 text-lg font-medium text-foreground hover:text-clura-400 transform hover:scale-105 transition-all duration-300"
-            >
-              Start Searching People
-            </button>
-          </div>
-        </section>
-
+        <HeroSection />
+        <FeaturesSection />
+        <MissionSection />
+        <FAQSection />
+        <CTASection />
         <Footer />
       </div>
-
-      <style>
-        {`
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px) translateX(0px) scale(1);
-            }
-            33% {
-              transform: translateY(-30px) translateX(20px) scale(1.1);
-            }
-            66% {
-              transform: translateY(20px) translateX(-15px) scale(0.9);
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
