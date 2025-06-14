@@ -3,26 +3,10 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const cardGradientGlow = "relative before:absolute before:top-0 before:left-0 before:right-0 before:h-[18px] before:rounded-t-xl before:pointer-events-none before:content-[''] before:z-10 before:shadow-[0_-5px_16px_0_#89CFF0cc]" // more visible top glow
-const cardBase =
-  'relative flex flex-col items-center justify-between bg-[#181f2d] rounded-xl border border-[#232943] w-full max-w-xs min-h-[540px] h-[540px] px-6 py-8 overflow-hidden ' +
-  cardGradientGlow
+const gradient = "linear-gradient(90deg, #fff 0%, #4B6CB7 60%, #89CFF0 100%)"
+const gradientText = `bg-gradient-to-r from-white via-[#4b6cb7] to-[#89CFF0] bg-clip-text text-transparent`
+const gradientBtn = `bg-gradient-to-r from-white via-[#4b6cb7] to-[#89CFF0] bg-clip-text text-transparent`
 
-const gradientText =
-  'bg-gradient-to-r from-white via-[#4B6CB7] to-[#89CFF0] bg-clip-text text-transparent'
-const priceText =
-  'text-3xl font-extrabold ' + gradientText + ' mb-1 text-center'
-
-const toggleBtnGradient =
-  "bg-gradient-to-r from-white via-[#4B6CB7] to-[#89CFF0] bg-clip-text text-transparent border border-[#334c94] px-3 py-1 rounded-full text-xs font-semibold transition-shadow"
-const toggleActive =
-  "shadow-[0_0_5px_#89CFF0,0_0_8px_white] font-bold"
-
-const btnOutline =
-  "border border-blue-500 rounded-md py-2 w-full font-semibold text-lg mt-auto mb-4 transition relative z-20 overflow-hidden bg-transparent"
-const btnGradientText =
-  "bg-gradient-to-r from-white via-[#4B6CB7] to-[#89CFF0] bg-clip-text text-transparent"
-const btnActiveShadow = "shadow-[0_0_8px_#89CFF0]"
 const plans = [
   {
     name: 'Basic',
@@ -33,28 +17,30 @@ const plans = [
       '10 AI searches per month',
       'Basic profile insights',
       'Email support',
-      'Standard search filters'
-    ]
+      'Standard search filters',
+    ],
   },
   {
     name: 'Professional',
     price: '$500',
     period: '/month',
-    description: 'For businesses looking to outperform their competition with AI and automations.',
+    description:
+      'For businesses looking to outperform their competition with AI and automations.',
     features: [
       '500 AI searches per month',
       'Full enriched profile data',
       'Priority support',
       'Advanced AI search filters',
       'Export unlimited contacts',
-      'Real-time data updates'
-    ]
+      'Real-time data updates',
+    ],
   },
   {
     name: 'Enterprise',
     price: '$5000',
     period: '/month',
-    description: 'For businesses looking to fully leverage AI and automations to become an industry leader.',
+    description:
+      'For businesses looking to fully leverage AI and automations to become an industry leader.',
     features: [
       'Unlimited AI searches',
       'Complete profile enrichment',
@@ -65,26 +51,48 @@ const plans = [
       'Team management dashboard',
       'Custom integrations',
       'GDPR compliance tools',
-      'Advanced analytics'
-    ]
-  }
+      'Advanced analytics',
+    ],
+  },
 ]
+
+const cardBase =
+  'relative flex flex-col items-center justify-between bg-[#181f2d] rounded-xl border border-[#232943] max-w-[350px] min-w-[320px] w-full h-[580px] px-6 py-8 shadow-lg overflow-hidden'
+
+// Used to render a gradient+shadow on the top OUTSIDE of the card
+function CardTopGlow() {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: -16,
+        left: 0,
+        right: 0,
+        height: 28,
+        zIndex: 20,
+        pointerEvents: 'none',
+        borderTopLeftRadius: '0.75rem',
+        borderTopRightRadius: '0.75rem',
+        background: 'rgba(137, 207, 240, 0.22)',
+        boxShadow: '0 -5px 10px #89CFF0',
+        filter: 'blur(0px)',
+      }}
+    />
+  )
+}
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false)
-  // Option to implement annual toggle later; here, all prices static as per instructions.
 
   return (
     <div className="min-h-screen bg-[#0C1020] flex flex-col items-center justify-center py-10 px-2">
       <div className="text-center mb-10">
         <h1
-          className={
-            'text-[2.3rem] md:text-4xl font-extrabold mb-2 leading-tight ' +
-            gradientText
-          }
+          className="text-[2.3rem] md:text-4xl font-extrabold mb-2 leading-tight select-none"
           style={{
+            background: gradient,
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            WebkitTextFillColor: 'transparent',
           }}
         >
           Choose what works for you
@@ -92,80 +100,88 @@ export default function Pricing() {
         <div className="flex items-center justify-center gap-2 mt-3">
           <button
             onClick={() => setIsAnnual(false)}
-            className={
-              toggleBtnGradient +
-              (isAnnual
-                ? ''
-                : ' ' + toggleActive + ' outline-none')
-            }
-            style={
-              !isAnnual
-                ? {
-                    textShadow: '0 0 8px #89CFF0, 0 0 2px #fff',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }
-                : { WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }
-            }
+            className={`
+              px-3 py-1 rounded-full text-xs font-semibold transition 
+              border border-[#334c94]
+              ${!isAnnual ? "shadow-[0_0_5px_#89CFF0]" : ""}
+            `}
+            style={{
+              background: gradient,
+              color: 'transparent',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              opacity: !isAnnual ? 1 : 0.8,
+              fontWeight: !isAnnual ? 700 : 600,
+            }}
           >
             Monthly
           </button>
           <button
             onClick={() => setIsAnnual(true)}
-            className={
-              toggleBtnGradient +
-              (isAnnual
-                ? ' ' + toggleActive + ' outline-none'
-                : '')
-            }
-            style={
-              isAnnual
-                ? {
-                    textShadow: '0 0 8px #89CFF0, 0 0 2px #fff',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }
-                : { WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }
-            }
+            className={`
+              px-3 py-1 rounded-full text-xs font-semibold transition 
+              border border-[#334c94]
+              ${isAnnual ? "shadow-[0_0_5px_#89CFF0]" : ""}
+            `}
+            style={{
+              background: gradient,
+              color: 'transparent',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              opacity: isAnnual ? 1 : 0.8,
+              fontWeight: isAnnual ? 700 : 600,
+            }}
           >
             Annually (-20%)
           </button>
         </div>
       </div>
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
-        {plans.map((plan, idx) => (
+        {plans.map((plan) => (
           <div
             key={plan.name}
             className={cardBase}
             style={{
-              minWidth: 320, // ensures equal width on all cards
+              minWidth: 320,
               maxWidth: 350,
-              minHeight: 540,
-              height: 540,
-              position: 'relative'
+              width: 350,
+              minHeight: 580,
+              height: 580,
+              boxSizing: 'border-box',
+              position: 'relative',
+              marginTop: 16,
+              marginBottom: 16,
+              // Remove any internal pseudo-glow!
             }}
           >
-            {/* Subtle top glow is handled by pseudo-elements in tailwind above (cardGradientGlow) */}
-            <div className="flex flex-col items-center w-full relative z-20">
-              <h3 className="text-lg font-semibold text-white mb-2">
-                {plan.name}
-              </h3>
+            {/* Top outer glow */}
+            <CardTopGlow />
+
+            <div className="flex flex-col items-center w-full z-20 relative">
+              <h3 className="text-lg font-semibold text-white mb-2">{plan.name}</h3>
               <div className="flex items-baseline gap-1 mb-1">
                 <span
-                  className={priceText}
+                  className="text-3xl font-extrabold"
                   style={{
-                    background: "linear-gradient(90deg, #fff 0%, #4B6CB7 70%, #89CFF0 100%)",
+                    background: gradient,
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
+                    WebkitTextFillColor: 'transparent',
+                    lineHeight: 1,
                   }}
                 >
                   {plan.price}
-                  <span className="text-base font-normal text-white/80 ml-1 align-bottom not-italic"
+                  <span
                     style={{
-                      background: "linear-gradient(90deg, #fff 0%, #4B6CB7 70%, #89CFF0 100%)",
+                      marginLeft: 5,
+                      fontWeight: 500,
+                      fontSize: 18,
+                      background: gradient,
                       WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent'
-                    }}>
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
                     {plan.period}
                   </span>
                 </span>
@@ -175,24 +191,20 @@ export default function Pricing() {
             <Button
               variant="outline"
               className={
-                btnOutline +
-                ' ' +
-                btnActiveShadow +
-                ' ' +
-                btnGradientText
+                'border border-blue-500 rounded-md py-2 w-full font-semibold text-lg mt-auto mb-4 transition relative z-20 overflow-hidden bg-transparent'
               }
               style={{
                 borderColor: '#2563eb',
                 background: 'transparent',
-                position: 'relative'
+                position: 'relative',
               }}
             >
               <span
-                className={btnGradientText}
                 style={{
-                  background: "linear-gradient(90deg, #fff 0%, #4B6CB7 70%, #89CFF0 100%)",
+                  background: gradient,
                   WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
+                  WebkitTextFillColor: 'transparent',
+                  fontWeight: 800,
                 }}
               >
                 Get Started
