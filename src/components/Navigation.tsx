@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -48,7 +47,6 @@ const Navigation = () => {
             />
           </Link>
 
-          {/* Desktop Navigation - Centered */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
@@ -75,13 +73,12 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white hover:bg-blue-700"
+              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-slate-700 text-white hover:bg-slate-600"
             >
               Sign up →
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 transition-colors duration-300 text-gray-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -91,7 +88,6 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div className={`md:hidden fixed inset-y-0 right-0 w-64 bg-slate-900/95 backdrop-blur-md border-l border-slate-700/50 transform transition-transform duration-300 ${
         isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
@@ -108,7 +104,7 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="block mt-6 bg-blue-600 hover:bg-blue-700 px-4 py-3 text-center text-white rounded-lg transition-colors"
+            className="block mt-6 bg-slate-700 hover:bg-slate-600 px-4 py-3 text-center text-white rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Sign up →
@@ -116,7 +112,6 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm"
