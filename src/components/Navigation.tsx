@@ -75,9 +75,16 @@ const Navigation = () => {
             </Link>
             <Link
               to="/signup"
-              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white hover:bg-black"
+              className="relative px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-black text-white hover:bg-gray-900 overflow-hidden group"
             >
-              Sign up →
+              <span className="relative z-10">Sign up →</span>
+              <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
+                <div className="absolute inset-[1px] bg-black rounded-lg"></div>
+              </div>
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-lg">
+                <div className="absolute inset-0 rounded-lg bg-gradient-conic from-blue-400 via-cyan-300 to-blue-500 opacity-30 animate-spin" style={{ animationDuration: '3s' }}></div>
+              </div>
             </Link>
           </div>
 
@@ -108,10 +115,17 @@ const Navigation = () => {
           ))}
           <Link
             to="/signup"
-            className="block mt-6 bg-blue-600 hover:bg-black px-4 py-3 text-center text-white rounded-lg transition-colors"
+            className="relative block mt-6 bg-black hover:bg-gray-900 px-4 py-3 text-center text-white rounded-lg transition-colors overflow-hidden group"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Sign up →
+            <span className="relative z-10">Sign up →</span>
+            <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
+              <div className="absolute inset-[1px] bg-black rounded-lg"></div>
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-lg">
+              <div className="absolute inset-0 rounded-lg bg-gradient-conic from-blue-400 via-cyan-300 to-blue-500 opacity-30 animate-spin" style={{ animationDuration: '3s' }}></div>
+            </div>
           </Link>
         </div>
       </div>

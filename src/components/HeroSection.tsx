@@ -49,26 +49,8 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
-              Harnessing the power of artificial intelligence to revolutionize 
-              <br />
-              people discovery and enhance human connections.
-            </p>
-
-            {/* CTA Button */}
-            <div className="mb-16">
-              <button 
-                onClick={handleSearch}
-                className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-600/25"
-              >
-                Start Searching People
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </button>
-            </div>
-
             {/* Search Interface - Simplified */}
-            <div className="relative max-w-4xl mx-auto mb-8">
+            <div className="relative max-w-4xl mx-auto mb-16">
               <div className="glass-card p-8 bg-slate-900/40 backdrop-blur-lg border border-slate-700/50 rounded-2xl shadow-2xl">
                 <div className="flex items-center space-x-4">
                   <Search className="w-6 h-6 text-gray-400 flex-shrink-0" />

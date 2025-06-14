@@ -25,9 +25,16 @@ const CTASection = () => {
           </p>
           <button 
             onClick={handleStartSearching}
-            className="px-8 py-4 text-lg font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-600/25"
+            className="relative px-8 py-4 text-lg font-medium bg-black hover:bg-gray-900 text-white rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg overflow-hidden group"
           >
-            Start Searching People
+            <span className="relative z-10">Start Searching People</span>
+            <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
+              <div className="absolute inset-[2px] bg-black rounded-lg"></div>
+            </div>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-lg">
+              <div className="absolute inset-0 rounded-lg bg-gradient-conic from-blue-400 via-cyan-300 to-blue-500 opacity-50 animate-spin" style={{ animationDuration: '3s' }}></div>
+            </div>
           </button>
         </div>
       </div>
