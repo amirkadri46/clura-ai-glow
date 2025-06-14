@@ -70,7 +70,7 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C1020]">
+    <div className="min-h-screen bg-black">
       <Navigation />
       <div className="pt-20 flex flex-col items-center fixed inset-0 overflow-y-auto">
         <div className="w-full flex flex-col items-center justify-center py-10 px-2">
@@ -82,7 +82,7 @@ export default function Pricing() {
               <button
                 onClick={() => setIsAnnual(false)}
                 className={`px-3 py-1 rounded-full text-xs font-semibold border border-[#334c94] transition 
-                  ${!isAnnual ? "bg-white text-[#0C1020]" : "text-white/70"}
+                  ${!isAnnual ? "bg-white text-black" : "text-white/70"}
                 `}
               >
                 Monthly
@@ -90,7 +90,7 @@ export default function Pricing() {
               <button
                 onClick={() => setIsAnnual(true)}
                 className={`px-3 py-1 rounded-full text-xs font-semibold border border-[#334c94] transition 
-                  ${isAnnual ? "bg-white text-[#0C1020]" : "text-white/70"}
+                  ${isAnnual ? "bg-white text-black" : "text-white/70"}
                 `}
               >
                 Annually (-20%)
@@ -107,7 +107,7 @@ export default function Pricing() {
                 <div className="flex flex-col flex-1">
                   <h3 className="text-lg font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">{plan.name}</h3>
                   <div className="mb-2">
-                    <span className="text-3xl font-extrabold text-white">
+                    <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0]">
                       {getDisplayPrice(plan)}
                       <span className="ml-2 text-base font-medium text-white/80">
                         {getPeriodText()}

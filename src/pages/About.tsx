@@ -13,9 +13,9 @@ const About = () => {
           {/* Hero Section */}
           <section className="py-20">
             <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-              <h1 className="text-5xl md:text-6xl font-light tracking-tight text-white mb-6">
+              <h1 className="text-5xl md:text-6xl font-light tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0] mb-6">
                 About{' '}
-                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-white to-[#599cf0] bg-clip-text text-transparent">
                   Clura.ai
                 </span>
               </h1>
@@ -53,7 +53,7 @@ const About = () => {
                       boxShadow: '0 0 10px #89CFF0'
                     }}
                   >
-                    <h3 className="text-2xl font-semibold text-white mb-6">{box.title}</h3>
+                    <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0] mb-6">{box.title}</h3>
                     <p className="text-gray-400 leading-relaxed">{box.content}</p>
                   </div>
                 ))}
@@ -150,7 +150,7 @@ const About = () => {
                   boxShadow: '0 0 10px #89CFF0'
                 }}
               >
-                <h2 className="text-4xl font-light tracking-tight text-white mb-8 text-center">Our Story</h2>
+                <h2 className="text-4xl font-light tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0] mb-8 text-center">Our Story</h2>
                 <div className="space-y-6 text-lg text-gray-400 leading-relaxed">
                   <p>
                     Clura.ai was born from a simple frustration: finding the right people shouldn't be this hard. 
