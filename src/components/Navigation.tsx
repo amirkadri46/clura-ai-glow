@@ -74,10 +74,10 @@ const Navigation = () => {
               Log in
             </Link>
             <Link
-              to="/login"
-              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 text-gray-300 hover:text-white hover:bg-slate-800"
+              to="/signup"
+              className="px-6 py-2 text-sm font-medium rounded-lg transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white hover:bg-blue-700"
             >
-              Log in
+              Sign up →
             </Link>
           </div>
 
@@ -107,11 +107,11 @@ const Navigation = () => {
             </Link>
           ))}
           <Link
-            to="/login"
-            className="block mt-6 text-gray-300 hover:text-white hover:bg-slate-800 px-4 py-3 text-center rounded-lg transition-colors"
+            to="/signup"
+            className="block mt-6 bg-blue-600 hover:bg-blue-700 px-4 py-3 text-center text-white rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Log in
+            Sign up →
           </Link>
         </div>
       </div>
