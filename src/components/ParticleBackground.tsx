@@ -23,15 +23,15 @@ const ParticleBackground = () => {
       alpha: number;
     }> = [];
 
-    // Create particles
-    for (let i = 0; i < 100; i++) {
+    // Much tinier and fainter particles
+    for (let i = 0; i < 120; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.12,
+        size: Math.random() * 0.6 + 0.2,  // super tiny dots
+        alpha: Math.random() * 0.16 + 0.07, // much more faint
       });
     }
 
@@ -42,6 +42,7 @@ const ParticleBackground = () => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
+        // Soft bounce on edges
         if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
         if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
@@ -49,23 +50,6 @@ const ParticleBackground = () => {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(139, 92, 246, ${particle.alpha})`;
         ctx.fill();
-      });
-
-      // Draw connections
-      particles.forEach((particle, i) => {
-        particles.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(139, 92, 246, ${0.1 * (1 - distance / 100)})`;
-            ctx.stroke();
-          }
-        });
       });
 
       requestAnimationFrame(animate);
@@ -86,7 +70,7 @@ const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)' }}
+      style={{ background: 'transparent' }}
     />
   );
 };

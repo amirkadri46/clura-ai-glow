@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ParticleBackground from '@/components/ParticleBackground';
 import { Check } from 'lucide-react';
 
 const Pricing = () => {
@@ -58,11 +58,11 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#000000' }}>
-      <Navigation />
-      
-      <div className="pt-20 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen overflow-hidden">
+      <ParticleBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <div className="pt-20 pb-20">
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-5xl font-light tracking-tight mb-4 text-white">
@@ -161,9 +161,8 @@ const Pricing = () => {
             ))}
           </div>
         </div>
+        <Footer />
       </div>
-
-      <Footer />
     </div>
   );
 };

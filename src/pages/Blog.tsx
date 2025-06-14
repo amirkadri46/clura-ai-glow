@@ -1,6 +1,6 @@
-
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ParticleBackground from '@/components/ParticleBackground';
 import { Link } from 'react-router-dom';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 
@@ -36,69 +36,70 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#000000' }}>
-      <Navigation />
-      
-      <div className="pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-light tracking-tight text-white mb-4">
-              Our{' '}
-              <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
-                Blog
-              </span>
-            </h1>
-            <p className="text-xl text-gray-400">
-              Insights, updates, and thought leadership from the Clura.ai team
-            </p>
-          </div>
+    <div className="relative min-h-screen overflow-hidden">
+      <ParticleBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <div className="pt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className="text-center mb-16">
+              <h1 className="text-5xl font-light tracking-tight text-white mb-4">
+                Our{' '}
+                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                  Blog
+                </span>
+              </h1>
+              <p className="text-xl text-gray-400">
+                Insights, updates, and thought leadership from the Clura.ai team
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <article 
-                key={post.id}
-                className="rounded-2xl border p-6 transition-all duration-300 hover:scale-105 group"
-                style={{ 
-                  backgroundColor: '#1A252F',
-                  borderColor: '#4B6CB7',
-                  boxShadow: '0 0 10px #89CFF0'
-                }}
-              >
-                <div className="mb-4">
-                  <div className="flex items-center text-sm text-gray-400 mb-3">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
-                    <span className="mx-2">•</span>
-                    <span>{post.readTime}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <article 
+                  key={post.id}
+                  className="rounded-2xl border p-6 transition-all duration-300 hover:scale-105 group"
+                  style={{ 
+                    backgroundColor: '#1A252F',
+                    borderColor: '#4B6CB7',
+                    boxShadow: '0 0 10px #89CFF0'
+                  }}
+                >
+                  <div className="mb-4">
+                    <div className="flex items-center text-sm text-gray-400 mb-3">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      <span>{new Date(post.date).toLocaleDateString()}</span>
+                      <span className="mx-2">•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-clura-400 transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-gray-400 leading-relaxed mb-4">
+                      {post.excerpt}
+                    </p>
                   </div>
-                  <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-clura-400 transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-gray-400 leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-sm text-gray-400">
-                    <User className="w-4 h-4 mr-2" />
-                    <span>{post.author}</span>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-sm text-gray-400">
+                      <User className="w-4 h-4 mr-2" />
+                      <span>{post.author}</span>
+                    </div>
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="text-clura-400 hover:text-clura-300 transition-colors flex items-center"
+                    >
+                      Read more
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
                   </div>
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="text-clura-400 hover:text-clura-300 transition-colors flex items-center"
-                  >
-                    Read more
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-
-      <Footer />
     </div>
   );
 };

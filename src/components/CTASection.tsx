@@ -1,3 +1,4 @@
+
 import { useNavigate } from 'react-router-dom';
 
 const CTASection = () => {
@@ -24,11 +25,15 @@ const CTASection = () => {
           </p>
           <button 
             onClick={handleStartSearching}
-            className="shining-btn px-8 py-4 text-lg font-medium rounded-lg"
-            style={{ boxShadow: "0 0 10px #0002" }}
+            className="px-8 py-4 text-lg font-medium rounded-lg mt-4"
+            style={{
+              background: "#1A252F",
+              color: "#fff",
+              border: "1px solid #89CFF0",
+              boxShadow: "0 0 10px #89CFF022"
+            }}
           >
-            <span>Start Searching People</span>
-            <div className="shine"></div>
+            Start Searching People
           </button>
         </div>
       </div>
