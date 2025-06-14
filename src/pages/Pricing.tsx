@@ -172,8 +172,8 @@ const Pricing = () => {
                     justifyContent: 'flex-start'
                   }}
                 >
-                  {/* Top glow only - subtle */}
-                  <div
+                  {/* Removed: Top glow/sky-blue orb animation */}
+                  {/* <div
                     className="absolute top-0 left-1/2 -translate-x-1/2 w-[75%] h-5 pointer-events-none z-0"
                     style={{
                       background:
@@ -181,7 +181,7 @@ const Pricing = () => {
                       borderTopLeftRadius: 16,
                       borderTopRightRadius: 16
                     }}
-                  />
+                  /> */}
                   <div className="flex flex-col flex-grow z-10 rounded-xl pt-6 pb-3 px-1 min-h-0">
                     {/* Plan Name */}
                     <h3
