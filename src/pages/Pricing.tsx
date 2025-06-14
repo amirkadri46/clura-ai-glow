@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import ParticleBackground from '@/components/ParticleBackground';
-import { Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+import { useState } from 'react'
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import ParticleBackground from '@/components/ParticleBackground'
+import { Check } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+
+// Gradient style for text
+const gradientText = "bg-gradient-to-r from-white via-white to-[#2d8eff] bg-clip-text text-transparent"
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -64,86 +68,101 @@ const Pricing = () => {
       <ParticleBackground />
       <div className="relative z-10">
         <Navigation />
-        <div className="pt-20 pb-20">
+        <div className="pt-16 pb-16">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-6xl md:text-7xl font-light tracking-tight mb-4 text-[#b3d2ff] drop-shadow-lg" style={{letterSpacing: '-0.03em'}}>
+          <div className="text-center mb-10">
+            <h1 className={`text-4xl md:text-5xl font-light tracking-tight mb-3 drop-shadow-lg ${gradientText}`} style={{letterSpacing: '-0.03em'}}>
               Subscriptions
             </h1>
-            <p className="text-lg md:text-xl text-[#8ea6c9] mb-8 font-light">
+            <p className="text-sm md:text-base text-white/70 mb-8 font-light">
               Three different subscriptions to match your companies&apos; needs.
             </p>
             {/* Toggle */}
-            <div className="flex items-center justify-center gap-3 mb-12">
+            <div className="flex items-center justify-center gap-2 mb-6">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-6 py-2 rounded-full border border-[#2C3646] backdrop-blur-md text-base font-medium transition-all duration-200 ${
-                  !isAnnual
-                    ? 'bg-[#12151C] text-[#b3d2ff] border-[#3b82f6] shadow shadow-blue-800/50'
-                    : 'bg-transparent text-[#8ea6c9] hover:text-[#b3d2ff]'
-                }`}
-                style={{minWidth: 120}}
+                className={`px-3 py-1 rounded-full border border-[#263049] backdrop-blur-md text-xs font-medium transition-all duration-200
+                  ${!isAnnual
+                    ? 'bg-[#12151C] ' + gradientText + ' border-[#3b82f6]'
+                    : 'bg-transparent text-white/60 hover:text-white'}
+                `}
+                style={{ minWidth: 90 }}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-6 py-2 rounded-full border border-[#2C3646] backdrop-blur-md text-base font-medium transition-all duration-200 ${
-                  isAnnual
-                    ? 'bg-[#12151C] text-[#b3d2ff] border-[#3b82f6] shadow shadow-blue-800/50'
-                    : 'bg-transparent text-[#8ea6c9] hover:text-[#b3d2ff]'
-                }`}
-                style={{minWidth: 120}}
+                className={`px-3 py-1 rounded-full border border-[#263049] backdrop-blur-md text-xs font-medium transition-all duration-200
+                  ${isAnnual
+                    ? 'bg-[#12151C] ' + gradientText + ' border-[#3b82f6]'
+                    : 'bg-transparent text-white/60 hover:text-white'}
+                `}
+                style={{ minWidth: 90 }}
               >
                 Annually (-20%)
               </button>
             </div>
           </div>
 
-          {/* Pricing Cards */}
-          <div className="flex flex-col md:flex-row gap-8 md:gap-8 justify-center max-w-6xl mx-auto">
+          {/* Pricing Cards Grid */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center max-w-5xl mx-auto">
             {plans.map((plan, index) => (
               <div
                 key={index}
-                className="flex flex-col w-full md:w-1/3 rounded-2xl border border-[#28384b] bg-black/80 
-                  backdrop-blur-md shadow-xl transition-all duration-300 overflow-hidden
-                  hover:border-[#54a7ff] hover:shadow-blue-600/30"
+                className="relative flex flex-col w-full md:w-1/3
+                  rounded-xl border border-[#263049] bg-black/70 backdrop-blur-lg shadow-none px-3 pb-5 pt-0 min-h-0
+                  hover:border-[#54a7ff] transition-all duration-300
+                  "
                 style={{
-                  minHeight: 560,
-                  boxShadow:
-                    "0 2px 40px 0 #4c82c1be, 0 0 0 1.5px #28384b"
+                  maxWidth: 350,
+                  minHeight: 0,
+                  margin: "0 auto"
                 }}
               >
-                {/* Plan Name */}
-                <div className="px-8 pt-8 pb-4">
-                  <h3 className="text-lg font-semibold text-[#b3d2ff] mb-0.5 tracking-tight">{plan.name}</h3>
-                  {/* Price */}
-                  <div className="flex items-end gap-2 mt-2 mb-1">
-                    <span className="text-4xl md:text-5xl font-bold text-[#cae5ff] drop-shadow-lg">{plan.price}</span>
-                    <span className="text-lg text-[#8ea6c9] font-normal">{plan.period}</span>
+                {/* Glow only at the top */}
+                <div
+                  className="absolute top-0 left-1/2 -translate-x-1/2 w-[75%] h-5 pointer-events-none"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at center, #90d4ffbb 0%, transparent 90%)',
+                  }}
+                />
+                {/* Card Content */}
+                <div className="flex flex-col flex-grow z-10 rounded-xl pt-7 pb-3 px-4 min-h-0">
+                  {/* Plan Name in gradient */}
+                  <h3 className={`text-base font-semibold tracking-tight mb-0.5 ${gradientText}`}>
+                    {plan.name}
+                  </h3>
+                  {/* Price in gradient */}
+                  <div className="flex items-end gap-1 mt-2 mb-1">
+                    <span className={`text-2xl md:text-4xl font-bold drop-shadow-lg ${gradientText}`}>{plan.price}</span>
+                    <span className="text-xs text-white font-normal">{plan.period}</span>
                   </div>
                   {/* Description */}
-                  <p className="text-[#a6bedc] my-4 font-light text-base min-h-[48px]">{plan.description}</p>
-                  {/* Button */}
+                  <p className="text-xs text-white/80 my-2 font-light min-h-[36px]">
+                    {plan.description}
+                  </p>
+                  {/* Button under price+desc */}
                   <Button
                     variant="outline"
-                    size="lg"
-                    className={`mt-2 mb-7 w-full py-2 rounded-lg font-normal border border-[#556986] text-[#bae1ff] bg-transparent hover:bg-[#0a1420] hover:text-white transition-colors duration-200 text-base tracking-tight shadow-sm shadow-blue-200/5`}
+                    size="sm"
+                    className={`w-full rounded-md mt-2 mb-0 py-2 border border-[#3b82f6] bg-black/70 hover:bg-[#111b2f] transition
+                      ${gradientText} font-medium text-sm tracking-tight`}
                     style={{
-                      boxShadow: "0 1px 0 0 #8ea6c933, 0 0 0 0 #273b5770",
-                      fontWeight: 500
+                      boxShadow: "none",
                     }}
                   >
                     Choose this plan
                   </Button>
-                  <div className="w-full border-t border-[#273b57] mt-2 mb-0"></div>
                 </div>
+                {/* Separator line under button */}
+                <div className="mx-4 border-t border-[#232d4c] my-2" />
                 {/* Features */}
-                <ul className="px-8 pb-6 pt-4 flex-1 space-y-3">
+                <ul className="px-4 pb-4 flex-1 space-y-2 text-xs">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-base">
-                      <Check className="w-5 h-5 text-[#54a7ff] mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-[#c8e4ff]">{feature}</span>
+                    <li key={featureIndex} className="flex items-start">
+                      <Check className="w-4 h-4 text-[#54a7ff] mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-white">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -154,7 +173,7 @@ const Pricing = () => {
         <Footer />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Pricing;
+export default Pricing
