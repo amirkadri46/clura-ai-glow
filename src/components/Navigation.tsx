@@ -81,10 +81,6 @@ const Navigation = () => {
               <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
                 <div className="absolute inset-[1px] bg-black rounded-lg"></div>
               </div>
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-              <div className="absolute inset-0 rounded-lg">
-                <div className="absolute inset-0 rounded-lg bg-gradient-conic from-blue-400 via-cyan-300 to-blue-500 opacity-30 animate-spin" style={{ animationDuration: '3s' }}></div>
-              </div>
             </Link>
           </div>
 
@@ -121,10 +117,6 @@ const Navigation = () => {
             <span className="relative z-10">Sign up →</span>
             <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 opacity-75">
               <div className="absolute inset-[1px] bg-black rounded-lg"></div>
-            </div>
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
-            <div className="absolute inset-0 rounded-lg">
-              <div className="absolute inset-0 rounded-lg bg-gradient-conic from-blue-400 via-cyan-300 to-blue-500 opacity-30 animate-spin" style={{ animationDuration: '3s' }}></div>
             </div>
           </Link>
         </div>
