@@ -92,19 +92,19 @@ const Index = () => {
       {/* Enhanced moving background gradients */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
-        <div className="absolute top-0 left-0 w-[150%] h-[150%] animate-pulse">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/30 via-blue-400/20 to-transparent rounded-full blur-3xl animate-pulse" style={{
-            animation: 'float 20s ease-in-out infinite'
+        <div className="absolute top-0 left-0 w-[200%] h-[200%] animate-pulse">
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-radial from-blue-500/30 via-blue-400/20 to-transparent rounded-full blur-3xl animate-pulse" style={{
+            animation: 'float 40s ease-in-out infinite'
           }}></div>
         </div>
-        <div className="absolute top-0 right-0 w-[150%] h-[150%]">
-          <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-gradient-radial from-purple-500/25 via-purple-400/15 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 25s ease-in-out infinite reverse'
+        <div className="absolute top-0 right-0 w-[200%] h-[200%]">
+          <div className="absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-gradient-radial from-purple-500/25 via-purple-400/15 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 50s ease-in-out infinite reverse'
           }}></div>
         </div>
-        <div className="absolute bottom-0 left-0 w-[150%] h-[150%]">
-          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-gradient-radial from-indigo-500/20 via-indigo-400/10 to-transparent rounded-full blur-3xl" style={{
-            animation: 'float 30s ease-in-out infinite'
+        <div className="absolute bottom-0 left-0 w-[200%] h-[200%]">
+          <div className="absolute bottom-1/4 left-1/2 w-[450px] h-[450px] bg-gradient-radial from-indigo-500/20 via-indigo-400/10 to-transparent rounded-full blur-3xl" style={{
+            animation: 'float 60s ease-in-out infinite'
           }}></div>
         </div>
       </div>
@@ -123,7 +123,7 @@ const Index = () => {
               </div>
               <h1 className="text-5xl md:text-7xl font-light tracking-tight text-foreground mb-12 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent animate-pulse">
                 Find Anyone with{' '}
-                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent font-bold">
                   AI-Powered
                 </span>{' '}
                 Search
@@ -146,7 +146,7 @@ const Index = () => {
                       />
                       <button 
                         onClick={handleSearch}
-                        className="neuro-button px-6 py-3 text-base font-medium text-foreground hover:text-clura-400 transition-all duration-300 group"
+                        className="neuro-button px-6 py-3 text-base font-medium text-foreground hover:text-clura-400 transition-all duration-300 group hover:scale-105"
                       >
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </button>
@@ -179,7 +179,9 @@ const Index = () => {
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="scroll-reveal text-center mb-16">
-              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4">Powerful Features</h2>
+              <h2 className="text-4xl font-light tracking-tight text-foreground mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+                Powerful Features
+              </h2>
               <p className="text-xl text-muted-foreground">Everything you need to find the right people</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -203,7 +205,7 @@ const Index = () => {
             <div className="scroll-reveal">
               <h2 className="text-5xl font-light tracking-tight text-foreground leading-tight">
                 "To make people discovery{' '}
-                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-clura-400 to-clura-600 bg-clip-text text-transparent font-bold">
                   effortless, intelligent, and accessible
                 </span>{' '}
                 for everyone."
@@ -240,19 +242,21 @@ const Index = () => {
         <Footer />
       </div>
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) translateX(0px) scale(1);
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px) translateX(0px) scale(1);
+            }
+            33% {
+              transform: translateY(-30px) translateX(20px) scale(1.1);
+            }
+            66% {
+              transform: translateY(20px) translateX(-15px) scale(0.9);
+            }
           }
-          33% {
-            transform: translateY(-30px) translateX(20px) scale(1.1);
-          }
-          66% {
-            transform: translateY(20px) translateX(-15px) scale(0.9);
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
