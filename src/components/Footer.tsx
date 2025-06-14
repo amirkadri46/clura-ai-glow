@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
 // Import Separator from shadcn/ui
@@ -13,7 +14,7 @@ const Footer = () => {
       {/* Newsletter Section with transparent background */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-0">
         <div className="text-center">
-          <h3 className="text-2xl font-semibold text-white mb-4">Get the Clura.ai newsletter</h3>
+          <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#599cf0] mb-4">Get the Clura.ai newsletter</h3>
           <div className="max-w-md mx-auto flex gap-4">
             <input
               type="email"
