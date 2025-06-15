@@ -66,7 +66,7 @@ const Search = () => {
             <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
               <button
                 onClick={startNewSearch}
-                className="text-white text-sm font-medium"
+                className="text-white text-sm font-medium cursor-pointer"
                 style={{
                   background: "#374151",
                   borderRadius: "24px",
@@ -77,16 +77,7 @@ const Search = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.2s ease",
-                  cursor: "pointer",
-                }}
-                onMouseOver={e => {
-                  e.currentTarget.style.background = "#4b5563";
-                  e.currentTarget.style.transform = "translateY(-1px)";
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.background = "#374151";
-                  e.currentTarget.style.transform = "translateY(0)";
+                  transition: "none",
                 }}
               >
                 new search
