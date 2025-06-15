@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -48,6 +49,9 @@ const DashboardContent: React.FC = () => {
   const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // For outside click detection (RecentSearchMenu)
+  const menuRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   // Liked cards global sync
   const { syncProfiles } = useLikedCards();
   useEffect(() => { syncProfiles(dummyProfiles); }, [syncProfiles]);
@@ -80,6 +84,7 @@ const DashboardContent: React.FC = () => {
   const handleMenuToggle = (i: number) => {
     setMenuOpenIndex(menuOpenIndex === i ? null : i);
   };
+
   const handleDeleteRecent = (i: number) => {
     setRecentSearches(prev => prev.filter((_, idx) => idx !== i));
     setMenuOpenIndex(null);
@@ -129,7 +134,27 @@ const DashboardContent: React.FC = () => {
     if (e.key === "Enter") handleSearch();
   };
 
-  // Fix: Calculate actual content minwidth based on sidebar, so centering is always "dashboard-centered"
+  // Fix: Center bar regardless of sidebar
+  // Remove dynamic left/transform, use left: 50% and translateX(-50%) always
+
+  // --- Fix RecentSearchMenu: click anywhere closes menu ---
+  useEffect(() => {
+    if (menuOpenIndex === null) return;
+    function handleClickOutside(event: MouseEvent) {
+      let clickedOnMenu = false;
+      for (const ref of menuRefs.current) {
+        if (ref && ref.contains(event.target as Node)) {
+          clickedOnMenu = true;
+          break;
+        }
+      }
+      if (!clickedOnMenu) setMenuOpenIndex(null);
+    }
+    document.addEventListener("mousedown", handleClickOutside, true);
+    return () => document.removeEventListener("mousedown", handleClickOutside, true);
+  }, [menuOpenIndex]);
+
+  // Pass handlers/props as before
   const sidebarWidth = sidebarOpen ? 320 : 64;
 
   return (
@@ -191,7 +216,8 @@ const DashboardContent: React.FC = () => {
               : "relative mx-auto"}
             flex justify-center`}
           style={{
-            left: searchBarAtTop ? `calc(${sidebarWidth}px + 50%)` : undefined,
+            // Remove left: sidebarWidth and transform; always center!
+            left: searchBarAtTop ? `50%` : undefined,
             transform: searchBarAtTop ? "translateX(-50%)" : undefined,
             zIndex: 25,
             alignItems: "center",
@@ -273,3 +299,4 @@ const Search: React.FC = () => (
 );
 
 export default Search;
+
