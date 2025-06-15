@@ -43,16 +43,22 @@ const Search = () => {
         {/* Main Content */}
         <main className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-2xl">
-            <div className="glass-card p-8 bg-slate-900/40 backdrop-blur-lg border border-slate-700/50 rounded-2xl shadow-2xl">
-              <div className="flex items-center space-x-4">
+            <div
+              className="backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl bg-slate-900/80"
+              style={{
+                boxShadow: "0 4px 32px 0 #0008, 0 2px 8px 0 #23242622",
+              }}
+            >
+              <div className="flex items-center space-x-4 px-8 py-6">
                 <SearchIcon className="w-6 h-6 text-gray-400 flex-shrink-0" />
                 <input
                   type="text"
-                  className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-xl py-3 font-light"
+                  className="flex-1 bg-transparent text-white placeholder:text-slate-300 outline-none text-xl py-3 font-light"
                   placeholder="who are you looking for"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
+                  autoFocus
                 />
                 <button
                   aria-label="Send"
