@@ -1,250 +1,171 @@
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Search as SearchIcon, ArrowRight, Filter, MapPin, Building, Calendar, Phone, Mail, Star } from 'lucide-react';
-import Navigation from '@/components/Navigation';
-import SpaceBackground from '@/components/SpaceBackground';
+import { ArrowLeft, Plus, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
-  const [searchParams] = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('q') || '');
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchHistory, setSearchHistory] = useState([
-    "AI engineers in Silicon Valley",
-    "Product managers at startups",
-    "Full stack developers near me"
-  ]);
-
-  useEffect(() => {
-    if (searchParams.get('q')) {
-      setIsLoading(true);
-      // Simulate search delay
-      setTimeout(() => setIsLoading(false), 1500);
-    }
-  }, [searchParams]);
-
-  const mockResults = [
-    {
-      id: 1,
-      name: "Sarah Chen",
-      title: "Senior AI Engineer",
-      company: "Meta",
-      location: "San Francisco, CA",
-      experience: "5+ years",
-      avatar: "SC",
-      skills: ["Machine Learning", "Python", "TensorFlow"],
-      summary: "Experienced AI engineer with expertise in deep learning and neural networks.",
-      rating: 4.9,
-      phone: "+1 (555) 123-4567",
-      email: "sarah.chen@meta.com",
-      portfolio: "github.com/sarah-chen"
-    },
-    {
-      id: 2,
-      name: "Marcus Rodriguez",
-      title: "Full Stack Developer",
-      company: "Google",
-      location: "Mountain View, CA",
-      experience: "3+ years",
-      avatar: "MR",
-      skills: ["React", "Node.js", "TypeScript"],
-      summary: "Full-stack developer passionate about building scalable applications.",
-      rating: 4.7,
-      phone: "+1 (555) 234-5678",
-      email: "marcus.r@google.com",
-      portfolio: "marcusdev.com"
-    },
-    {
-      id: 3,
-      name: "Emily Watson",
-      title: "Product Designer",
-      company: "Apple",
-      location: "Cupertino, CA",
-      experience: "4+ years",
-      avatar: "EW",
-      skills: ["Figma", "User Research", "Prototyping"],
-      summary: "Creative product designer focused on user-centered design solutions.",
-      rating: 4.8,
-      phone: "+1 (555) 345-6789",
-      email: "emily.watson@apple.com",
-      portfolio: "emilydesign.portfolio"
-    }
+  const navigate = useNavigate();
+  const [currentWord, setCurrentWord] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const animatedWords = ['Hiring', 'Sales', 'Student', 'Researchers', 'Founders', 'Networking'];
+  
+  const recentSearches = [
+    'people who started a startup in AI field',
+    'employee who works at top mnc\'s and has experience of 3years and currently live in mumbai',
+    'founders focused on ed-tech or online learning platforms',
+    'who works at a VC firm and studied finance?',
+    'people working on AI lead generation'
   ];
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      setIsLoading(true);
-      if (!searchHistory.includes(query)) {
-        setSearchHistory([query, ...searchHistory.slice(0, 4)]);
-      }
-      setTimeout(() => setIsLoading(false), 1500);
-    }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % animatedWords.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleBackToDashboard = () => {
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen relative">
-      <SpaceBackground />
-      <Navigation />
-      
-      <div className="relative z-10 pt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Search Card */}
-          <div className="mb-8">
-            <div className="glass-card p-8 bg-slate-900/70 border border-clura-500/40 shadow-2xl shadow-clura-500/30 rounded-3xl backdrop-blur-lg">
-              <div className="flex items-center space-x-4 mb-6">
-                <SearchIcon className="w-6 h-6 text-clura-400 flex-shrink-0" />
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Describe who you're looking for..."
-                  className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-xl py-3"
-                />
-                <button 
-                  onClick={handleSearch}
-                  className="neuro-button px-6 py-3 text-sm font-medium text-foreground hover:text-clura-400 transition-all duration-300 group"
-                >
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+    <div className="min-h-screen bg-[#2A2A2A] text-white flex">
+      {/* Left Sidebar */}
+      <div className="w-80 p-6 flex flex-col">
+        {/* Logo and Brand */}
+        <div className="flex items-center mb-8">
+          <div 
+            className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6B48FF] to-[#A78BFA] cursor-pointer"
+            onClick={handleBackToDashboard}
+          ></div>
+          <span 
+            className="ml-[10px] text-white text-2xl font-bold cursor-pointer"
+            onClick={handleBackToDashboard}
+          >
+            Clura
+          </span>
+        </div>
+
+        {/* Action Cards */}
+        <div className="space-y-[10px] mb-8">
+          <button className="w-[200px] h-[50px] border border-white bg-[#2A2A2A] text-white text-base font-bold rounded flex items-center justify-center hover:bg-[#3A3A3A] transition-colors">
+            <Plus className="w-4 h-4 mr-2" />
+            New Search
+          </button>
+          <button className="w-[200px] h-[50px] border border-white bg-[#2A2A2A] text-white text-base font-bold rounded flex items-center justify-center hover:bg-[#3A3A3A] transition-colors">
+            <User className="w-4 h-4 mr-2" />
+            Profile
+          </button>
+        </div>
+
+        {/* Recent Search Section */}
+        <div>
+          <h3 className="text-white text-lg font-semibold mb-4">Recent Searches</h3>
+          <div className="space-y-[10px]">
+            {recentSearches.map((search, index) => (
+              <div 
+                key={index}
+                className="w-[300px] h-[40px] border border-white bg-[#2A2A2A] rounded-[5px] flex items-center px-3 cursor-pointer hover:bg-[#3A3A3A] transition-colors"
+              >
+                <span className="text-gray-400 text-sm truncate">{search}</span>
               </div>
-              
-              {/* Search History */}
-              {searchHistory.length > 0 && (
-                <div>
-                  <h4 className="text-sm text-muted-foreground mb-3">Recent Searches</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {searchHistory.map((search, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setQuery(search)}
-                        className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full border border-clura-500/30 text-sm hover:bg-clura-500/30 transition-colors"
-                      >
-                        {search}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="mt-auto space-y-4">
+          <div className="text-sm text-gray-400">
+            <div className="flex items-center justify-between">
+              <span>All Prospects</span>
+              <span>...</span>
             </div>
           </div>
-
-          {/* Filters */}
-          <div className="mb-6">
-            <div className="flex items-center space-x-4 text-sm">
-              <Filter className="w-4 h-4 text-clura-400" />
-              <button className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full border border-clura-500/30">
-                All Results
-              </button>
-              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
-                Engineers
-              </button>
-              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
-                Designers
-              </button>
-              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
-                Managers
-              </button>
+          <div className="text-sm text-gray-400">
+            <div className="flex items-center justify-between">
+              <span>Saved</span>
+              <span>...</span>
             </div>
           </div>
-
-          {/* Results */}
-          {isLoading ? (
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="glass-card p-6 animate-pulse bg-slate-900/50 border border-clura-500/20">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-clura-500/20 rounded-full"></div>
-                    <div className="flex-1 space-y-2">
-                      <div className="h-4 bg-clura-500/20 rounded w-1/4"></div>
-                      <div className="h-3 bg-clura-500/10 rounded w-1/3"></div>
-                      <div className="h-3 bg-clura-500/10 rounded w-1/2"></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-6">
-              <div className="text-muted-foreground text-sm mb-4">
-                Found {mockResults.length} results for "{query}"
-              </div>
-              {mockResults.map((result, index) => (
-                <div 
-                  key={result.id} 
-                  className="glass-card p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer bg-slate-900/50 border border-clura-500/20 backdrop-blur-lg"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    animation: 'fade-in 0.6s ease-out forwards'
-                  }}
-                >
-                  <div className="flex items-start space-x-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      {result.avatar}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h3 className="text-xl font-semibold text-foreground group-hover:text-clura-400 transition-colors">
-                            {result.name}
-                          </h3>
-                          <p className="text-muted-foreground text-lg">{result.title}</p>
-                          <div className="flex items-center space-x-1 mt-1">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <span className="text-sm text-muted-foreground">{result.rating}</span>
-                          </div>
-                        </div>
-                        <button className="neuro-button px-6 py-3 text-sm opacity-0 group-hover:opacity-100 transition-all duration-300">
-                          Contact
-                        </button>
-                      </div>
-                      
-                      <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center space-x-1">
-                          <Building className="w-4 h-4" />
-                          <span>{result.company}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <MapPin className="w-4 h-4" />
-                          <span>{result.location}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Calendar className="w-4 h-4" />
-                          <span>{result.experience}</span>
-                        </div>
-                      </div>
-
-                      <p className="text-foreground mb-4 leading-relaxed">{result.summary}</p>
-
-                      {/* Contact Details */}
-                      <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center space-x-1">
-                          <Phone className="w-4 h-4" />
-                          <span>{result.phone}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Mail className="w-4 h-4" />
-                          <span>{result.email}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {result.skills.map((skill) => (
-                          <span 
-                            key={skill}
-                            className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full text-sm border border-clura-500/30"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="text-xs text-gray-500 mt-6">
+            <p>Recent Chats</p>
+            <p className="mt-1">No saved chats yet.</p>
+          </div>
         </div>
       </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col items-center justify-center p-8 relative">
+        {/* Back Button */}
+        <button 
+          onClick={handleBackToDashboard}
+          className="absolute top-6 right-6 w-[30px] h-[30px] border border-white rounded flex items-center justify-center hover:bg-[#3A3A3A] transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 text-white" />
+        </button>
+
+        {/* Main Title with Animation */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-white mb-2">
+            The People Search Engine for
+          </h1>
+          <div className="h-12 flex items-center justify-center">
+            <span 
+              key={currentWord}
+              className="text-4xl font-bold text-white animate-fade-in"
+              style={{
+                animation: 'fadeInOut 3s ease-in-out infinite'
+              }}
+            >
+              {animatedWords[currentWord]}
+            </span>
+          </div>
+        </div>
+
+        {/* Search Bar Container */}
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="People who..."
+              className="w-[600px] h-[50px] border border-white bg-[#2A2A2A] text-white text-base px-4 rounded placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/20"
+            />
+          </div>
+          <button className="w-[120px] h-[50px] border border-white bg-[#2A2A2A] text-white text-sm font-medium rounded hover:bg-[#3A3A3A] transition-colors">
+            Deep Research
+          </button>
+        </div>
+
+        {/* Suggestion Pills */}
+        <div className="flex flex-wrap gap-3 mt-8 max-w-4xl justify-center">
+          {[
+            'Founders focused on ed-tech or online learning platforms',
+            'People who started companies in Web3 or crypto',
+            'Who works at a VC firm and studied finance?',
+            'People working on AI lead generation'
+          ].map((suggestion, index) => (
+            <button
+              key={index}
+              onClick={() => setSearchQuery(suggestion)}
+              className="px-4 py-2 border border-gray-600 bg-[#2A2A2A] text-gray-300 text-sm rounded-full hover:bg-[#3A3A3A] hover:text-white transition-colors"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeInOut {
+          0%, 20% { opacity: 1; }
+          25%, 95% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 };
