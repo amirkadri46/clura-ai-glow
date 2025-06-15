@@ -28,8 +28,9 @@ const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
     onMouseOut={e => (e.currentTarget.style.background = "#d1d9ed")}
   >
     <Icon className={sidebarOpen ? "w-5 h-5 mr-3" : "w-5 h-5"} color="#8d94a1" />
-    {sidebarOpen && <span className="text-gray-800">{label}</span>}
+    {sidebarOpen && <span className="text-gray-700">{label}</span>}
   </button>
 );
 
 export default SidebarMenuButton;
+
