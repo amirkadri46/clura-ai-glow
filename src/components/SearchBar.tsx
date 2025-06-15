@@ -1,5 +1,5 @@
 
-import React, { forwardRef } from "react";
+import React from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 
 interface SearchBarProps {
@@ -25,22 +25,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
   inputRef,
   autoFocus,
 }) => {
-  // Calculate position: always horizontally centered in main area (not viewport)
-  // If at top: fixed, else: relative in flow.
-  const fixedStyles = searchBarAtTop
+  // Correctly narrow the type for position
+  const fixedStyles: React.CSSProperties = searchBarAtTop
     ? {
-        position: "fixed",
-        top: 32, // 2rem
+        position: "fixed" as "fixed",
+        top: 32,
         left: `calc(${sidebarWidth}px + 50%)`,
         transform: "translateX(-50%)",
         zIndex: 40,
         width: "100%",
-        maxWidth: "32rem", // Tailwind max-w-xl
+        maxWidth: "32rem",
         transition:
           "all 0.65s cubic-bezier(.33,1.01,.61,.99), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
       }
     : {
-        position: "relative",
+        position: "relative" as "relative",
         left: "auto",
         transform: "none",
         zIndex: 25,
@@ -62,9 +61,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
         autoComplete="off"
         spellCheck={false}
       >
-        <div className="flex items-center w-full rounded-2xl shadow-2xl border border-gray-200 bg-white p-2 
+        <div
+          className="flex items-center w-full rounded-2xl shadow-2xl border border-gray-200 bg-white p-2 
           transition-all focus-within:ring-2 ring-indigo-400"
-          style={{ boxShadow: "0 4px 24px 0 rgba(141,148,161,0.14)" }}>
+          style={{ boxShadow: "0 4px 24px 0 rgba(141,148,161,0.14)" }}
+        >
           <SearchIcon className="w-6 h-6 text-gray-400 ml-2 flex-shrink-0" />
           <input
             ref={inputRef}
