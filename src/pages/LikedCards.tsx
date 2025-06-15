@@ -17,7 +17,7 @@ const LikedCardsMain: React.FC = () => {
   const handleRecentSearchClick = (_recent: string) => {};
   const handleMenuToggle = (_i: number) => {};
   const handleDeleteRecent = (_i: number) => {};
-  const handleStartRename = (_i: number) => {};
+  const handleStartRename = (_i: number, _currentValue: string) => {};
   const handleRename = (_i: number) => {};
   const handleCancelRename = () => {};
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
@@ -34,7 +34,7 @@ const LikedCardsMain: React.FC = () => {
         onRecentMenuToggle={() => {}}
         menuOpenIndex={null}
         onDeleteRecent={() => {}}
-        onStartRename={() => {}}
+        onStartRename={handleStartRename}
         editIndex={null}
         editValue={""}
         setEditValue={() => {}}
