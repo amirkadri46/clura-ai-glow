@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -36,7 +35,7 @@ const EducationSection: React.FC<Props> = ({
           onClick={addEducation}
           variant="outline"
           size="sm"
-          className="border-gray-300 text-black bg-white hover:bg-gray-100"
+          className="border-gray-300 text-black bg-white hover:bg-gray-100 hover:text-black"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Education
