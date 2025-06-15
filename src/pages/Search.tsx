@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
@@ -61,14 +61,19 @@ const Search = () => {
             <button
               aria-label="Send"
               onClick={handleSend}
-              className="ml-2 flex items-center justify-center rounded-full bg-[#333436] hover:bg-[#37393C] transition-colors duration-200"
+              className="ml-2 flex items-center justify-center rounded-full bg-white border border-gray-300 hover:bg-gray-100 transition-colors duration-200"
               style={{
                 width: 48,
                 height: 48,
-                boxShadow: "0 2px 8px 0 #0002, 0 0.5px 2px 0 #23242633",
+                boxShadow: "0 2px 8px 0 #0002, 0 0.5px 2px 0 #23242622",
               }}
             >
-              <Send className="text-neutral-300" size={24} />
+              <ArrowRight
+                size={32}
+                strokeWidth={4}
+                color="#18181b"
+                className="mx-auto"
+              />
             </button>
           </div>
         </main>
