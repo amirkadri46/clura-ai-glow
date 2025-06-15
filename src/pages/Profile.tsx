@@ -124,12 +124,13 @@ const Profile = () => {
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
       <div className="flex flex-1 h-0 w-full">
+        {/* Fix: pass empty array to prevent 'undefined.length' error */}
         <Sidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
           startNewSearch={startNewSearch}
           goToProfile={goToProfile}
-          recentSearches={[]} {/* Fix: pass empty array to prevent 'undefined.length' error */}
+          recentSearches={[]}
         />
         <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
           <div className="w-full">
