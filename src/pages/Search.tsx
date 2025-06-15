@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
@@ -21,13 +22,11 @@ const Search = () => {
     }
   };
 
-  // "New Search" on the sidebar should reset the query.
   const startNewSearch = () => {
     setQuery("");
     // ...add any additional logic if needed
   };
 
-  // "Profile" on the sidebar should navigate to the profile page.
   const goToProfile = () => {
     navigate("/profile");
   };
@@ -43,36 +42,27 @@ const Search = () => {
         />
         {/* Main Content */}
         <main className="flex flex-1 items-center justify-center">
-          <div
-            className="w-full max-w-2xl rounded-2xl bg-white border border-gray-200 shadow-lg flex items-center px-8 py-6"
-            style={{
-              boxShadow: "0 4px 32px 0 #0004, 0 1.5px 8px 0 #23242611",
-            }}
-          >
-            <input
-              type="text"
-              className="flex-1 bg-white border border-gray-200 rounded-md outline-none text-lg text-neutral-900 placeholder:text-neutral-400 font-normal px-4 py-3 mr-4"
-              placeholder="What do you want to know?"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <button
-              aria-label="Send"
-              onClick={handleSend}
-              className="ml-2 flex items-center justify-center rounded-full bg-black hover:bg-neutral-800 transition-colors duration-200 border-none shadow-md"
-              style={{
-                width: 48,
-                height: 48,
-              }}
-            >
-              <ChevronRight
-                size={28}
-                strokeWidth={3.5}
-                color="#fff"
-                className="mx-auto"
-              />
-            </button>
+          <div className="w-full max-w-2xl">
+            <div className="glass-card p-8 bg-slate-900/40 backdrop-blur-lg border border-slate-700/50 rounded-2xl shadow-2xl">
+              <div className="flex items-center space-x-4">
+                <SearchIcon className="w-6 h-6 text-gray-400 flex-shrink-0" />
+                <input
+                  type="text"
+                  className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-xl py-3 font-light"
+                  placeholder="who are you looking for"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <button
+                  aria-label="Send"
+                  onClick={handleSend}
+                  className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-300 group"
+                >
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
           </div>
         </main>
       </div>
@@ -81,3 +71,4 @@ const Search = () => {
 };
 
 export default Search;
+
