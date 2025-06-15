@@ -44,16 +44,38 @@ const Search = () => {
         <main className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-2xl">
             <div
-              className="backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl bg-slate-900/80"
+              className="border shadow-2xl"
               style={{
+                borderColor: "#8d94a1",
+                background: "#fff",
+                borderRadius: "24px", // Half round
                 boxShadow: "0 4px 32px 0 #0008, 0 2px 8px 0 #23242622",
+                padding: "0",
               }}
             >
-              <div className="flex items-center space-x-4 px-8 py-6">
-                <SearchIcon className="w-6 h-6 text-gray-400 flex-shrink-0" />
+              <div
+                className="flex items-center"
+                style={{
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  paddingTop: "24px",
+                  paddingBottom: "24px",
+                  borderRadius: "24px", // Half round
+                }}
+              >
+                <SearchIcon className="w-6 h-6" style={{ color: "#8d94a1" }} />
                 <input
                   type="text"
-                  className="flex-1 bg-transparent text-white placeholder:text-slate-300 outline-none text-xl py-3 font-light"
+                  className="flex-1 bg-transparent outline-none text-xl font-light"
+                  style={{
+                    color: "#8d94a1",
+                    '::placeholder': {
+                      color: "#8d94a1",
+                      opacity: 1
+                    },
+                    marginLeft: "16px",
+                    marginRight: "16px",
+                  }}
                   placeholder="who are you looking for"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -63,9 +85,17 @@ const Search = () => {
                 <button
                   aria-label="Send"
                   onClick={handleSend}
-                  className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-300 group"
+                  style={{
+                    background: "#fff",
+                    border: `1.5px solid #8d94a1`,
+                    borderRadius: "12px",
+                    padding: "12px 24px",
+                    color: "#8d94a1",
+                    transition: "background 0.2s",
+                  }}
+                  className="hover:bg-gray-100 transition-colors duration-200"
                 >
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5" style={{ color: "#8d94a1" }} />
                 </button>
               </div>
             </div>

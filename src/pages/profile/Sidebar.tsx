@@ -3,8 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToggleLeft, ToggleRight, User } from "lucide-react";
 
-const SIDEBAR_WIDTH = 260;
-const SIDEBAR_COLLAPSED_WIDTH = 48;
+const SIDEBAR_WIDTH = 300; // previously 260
+const SIDEBAR_COLLAPSED_WIDTH = 56; // slightly wider when collapsed
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -64,11 +64,11 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="w-full flex justify-center mb-2">
           <button
             onClick={startNewSearch}
-            className="text-white text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200"
+            className="text-white text-sm font-medium cursor-pointer transition-colors duration-200"
             style={{
               background: "#374151",
               borderRadius: "24px",
-              width: "200px",
+              width: "220px",
               height: "36px",
               border: "none",
               outline: "none",
@@ -76,6 +76,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               alignItems: "center",
               justifyContent: "center",
             }}
+            // Remove scaling, add subtle grey hover
+            onMouseOver={e => (e.currentTarget.style.background = "#40454e")}
+            onMouseOut={e => (e.currentTarget.style.background = "#374151")}
           >
             new search
           </button>
@@ -87,16 +90,19 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="w-full flex justify-center mb-2">
           <button
             onClick={goToProfile}
-            className="flex items-center justify-center text-gray-800 text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200 bg-transparent backdrop-blur-sm"
+            className="flex items-center justify-center text-gray-800 text-sm font-medium cursor-pointer bg-transparent transition-colors duration-200"
             style={{
               borderRadius: "24px",
-              width: "200px",
+              width: "220px",
               height: "36px",
               border: "1px solid #374151",
               outline: "none",
               background: "rgba(255,255,255,0.55)",
               backdropFilter: "blur(20px)",
             }}
+            // Remove scaling, add subtle grey hover
+            onMouseOver={e => (e.currentTarget.style.background = "#e5e7eb")}
+            onMouseOut={e => (e.currentTarget.style.background = "rgba(255,255,255,0.55)")}
           >
             <User className="w-4 h-4 mr-2" />
             Profile
@@ -128,3 +134,4 @@ const Sidebar: React.FC<SidebarProps> = ({
 };
 
 export default Sidebar;
+
