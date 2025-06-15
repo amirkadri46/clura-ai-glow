@@ -23,7 +23,7 @@ const Search = () => {
 
       {/* Main content area with resizable panels */}
       <div className="flex-1">
-        <ResizablePanelGroup direction="horizontal" className="min-h-full">
+        <ResizablePanelGroup direction="horizontal" className="h-full">
           {/* Sidebar */}
           <ResizablePanel defaultSize={25} minSize={15} maxSize={40}>
             <div className="h-full bg-gray-100">
