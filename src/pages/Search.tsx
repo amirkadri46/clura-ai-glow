@@ -29,11 +29,12 @@ const Search = () => {
             height: "100%",
             borderRight: "1px solid #e5e7eb",
             overflow: "hidden",
-            paddingTop: 20,
+            // Move logo/title up by reducing top padding from 20px to 8px
+            paddingTop: 8,
             paddingBottom: 20,
           }}
         >
-          {/* Top section: Logo & Brand (left-aligned) */}
+          {/* Top section: Logo & Brand (left-aligned, moved further up) */}
           <div
             className={`flex items-center transition-all duration-200 w-full px-4 pt-2 ${
               sidebarOpen ? "opacity-100 h-16" : "opacity-0 h-0 overflow-hidden"
@@ -43,6 +44,7 @@ const Search = () => {
               marginBottom: sidebarOpen ? 10 : 0,
               minHeight: 48,
               justifyContent: "flex-start", // ensure left alignment
+              // Remove extra space above logo/title
             }}
           >
             <img
@@ -129,3 +131,4 @@ const Search = () => {
 };
 
 export default Search;
+
