@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Search as SearchIcon, ArrowRight, MoreVertical } from "lucide-react";
+import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
@@ -14,18 +14,11 @@ const Search = () => {
   const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  // When user "submits" search (send or enter)
+  // NOTE: handleSend is now ONLY for UI effect, not recentSearches
   const handleSend = () => {
-    if (query.trim()) {
-      if (
-        !recentSearches.some(
-          q => q.trim().toLowerCase() === query.trim().toLowerCase()
-        )
-      ) {
-        setRecentSearches((prev) => [query, ...prev]);
-      }
-      // Here you can handle search, e.g. call an API
-    }
+    // No add to recentSearches here
+    // Only UI effect (grey on button handled via styles)
+    // In future: call backend here.
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,7 +27,7 @@ const Search = () => {
     }
   };
 
-  // Add a new recent search; called by sidebar's "New Search"
+  // Only add to recentSearches with New Search
   const startNewSearch = () => {
     if (query.trim()) {
       if (
@@ -52,31 +45,26 @@ const Search = () => {
     navigate("/profile");
   };
 
-  // Click on a recent search: populate the search bar with that query.
   const handleRecentSearchClick = (recent: string) => {
     setQuery(recent);
   };
 
-  // Handle open/close of 3-dot menu
   const handleMenuToggle = (i: number) => {
     setMenuOpenIndex(menuOpenIndex === i ? null : i);
-    setEditIndex(null); // hide rename if open
+    setEditIndex(null);
   };
 
-  // Delete a recent search
   const handleDeleteRecent = (i: number) => {
     setRecentSearches(prev => prev.filter((_, j) => j !== i));
     setMenuOpenIndex(null);
   };
 
-  // Start rename mode for a recent search
   const handleStartRename = (i: number) => {
     setEditIndex(i);
     setEditValue(recentSearches[i]);
     setMenuOpenIndex(null);
   };
 
-  // Confirm rename
   const handleRename = (i: number) => {
     if (editValue.trim()) {
       setRecentSearches(prev =>
@@ -87,19 +75,16 @@ const Search = () => {
     }
   };
 
-  // Cancel rename
   const handleCancelRename = () => {
     setEditIndex(null);
     setEditValue("");
   };
 
-  // Toggle button logic and styling as per your requirements
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
 
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-white transition-colors duration-300 relative">
-        {/* Sidebar */}
         <Sidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -118,7 +103,7 @@ const Search = () => {
           onCancelRename={handleCancelRename}
         />
 
-        {/* Toggle Button OUTSIDE the sidebar */}
+        {/* Sidebar Toggle Button */}
         <button
           className="absolute top-5 z-50 border-none rounded-full p-2 transition flex items-center justify-center"
           style={{
@@ -146,22 +131,19 @@ const Search = () => {
               style={{
                 borderColor: "#8d94a1",
                 background: "#fff",
-                borderTopLeftRadius: 24,
-                borderTopRightRadius: 24,
-                borderBottomLeftRadius: 24,
-                borderBottomRightRadius: 24,
+                borderRadius: 24,
                 boxShadow: "0 4px 32px 0 #0008, 0 2px 8px 0 #23242622",
-                padding: "0",
+                padding: 0,
               }}
             >
               <div
                 className="flex items-center"
                 style={{
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                  paddingTop: "24px",
-                  paddingBottom: "24px",
-                  borderRadius: "24px",
+                  paddingLeft: 32,
+                  paddingRight: 32,
+                  paddingTop: 24,
+                  paddingBottom: 24,
+                  borderRadius: 24,
                 }}
               >
                 <SearchIcon className="w-6 h-6" style={{ color: "#8d94a1" }} />
@@ -174,18 +156,25 @@ const Search = () => {
                   onKeyDown={handleKeyDown}
                   autoFocus
                 />
+                {/* Send Button with grey hover effect */}
                 <button
                   aria-label="Send"
+                  // No onClick for backend/LLM yet
                   onClick={handleSend}
                   style={{
                     background: "#fff",
-                    border: `1.5px solid #8d94a1`,
-                    borderRadius: "12px",
+                    border: "1.5px solid #8d94a1",
+                    borderRadius: 12,
                     padding: "12px 24px",
                     color: "#8d94a1",
                     transition: "background 0.2s",
                   }}
                   className="hover:bg-gray-100 transition-colors duration-200"
+                  tabIndex={0}
+                  onMouseDown={e => (e.currentTarget.style.background = "#f3f4f6")}
+                  onMouseUp={e => (e.currentTarget.style.background = "#fff")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#fff")}
+                  disabled={false}
                 >
                   <ArrowRight className="w-5 h-5" style={{ color: "#8d94a1" }} />
                 </button>
