@@ -25,39 +25,38 @@ const SearchBar: React.FC<SearchBarProps> = ({
   inputRef,
   autoFocus,
 }) => {
-  // Correctly narrow the type for position
+  // Calculate the available width and center position
+  const availableWidth = `calc(100vw - ${sidebarWidth}px)`;
+  const leftOffset = sidebarWidth;
+
   const fixedStyles: React.CSSProperties = searchBarAtTop
     ? {
         position: "fixed" as "fixed",
         top: 32,
-        left: `calc(${sidebarWidth}px + 50%)`,
-        transform: "translateX(-50%)",
+        left: leftOffset,
+        width: availableWidth,
         zIndex: 40,
-        width: "100%",
-        maxWidth: "32rem",
-        transition:
-          "all 0.65s cubic-bezier(.33,1.01,.61,.99), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
+        display: "flex",
+        justifyContent: "center",
+        transition: "all 0.65s cubic-bezier(.33,1.01,.61,.99), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
       }
     : {
         position: "relative" as "relative",
-        left: "auto",
-        transform: "none",
-        zIndex: 25,
         width: "100%",
-        maxWidth: "32rem",
-        margin: "0 auto",
-        transition:
-          "all 0.65s cubic-bezier(.33,1.01,.61,.99), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
+        display: "flex",
+        justifyContent: "center",
+        zIndex: 25,
+        transition: "all 0.65s cubic-bezier(.33,1.01,.61,.99)",
       };
 
   return (
     <div
-      className={`transition-all duration-700 flex justify-center`}
+      className="transition-all duration-700"
       style={fixedStyles}
     >
       <form
         onSubmit={onSubmit}
-        className="w-full"
+        className="w-full max-w-2xl"
         autoComplete="off"
         spellCheck={false}
       >

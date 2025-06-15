@@ -184,6 +184,7 @@ const DashboardContent: React.FC = () => {
         onRename={(i) => { setRecentSearches(prev => prev.map((v, idx) => idx === i ? editValue : v)); setEditIndex(null); setEditValue(""); }}
         onCancelRename={() => setEditIndex(null)}
       />
+      
       {/* Sidebar Toggle Button */}
       <button
         className="absolute top-5 z-50 border-none rounded-full p-2 transition flex items-center justify-center"
@@ -203,12 +204,12 @@ const DashboardContent: React.FC = () => {
       >
         <span style={{ fontSize: 20, color: "#000" }}>{sidebarOpen ? "<" : ">"}</span>
       </button>
-      {/* Main Content (should take full available width after sidebar) */}
+
+      {/* Main Content */}
       <main
         className="flex-1 flex flex-col min-h-screen items-center bg-white p-3 md:px-12"
         style={{ minWidth: 0 }}
       >
-        {/* --- Use new SearchBar component here --- */}
         <SearchBar
           searchBarAtTop={searchBarAtTop}
           sidebarOpen={sidebarOpen}
@@ -220,12 +221,14 @@ const DashboardContent: React.FC = () => {
           inputRef={inputRef}
           autoFocus={!searchBarAtTop}
         />
+        
         {/* Loader */}
         {loading && (
           <div className="flex-1 flex items-center justify-center w-full h-60">
             <div className="text-lg font-medium text-indigo-600 animate-pulse">Searching...</div>
           </div>
         )}
+        
         {/* Results */}
         {!loading && results.length > 0 && (
           <div className="w-full pt-40 md:pt-36 max-w-7xl mx-auto transition-all">
@@ -239,6 +242,7 @@ const DashboardContent: React.FC = () => {
             </div>
           </div>
         )}
+        
         {!loading && searchBarAtTop && results.length === 0 && (
           <div className="w-full pt-40 md:pt-36 text-xl text-gray-500 flex items-center justify-center min-h-[300px] animate-fade-in">
             No results found.
