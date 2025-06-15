@@ -1,20 +1,23 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { MessageCircle, Heart, Linkedin } from "lucide-react";
 import { DummyProfile } from "./dummyProfiles";
 import { toast } from "sonner";
+import { useLikedCards } from "@/hooks/useLikedCards";
 
 interface ProfileCardProps {
   profile: DummyProfile;
-  initiallyLiked?: boolean;
+  hideActions?: boolean;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ profile, initiallyLiked = false }) => {
-  const [liked, setLiked] = useState(initiallyLiked);
+const ProfileCard: React.FC<ProfileCardProps> = ({ profile, hideActions = false }) => {
+  const { isLiked, toggleLike } = useLikedCards();
+
+  const liked = isLiked(profile.id);
 
   const handleLike = () => {
-    setLiked((prev) => !prev);
-    toast(liked ? `Removed from Liked` : `Added to Liked`);
+    toggleLike(profile);
+    toast(liked ? "Removed from Liked Cards" : "Added to Liked Cards");
   };
 
   const handleMessage = () => {
@@ -25,7 +28,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, initiallyLiked = fal
     toast("LinkedIn redirect coming soon!");
   };
 
-  // Badge color gradient for relevance (1–10, green→yellow→red)
   const getScoreColor = () => {
     if (profile.relevance <= 3) return "bg-green-500";
     if (profile.relevance <= 7) return "bg-yellow-400";
@@ -68,6 +70,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, initiallyLiked = fal
         </ul>
       </div>
       {/* Action Buttons */}
+      {!hideActions && (
       <div className="mt-auto flex gap-3">
         <button
           onClick={handleMessage}
@@ -95,6 +98,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, initiallyLiked = fal
           LinkedIn
         </button>
       </div>
+      )}
     </div>
   );
 };
