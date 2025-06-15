@@ -48,7 +48,7 @@ const ProjectsSection: React.FC<Props> = ({
             variant="ghost"
             size="sm"
             onClick={() => removeProject(project.id)}
-            className="absolute top-2 right-2 text-black hover:bg-gray-100"
+            className="absolute top-2 right-2 !text-black hover:bg-gray-100 active:!text-black focus:!text-black"
           >
             <X className="w-4 h-4" />
           </Button>

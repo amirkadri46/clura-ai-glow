@@ -43,7 +43,7 @@ const SkillsSection: React.FC<Props> = ({
               variant="ghost"
               size="sm"
               onClick={() => removeSkill(index)}
-              className="h-4 w-4 p-0 text-black hover:bg-gray-100"
+              className="h-4 w-4 p-0 !text-black hover:bg-gray-100 active:!text-black focus:!text-black"
             >
               <X className="w-3 h-3" />
             </Button>

@@ -48,7 +48,7 @@ const ProfilesSection: React.FC<Props> = ({
             variant="ghost"
             size="sm"
             onClick={() => removeProfile(index)}
-            className="text-black hover:bg-gray-100"
+            className="!text-black hover:bg-gray-100 active:!text-black focus:!text-black"
           >
             <X className="w-4 h-4" />
           </Button>
