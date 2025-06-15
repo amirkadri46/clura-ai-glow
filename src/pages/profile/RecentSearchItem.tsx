@@ -14,7 +14,7 @@ interface RecentSearchItemProps {
   onRecentSearchClick?: (search: string) => void;
   onMenuToggle?: (i: number) => void;
   onDeleteRecent?: (i: number) => void;
-  onStartRename?: (i: number) => void;
+  onStartRename?: (i: number, currentValue: string) => void; // Fixed: now matches the expected signature
   onRename?: (i: number) => void;
   onCancelRename?: () => void;
   closeMenu?: () => void;
@@ -102,7 +102,11 @@ const RecentSearchItem: React.FC<RecentSearchItemProps> = ({
               {q}
             </div>
             <button
-              onClick={() => onMenuToggle && onMenuToggle(i)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onMenuToggle && onMenuToggle(i);
+              }}
               className="ml-2 p-1 rounded transition"
               style={{
                 background: "transparent",
@@ -111,12 +115,12 @@ const RecentSearchItem: React.FC<RecentSearchItemProps> = ({
                 justifyContent: "center",
               }}
             >
-              <MoreVertical size={18} color="#24292f" /> {/* even darker grey */}
+              <MoreVertical size={18} color="#24292f" />
             </button>
             {isMenuOpen && (
               <RecentSearchMenu
                 onRename={() => {
-                  onStartRename && onStartRename(i);
+                  onStartRename && onStartRename(i, q); // Fixed: passing current value
                   closeMenu && closeMenu();
                 }}
                 onDelete={() => {
@@ -146,7 +150,11 @@ const RecentSearchItem: React.FC<RecentSearchItemProps> = ({
         <Search className="w-3 h-3 mr-0" />
       </button>
       <button
-        onClick={() => onMenuToggle && onMenuToggle(i)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onMenuToggle && onMenuToggle(i);
+        }}
         className="absolute right-0 top-0 p-1 rounded transition"
         style={{
           background: "transparent",
@@ -155,12 +163,12 @@ const RecentSearchItem: React.FC<RecentSearchItemProps> = ({
           justifyContent: "center",
         }}
       >
-        <MoreVertical size={12} color="#24292f" /> {/* even darker grey */}
+        <MoreVertical size={12} color="#24292f" />
       </button>
       {isMenuOpen && (
         <RecentSearchMenu
           onRename={() => {
-            onStartRename && onStartRename(i);
+            onStartRename && onStartRename(i, q); // Fixed: passing current value
             closeMenu && closeMenu();
           }}
           onDelete={() => {

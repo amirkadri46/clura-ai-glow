@@ -48,8 +48,11 @@ const DashboardContent: React.FC = () => {
     syncProfiles(dummyProfiles); 
   }, [syncProfiles]);
 
-  // For sidebar navigation (dummy)
-  const goToProfile = () => {};
+  // For sidebar navigation
+  const goToProfile = () => {
+    // Add navigation to profile page if needed
+    console.log("Navigate to profile");
+  };
 
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
 

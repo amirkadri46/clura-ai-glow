@@ -5,41 +5,52 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
 import { useLikedCards } from "@/hooks/useLikedCards";
 import ProfileCard from "@/components/ProfileCard";
+import { useRecentSearchMenu } from "@/hooks/useRecentSearchMenu";
 
 const LikedCardsMain: React.FC = () => {
   const { likedProfiles } = useLikedCards();
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const [recentSearches, setRecentSearches] = React.useState<string[]>([]);
   const navigate = useNavigate();
 
-  // Dummy handlers to keep sidebar functionality
-  const startNewSearch = () => {};
+  // Recent search menu functionality
+  const {
+    editIndex,
+    editValue,
+    setEditValue,
+    menuOpenIndex,
+    handleMenuToggle,
+    handleStartRename,
+    handleRename,
+    handleCancelRename,
+    handleDeleteRecent
+  } = useRecentSearchMenu();
+
+  // Proper handlers for sidebar functionality
+  const startNewSearch = () => navigate("/search");
   const goToProfile = () => navigate("/profile");
-  const handleRecentSearchClick = (_recent: string) => {};
-  const handleMenuToggle = (_i: number) => {};
-  const handleDeleteRecent = (_i: number) => {};
-  const handleStartRename = (_i: number, _currentValue: string) => {};
-  const handleRename = (_i: number) => {};
-  const handleCancelRename = () => {};
-  const handleSidebarToggle = () => setSidebarOpen((v) => !v);
+  const handleRecentSearchClick = (recent: string) => {
+    navigate(`/search?q=${encodeURIComponent(recent)}`);
+  };
 
   return (
     <div className="min-h-screen flex w-full bg-white transition-colors duration-300 relative">
       <Sidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
-        startNewSearch={() => {}}
-        goToProfile={() => navigate("/profile")}
-        recentSearches={[]}
-        onRecentSearchClick={() => {}}
-        onRecentMenuToggle={() => {}}
-        menuOpenIndex={null}
-        onDeleteRecent={() => {}}
-        onStartRename={handleStartRename}
-        editIndex={null}
-        editValue={""}
-        setEditValue={() => {}}
-        onRename={() => {}}
-        onCancelRename={() => {}}
+        startNewSearch={startNewSearch}
+        goToProfile={goToProfile}
+        recentSearches={recentSearches}
+        onRecentSearchClick={handleRecentSearchClick}
+        onRecentMenuToggle={handleMenuToggle}
+        menuOpenIndex={menuOpenIndex}
+        onDeleteRecent={(i) => handleDeleteRecent(i, setRecentSearches)}
+        onStartRename={(i, currentValue) => handleStartRename(i, currentValue)}
+        editIndex={editIndex}
+        editValue={editValue}
+        setEditValue={setEditValue}
+        onRename={(i) => handleRename(i, recentSearches, setRecentSearches)}
+        onCancelRename={handleCancelRename}
       />
 
       {/* Sidebar Toggle Button */}
@@ -54,7 +65,11 @@ const LikedCardsMain: React.FC = () => {
           transition: "left 0.3s, background 0.2s",
         }}
         aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
-        onClick={() => setSidebarOpen(v => !v)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setSidebarOpen(v => !v);
+        }}
         tabIndex={0}
         onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
         onMouseOut={e => (e.currentTarget.style.background = "transparent")}

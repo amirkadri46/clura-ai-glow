@@ -17,13 +17,20 @@ const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
   style = {},
 }) => (
   <button
-    onClick={onClick}
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick();
+    }}
     className={`flex ${
       sidebarOpen
         ? "flex-row items-center w-full px-4 py-2 rounded-lg"
         : "flex-col items-center justify-center w-12 h-12 my-1 rounded-lg"
     } transition-colors duration-150 font-medium`}
-    style={style}
+    style={{
+      ...style,
+      background: "#d1d9ed",
+    }}
     onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
     onMouseOut={e => (e.currentTarget.style.background = "#d1d9ed")}
   >
@@ -33,4 +40,3 @@ const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
 );
 
 export default SidebarMenuButton;
-
