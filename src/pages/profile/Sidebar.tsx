@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
 import RecentSearchItem from "./RecentSearchItem";
-import { useNavigate } from "react-router-dom";
 
 const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 64;
@@ -61,13 +60,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     onCancelRename,
   } = props;
 
-  const navigate = useNavigate();
-
   // Assign correct click handlers for menuItems
   const itemHandlers = {
-    search: props.startNewSearch,
-    profile: props.goToProfile,
-    liked: () => navigate("/liked"),
+    search: startNewSearch,
+    profile: goToProfile,
+    liked: () => {}, // Placeholder, can customize as needed
   };
 
   // To focus input on rename open
@@ -152,7 +149,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           icon={Heart}
           label="Liked Cards"
           sidebarOpen={props.sidebarOpen}
-          onClick={() => navigate("/liked")}
+          onClick={() => {/* future functionality here */}}
           style={{
             marginBottom: props.sidebarOpen ? 8 : 10,
             marginTop: props.sidebarOpen ? 2 : undefined,
