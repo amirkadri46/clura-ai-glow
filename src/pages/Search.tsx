@@ -1,18 +1,24 @@
 
 import React, { useState } from "react";
-import { ToggleLeft, ToggleRight } from "lucide-react";
+import { ToggleLeft, ToggleRight, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SIDEBAR_WIDTH = 260;
 const SIDEBAR_COLLAPSED_WIDTH = 48;
 
 const Search = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const navigate = useNavigate();
 
   // Placeholder new search action
   const startNewSearch = () => {
     // Add logic to reset/clear search params here
     console.log("Starting new search session...");
     // Example: clear URL params, set state, etc.
+  };
+
+  const goToProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -80,6 +86,26 @@ const Search = () => {
                 }}
               >
                 new search
+              </button>
+            </div>
+          )}
+
+          {/* Profile Section */}
+          {sidebarOpen && (
+            <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
+              <button
+                onClick={goToProfile}
+                className="flex items-center justify-center text-gray-800 text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200 bg-transparent"
+                style={{
+                  borderRadius: "24px",
+                  width: "180px",
+                  height: "36px",
+                  border: "1px solid #374151",
+                  outline: "none",
+                }}
+              >
+                <User className="w-4 h-4 mr-2" />
+                Profile
               </button>
             </div>
           )}
