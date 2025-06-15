@@ -39,13 +39,13 @@ const FAQSection = () => {
               >
                 <h4 className="font-semibold text-white text-left">{faq.q}</h4>
                 <span
-                  className="ml-4 flex items-center justify-center rounded-full border border-white p-1 bg-slate-800 transition-colors"
+                  className="ml-4 flex items-center justify-center rounded-full bg-slate-800 transition-colors"
                   style={{ width: 32, height: 32 }}
                 >
                   {openIndex === index ? (
-                    <Minus className="text-white" size={20} strokeWidth={2.5} />
+                    <Minus className="text-blue-400" size={20} strokeWidth={2.5} />
                   ) : (
-                    <Plus className="text-white" size={20} strokeWidth={2.5} />
+                    <Plus className="text-blue-400" size={20} strokeWidth={2.5} />
                   )}
                 </span>
               </button>
