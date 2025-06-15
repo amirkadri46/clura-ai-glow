@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
@@ -6,6 +5,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import ProfileCard from "@/components/ProfileCard";
 import { dummyProfiles, DummyProfile } from "@/components/dummyProfiles";
 import { LikedCardsProvider, useLikedCards } from "@/hooks/useLikedCards";
+import SearchBar from "@/components/SearchBar";
 
 // Relevance algorithm remains unchanged
 function scoreProfile(profile: DummyProfile, query: string): number {
@@ -154,11 +154,11 @@ const DashboardContent: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside, true);
   }, [menuOpenIndex]);
 
-  // Pass handlers/props as before
   const sidebarWidth = sidebarOpen ? 320 : 64;
 
   return (
     <div className="flex w-full min-h-screen transition-colors duration-300 relative bg-white">
+      {/* Sidebar */}
       <Sidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -206,61 +206,18 @@ const DashboardContent: React.FC = () => {
       {/* Main Content (should take full available width after sidebar) */}
       <main
         className="flex-1 flex flex-col min-h-screen items-center bg-white p-3 md:px-12"
-        style={{ minWidth: 0 }}
+        style={{ minWidth: 0, position: "relative", overflow: "hidden" }}
       >
-        {/* Animated Search Bar Centralized (relative to dashboard area) */}
-        <div
-          className={`w-full transition-all duration-700 max-w-xl
-            ${searchBarAtTop
-              ? "fixed top-8 left-1/2 -translate-x-1/2 z-40"
-              : "relative mx-auto"}
-            flex justify-center`}
-          style={{
-            // Remove left: sidebarWidth and transform; always center!
-            left: searchBarAtTop ? `50%` : undefined,
-            transform: searchBarAtTop ? "translateX(-50%)" : undefined,
-            zIndex: 25,
-            alignItems: "center",
-            transition: "all 0.65s cubic-bezier(.33,1.01,.61,.99)",
-          }}
-        >
-          <form
-            onSubmit={handleSearch}
-            className="w-full"
-            autoComplete="off"
-            spellCheck={false}
-          >
-            <div className="flex items-center w-full rounded-2xl shadow-2xl border border-gray-200 bg-white p-2 
-              transition-all focus-within:ring-2 ring-indigo-400"
-              style={{ boxShadow: "0 4px 24px 0 rgba(141,148,161,0.14)" }}>
-              <SearchIcon className="w-6 h-6 text-gray-400 ml-2 flex-shrink-0" />
-              <input
-                ref={inputRef}
-                type="text"
-                className="flex-1 bg-transparent outline-none text-xl px-4 py-5 font-light text-black placeholder-[#8d94a1]"
-                placeholder="Who are you looking for?"
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                aria-label="Who are you looking for?"
-                autoFocus={!searchBarAtTop}
-                tabIndex={0}
-              />
-              <button
-                aria-label="Search"
-                type="submit"
-                className="flex items-center rounded-xl p-3 ml-2"
-                style={{
-                  background: "linear-gradient(90deg,#6c47ff 8%,#8b5cf6 80%)",
-                  boxShadow: "0 2px 16px #6366f15c"
-                }}
-                tabIndex={0}
-              >
-                <ArrowRight className="w-5 h-5 text-white" />
-              </button>
-            </div>
-          </form>
-        </div>
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          searchBarAtTop={searchBarAtTop}
+          sidebarOpen={sidebarOpen}
+          loading={loading}
+          onSearch={handleSearch}
+          onKeyDown={handleKeyDown}
+          inputRef={inputRef}
+        />
         {/* Loader */}
         {loading && (
           <div className="flex-1 flex items-center justify-center w-full h-60">
@@ -299,4 +256,3 @@ const Search: React.FC = () => (
 );
 
 export default Search;
-
