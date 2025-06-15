@@ -10,6 +10,7 @@ import ProfilesSection from "./profile/ProfilesSection";
 import ResumeUploadCard from "@/components/profile/ResumeUploadCard";
 import SaveProfileButton from "@/components/profile/SaveProfileButton";
 import ProfileView from "@/components/profile/ProfileView";
+import SidebarToggle from "@/components/SidebarToggle";
 import { useNavigate } from "react-router-dom";
 import { useProfileData } from "@/hooks/useProfileData";
 import { useToast } from "@/hooks/use-toast";
@@ -56,6 +57,11 @@ const Profile = () => {
   };
 
   const goToProfile = () => {};
+
+  const handleSidebarToggle = () => setSidebarOpen((v) => !v);
+
+  // Calculate dynamic sidebar width
+  const sidebarWidth = sidebarOpen ? 320 : 64;
 
   const handleSkillKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && newSkill.trim()) {
@@ -124,7 +130,6 @@ const Profile = () => {
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
       <div className="flex flex-1 h-0 w-full">
-        {/* Fix: pass empty array to prevent 'undefined.length' error */}
         <Sidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -132,6 +137,13 @@ const Profile = () => {
           goToProfile={goToProfile}
           recentSearches={[]}
         />
+        
+        <SidebarToggle
+          sidebarOpen={sidebarOpen}
+          sidebarWidth={sidebarWidth}
+          onToggle={handleSidebarToggle}
+        />
+
         <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
           <div className="w-full">
             <div className="flex items-center mb-6 px-8 pt-8">

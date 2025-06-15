@@ -34,16 +34,15 @@ const RecentSearchMenu: React.FC<RecentSearchMenuProps> = ({
   return (
     <div
       ref={ref}
-      className="absolute z-20 min-w-[120px] shadow-xl border border-gray-100 rounded-xl bg-white px-0.5 py-1 flex flex-col gap-1"
+      className="absolute z-50 min-w-[120px] shadow-xl border border-gray-200 rounded-xl bg-white px-0.5 py-1 flex flex-col gap-1"
       style={{
         ...style,
-        boxShadow: "0 2px 10px 0 rgba(0,0,0,0.08), 0 0.5px 1.5px rgba(60,60,60,0.09)",
-        border: "1px solid #eee",
+        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
       }}
     >
       <button
         onClick={onRename}
-        className="w-full block text-xs font-semibold text-gray-700 hover:bg-[#f3f4f6] px-4 py-2 leading-6 text-left rounded-t-xl transition"
+        className="w-full block text-xs font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 leading-6 text-left rounded-t-xl transition"
         style={{
           borderBottom: "1px solid #e5e7eb",
         }}

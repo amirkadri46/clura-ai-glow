@@ -35,6 +35,7 @@ const DashboardContent: React.FC = () => {
     editValue,
     setEditValue,
     menuOpenIndex,
+    handleMenuToggle,
     handleStartRename,
     handleRename,
     handleCancelRename,
@@ -64,10 +65,10 @@ const DashboardContent: React.FC = () => {
         goToProfile={goToProfile}
         recentSearches={recentSearches}
         onRecentSearchClick={handleRecentSearchClick}
-        onRecentMenuToggle={handleStartRename}
+        onRecentMenuToggle={handleMenuToggle}
         menuOpenIndex={menuOpenIndex}
         onDeleteRecent={(i) => handleDeleteRecent(i, setRecentSearches)}
-        onStartRename={(i) => handleStartRename(i, recentSearches[i])}
+        onStartRename={(i, currentValue) => handleStartRename(i, currentValue)}
         editIndex={editIndex}
         editValue={editValue}
         setEditValue={setEditValue}
