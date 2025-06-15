@@ -10,25 +10,10 @@ const Search = () => {
 
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
-      {/* Header with Clura logo and name, same as home page */}
-      <header className="flex items-center p-4 border-b border-gray-200">
-        <div className="flex items-center space-x-2">
-          <img
-            src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
-            alt="Clura.ai Icon"
-            className="w-8 h-8"
-          />
-          <img
-            src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
-            alt="Clura"
-            className="h-6"
-          />
-        </div>
-      </header>
       <div className="flex flex-1 h-0 w-full">
         {/* Sidebar */}
         <div
-          className={`transition-all duration-300 relative flex flex-col`}
+          className="transition-all duration-300 relative flex flex-col"
           style={{
             width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
             minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
@@ -39,9 +24,31 @@ const Search = () => {
             overflow: "hidden",
           }}
         >
-          {/* Toggle Button, always at top right of visible sidebar */}
+          {/* Top section: Logo & Brand */}
+          <div
+            className={`flex items-center space-x-2 px-4 pt-4 transition-all duration-200 ${
+              sidebarOpen ? "opacity-100 h-14" : "opacity-0 h-0 overflow-hidden"
+            }`}
+            style={{
+              transitionProperty: "opacity,height",
+            }}
+          >
+            <img
+              src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
+              alt="Clura.ai Icon"
+              className="w-8 h-8"
+              style={{ transition: "opacity 0.2s" }}
+            />
+            <img
+              src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
+              alt="Clura"
+              className="h-6"
+              style={{ transition: "opacity 0.2s" }}
+            />
+          </div>
+          {/* Toggle Button always top right of sidebar */}
           <button
-            className={`absolute top-3 right-3 z-20 bg-gray-100 border border-gray-200 rounded-full shadow p-2 transition hover:bg-gray-200 flex items-center justify-center`}
+            className="absolute top-3 right-3 z-20 bg-gray-100 border border-gray-200 rounded-full shadow p-2 transition hover:bg-gray-200 flex items-center justify-center"
             style={{ width: 40, height: 40 }}
             aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
             onClick={() => setSidebarOpen((v) => !v)}
