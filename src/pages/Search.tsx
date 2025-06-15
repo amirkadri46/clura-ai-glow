@@ -66,33 +66,30 @@ const Search = () => {
             <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
               <button
                 onClick={startNewSearch}
-                className="uppercase font-bold tracking-[1px] text-white text-[16px]"
+                className="text-gray-700 text-sm font-medium"
                 style={{
-                  fontFamily:
-                    "'Montserrat', 'Roboto', 'Inter', 'sans-serif'",
-                  background: "#13171f",
-                  borderRadius: "25px",
-                  width: "200px",
-                  height: "50px",
-                  marginTop: 0,
-                  boxShadow: "none",
-                  letterSpacing: "1px",
-                  outline: "none",
+                  background: "#f1f3f4",
+                  borderRadius: "24px",
+                  width: "140px",
+                  height: "36px",
                   border: "none",
+                  outline: "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "transform 0.15s cubic-bezier(.4,0,.2,1)",
-                  // No hover box-shadow
+                  transition: "all 0.2s ease",
+                  cursor: "pointer",
                 }}
                 onMouseOver={e => {
-                  e.currentTarget.style.transform = "translateY(-3px)";
+                  e.currentTarget.style.background = "#e8eaed";
+                  e.currentTarget.style.transform = "translateY(-1px)";
                 }}
                 onMouseOut={e => {
+                  e.currentTarget.style.background = "#f1f3f4";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                START NEW SEARCH
+                new search
               </button>
             </div>
           )}
@@ -131,4 +128,3 @@ const Search = () => {
 };
 
 export default Search;
-
