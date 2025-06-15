@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, User } from "lucide-react";
@@ -38,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         maxWidth: SIDEBAR_WIDTH,
-        background: "#fff",
+        background: "#8cadff", // Updated background color
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
@@ -114,4 +113,3 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 };
 
 export default Sidebar;
-
