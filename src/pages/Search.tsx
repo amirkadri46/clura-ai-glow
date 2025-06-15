@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { Search as SearchIcon, ArrowRight } from "lucide-react";
+import { Search as SearchIcon, ArrowRight, MoreVertical } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +9,22 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editValue, setEditValue] = useState("");
+  const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
+  // When user "submits" search (send or enter)
   const handleSend = () => {
     if (query.trim()) {
-      console.log("Searched:", query);
+      if (
+        !recentSearches.some(
+          q => q.trim().toLowerCase() === query.trim().toLowerCase()
+        )
+      ) {
+        setRecentSearches((prev) => [query, ...prev]);
+      }
+      // Here you can handle search, e.g. call an API
     }
   };
 
@@ -25,7 +37,13 @@ const Search = () => {
   // Add a new recent search; called by sidebar's "New Search"
   const startNewSearch = () => {
     if (query.trim()) {
-      setRecentSearches((prev) => [query, ...prev]);
+      if (
+        !recentSearches.some(
+          q => q.trim().toLowerCase() === query.trim().toLowerCase()
+        )
+      ) {
+        setRecentSearches((prev) => [query, ...prev]);
+      }
       setQuery("");
     }
   };
@@ -34,8 +52,48 @@ const Search = () => {
     navigate("/profile");
   };
 
-  // Toggle button is outside the sidebar, keep function exactly as before
-  // Mimic the same look, position right to sidebar, floating
+  // Click on a recent search: populate the search bar with that query.
+  const handleRecentSearchClick = (recent: string) => {
+    setQuery(recent);
+  };
+
+  // Handle open/close of 3-dot menu
+  const handleMenuToggle = (i: number) => {
+    setMenuOpenIndex(menuOpenIndex === i ? null : i);
+    setEditIndex(null); // hide rename if open
+  };
+
+  // Delete a recent search
+  const handleDeleteRecent = (i: number) => {
+    setRecentSearches(prev => prev.filter((_, j) => j !== i));
+    setMenuOpenIndex(null);
+  };
+
+  // Start rename mode for a recent search
+  const handleStartRename = (i: number) => {
+    setEditIndex(i);
+    setEditValue(recentSearches[i]);
+    setMenuOpenIndex(null);
+  };
+
+  // Confirm rename
+  const handleRename = (i: number) => {
+    if (editValue.trim()) {
+      setRecentSearches(prev =>
+        prev.map((item, idx) => (idx === i ? editValue.trim() : item))
+      );
+      setEditIndex(null);
+      setEditValue("");
+    }
+  };
+
+  // Cancel rename
+  const handleCancelRename = () => {
+    setEditIndex(null);
+    setEditValue("");
+  };
+
+  // Toggle button logic and styling as per your requirements
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
 
   return (
@@ -48,27 +106,36 @@ const Search = () => {
           startNewSearch={startNewSearch}
           goToProfile={goToProfile}
           recentSearches={recentSearches}
+          onRecentSearchClick={handleRecentSearchClick}
+          onRecentMenuToggle={handleMenuToggle}
+          menuOpenIndex={menuOpenIndex}
+          onDeleteRecent={handleDeleteRecent}
+          onStartRename={handleStartRename}
+          editIndex={editIndex}
+          editValue={editValue}
+          setEditValue={setEditValue}
+          onRename={handleRename}
+          onCancelRename={handleCancelRename}
         />
 
         {/* Toggle Button OUTSIDE the sidebar */}
         <button
-          className="absolute top-5 left-[320px] z-50 border border-gray-200 rounded-full shadow p-2 transition flex items-center justify-center"
+          className="absolute top-5 z-50 border-none rounded-full p-2 transition flex items-center justify-center"
           style={{
             width: 40,
             height: 40,
-            background: "#f3f4f6",
-            color: "#8d94a1",
-            // sidebarWidth: 320px when open, 64px when closed
+            background: "transparent",
+            color: "#000",
             left: sidebarOpen ? 320 : 64,
-            transition: "left 0.3s",
+            transition: "left 0.3s, background 0.2s",
           }}
           aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
           onClick={handleSidebarToggle}
           tabIndex={0}
-          onMouseOver={e => (e.currentTarget.style.background = "#d1d9ed")}
-          onMouseOut={e => (e.currentTarget.style.background = "#f3f4f6")}
+          onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
+          onMouseOut={e => (e.currentTarget.style.background = "transparent")}
         >
-          <span style={{ fontSize: 18 }}>{sidebarOpen ? "<" : ">"}</span>
+          <span style={{ fontSize: 20, color: "#000" }}>{sidebarOpen ? "<" : ">"}</span>
         </button>
 
         {/* Main Content */}

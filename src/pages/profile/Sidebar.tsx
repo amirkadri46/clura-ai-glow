@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Search, User } from "lucide-react";
+import React, { useRef } from "react";
+import { Search, User, MoreVertical, Check, X } from "lucide-react";
 
 const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 64;
@@ -11,6 +11,17 @@ interface SidebarProps {
   startNewSearch: () => void;
   goToProfile: () => void;
   recentSearches: string[];
+  // the following are now passed from Search.tsx
+  onRecentSearchClick?: (search: string) => void;
+  onRecentMenuToggle?: (i: number) => void;
+  menuOpenIndex?: number | null;
+  onDeleteRecent?: (i: number) => void;
+  onStartRename?: (i: number) => void;
+  editIndex?: number | null;
+  editValue?: string; // temp value in edit mode
+  setEditValue?: (v: string) => void;
+  onRename?: (i: number) => void;
+  onCancelRename?: () => void;
 }
 
 const menuItems = [
@@ -27,13 +38,37 @@ const menuItems = [
 ];
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-  const { sidebarOpen, startNewSearch, goToProfile, recentSearches } = props;
+  const {
+    sidebarOpen,
+    startNewSearch,
+    goToProfile,
+    recentSearches,
+    onRecentSearchClick,
+    onRecentMenuToggle,
+    menuOpenIndex,
+    onDeleteRecent,
+    onStartRename,
+    editIndex,
+    editValue,
+    setEditValue,
+    onRename,
+    onCancelRename,
+  } = props;
 
   // Assign correct click handlers for menuItems
   const itemHandlers = {
     search: startNewSearch,
     profile: goToProfile,
   };
+
+  // To focus input on rename open
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (editIndex !== null && sidebarOpen) {
+      inputRef.current?.focus();
+    }
+  }, [editIndex, sidebarOpen]);
 
   return (
     <div
@@ -105,18 +140,109 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                 sidebarOpen ? (
                   <div
                     key={i}
-                    className="text-sm text-gray-700 truncate"
-                    style={{ background: "transparent", paddingLeft: 8 }}
+                    className="flex items-center group"
+                    style={{ background: "transparent", paddingLeft: 8, position: "relative" }}
                   >
-                    {q}
+                    {editIndex === i && setEditValue ? (
+                      <>
+                        <input
+                          ref={inputRef}
+                          className="text-sm px-2 py-1 border border-gray-300 rounded focus:outline-none mr-2 flex-1"
+                          value={editValue}
+                          onChange={e => setEditValue(e.target.value)}
+                          onBlur={() => onRename && onRename(i)}
+                          onKeyDown={e => {
+                            if (e.key === "Enter") {
+                              onRename && onRename(i);
+                            } else if (e.key === "Escape") {
+                              onCancelRename && onCancelRename();
+                            }
+                          }}
+                          style={{ background: "#fff" }}
+                        />
+                        <button
+                          onClick={() => onRename && onRename(i)}
+                          tabIndex={-1}
+                          className="ml-1 p-1 hover:bg-gray-200 rounded"
+                        >
+                          <Check size={14} />
+                        </button>
+                        <button
+                          onClick={onCancelRename}
+                          tabIndex={-1}
+                          className="ml-1 p-1 hover:bg-gray-200 rounded"
+                        >
+                          <X size={14} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          onClick={() => onRecentSearchClick && onRecentSearchClick(q)}
+                          className="text-sm text-gray-700 truncate cursor-pointer flex-1 hover:underline"
+                          title={q}
+                        >
+                          {q}
+                        </div>
+                        <button
+                          onClick={() => onRecentMenuToggle && onRecentMenuToggle(i)}
+                          className="ml-2 p-1 rounded hover:bg-gray-300"
+                        >
+                          <MoreVertical size={16} />
+                        </button>
+                        {/* 3-dot menu */}
+                        {menuOpenIndex === i && (
+                          <div className="absolute z-10 left-36 bg-white rounded shadow border px-2 py-1 flex flex-col min-w-[100px] gap-1"
+                            style={{ top: "50%", transform: "translateY(-50%)" }}>
+                            <button
+                              onClick={() => onStartRename && onStartRename(i)}
+                              className="text-xs text-gray-800 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                            >
+                              Rename
+                            </button>
+                            <button
+                              onClick={() => onDeleteRecent && onDeleteRecent(i)}
+                              className="text-xs text-red-600 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div
                     key={i}
-                    className="text-xs text-gray-600 w-8 h-8 flex items-center justify-center rounded mb-1"
+                    className="text-xs text-gray-600 w-8 h-8 flex items-center justify-center rounded mb-1 relative"
                     style={{ background: "transparent" }}
                   >
-                    <Search className="w-3 h-3 mr-0" />{/* icon only when collapsed */}
+                    <button onClick={() => onRecentSearchClick && onRecentSearchClick(q)} className="p-0 m-0">
+                      <Search className="w-3 h-3 mr-0" />
+                    </button>
+                    <button
+                      onClick={() => onRecentMenuToggle && onRecentMenuToggle(i)}
+                      className="absolute right-0 top-0 p-1 rounded hover:bg-gray-300"
+                    >
+                      <MoreVertical size={12} />
+                    </button>
+                    {/* 3-dot menu in collapsed view */}
+                    {menuOpenIndex === i && (
+                      <div className="absolute right-full top-0 bg-white rounded shadow border px-2 py-1 flex flex-col min-w-[80px] gap-1 z-20">
+                        <button
+                          onClick={() => onStartRename && onStartRename(i)}
+                          className="text-xs text-gray-800 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                        >
+                          Rename
+                        </button>
+                        <button
+                          onClick={() => onDeleteRecent && onDeleteRecent(i)}
+                          className="text-xs text-red-600 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )
               )}
