@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
 import RecentSearchItem from "./RecentSearchItem";
+import { useNavigate } from "react-router-dom";
 
 const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 64;
@@ -60,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     onCancelRename,
   } = props;
 
-  const navigate = require("react-router-dom").useNavigate();
+  const navigate = useNavigate();
 
   // Assign correct click handlers for menuItems
   const itemHandlers = {
