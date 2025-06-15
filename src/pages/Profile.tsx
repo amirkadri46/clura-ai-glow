@@ -310,19 +310,19 @@ const Profile = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 h-full w-full bg-white p-6 overflow-y-auto">
-          <div className="max-w-4xl mx-auto">
+        <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
+          <div className="w-full">
             {/* Header */}
-            <div className="flex items-center mb-6">
+            <div className="flex items-center mb-6 px-8 pt-8">
               <h1 className="text-3xl font-bold text-black">My Profile</h1>
             </div>
 
             {/* Resume Upload Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   My Resume
-                  <Button variant="outline" className="flex items-center border-black text-black hover:bg-gray-100">
+                  <Button variant="outline" className="flex items-center border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Upload className="w-4 h-4 mr-2" />
                     Upload Resume
                   </Button>
@@ -332,7 +332,7 @@ const Profile = () => {
             </Card>
 
             {/* Personal Information */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="text-black">Personal Information</CardTitle>
               </CardHeader>
@@ -345,7 +345,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, firstName: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter first name"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                   <div>
@@ -355,7 +355,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, lastName: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter last name"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                 </div>
@@ -368,7 +368,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, email: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter email"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                   <div>
@@ -378,7 +378,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, phone: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter phone number"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                 </div>
@@ -390,7 +390,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, city: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter city"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                   <div>
@@ -400,7 +400,7 @@ const Profile = () => {
                       onChange={(e) => setProfile({...profile, country: e.target.value})}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter country"
-                      className="border-black text-black bg-white"
+                      className="border-gray-300 text-black bg-white"
                     />
                   </div>
                 </div>
@@ -412,18 +412,18 @@ const Profile = () => {
                     onKeyPress={handleKeyPress}
                     placeholder="Profile Summary"
                     rows={4}
-                    className="border-black text-black bg-white"
+                    className="border-gray-300 text-black bg-white"
                   />
                 </div>
               </CardContent>
             </Card>
 
             {/* Education Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   Education
-                  <Button onClick={addEducation} variant="outline" size="sm" className="border-black text-black hover:bg-gray-100">
+                  <Button onClick={addEducation} variant="outline" size="sm" className="border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Education
                   </Button>
@@ -431,7 +431,7 @@ const Profile = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 {education.map((edu) => (
-                  <div key={edu.id} className="border border-black rounded-lg p-4 relative bg-white">
+                  <div key={edu.id} className="border border-gray-300 rounded-lg p-4 relative bg-white">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -447,7 +447,7 @@ const Profile = () => {
                           value={edu.school}
                           onChange={(e) => updateEducation(edu.id, "school", e.target.value)}
                           placeholder="Enter school name"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -456,7 +456,7 @@ const Profile = () => {
                           value={edu.degree}
                           onChange={(e) => updateEducation(edu.id, "degree", e.target.value)}
                           placeholder="Enter degree"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                     </div>
@@ -467,7 +467,7 @@ const Profile = () => {
                           value={edu.major}
                           onChange={(e) => updateEducation(edu.id, "major", e.target.value)}
                           placeholder="Enter major"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -476,7 +476,7 @@ const Profile = () => {
                           value={edu.startYear}
                           onChange={(e) => updateEducation(edu.id, "startYear", e.target.value)}
                           placeholder="Start year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -485,7 +485,7 @@ const Profile = () => {
                           value={edu.endYear}
                           onChange={(e) => updateEducation(edu.id, "endYear", e.target.value)}
                           placeholder="End year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                     </div>
@@ -495,7 +495,7 @@ const Profile = () => {
                         value={edu.gpa}
                         onChange={(e) => updateEducation(edu.id, "gpa", e.target.value)}
                         placeholder="Enter GPA"
-                        className="w-32 border-black text-black bg-white"
+                        className="w-32 border-gray-300 text-black bg-white"
                       />
                     </div>
                   </div>
@@ -504,11 +504,11 @@ const Profile = () => {
             </Card>
 
             {/* Work Experience Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   Work Experience
-                  <Button onClick={addExperience} variant="outline" size="sm" className="border-black text-black hover:bg-gray-100">
+                  <Button onClick={addExperience} variant="outline" size="sm" className="border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Experience
                   </Button>
@@ -516,7 +516,7 @@ const Profile = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 {experience.map((exp) => (
-                  <div key={exp.id} className="border border-black rounded-lg p-4 relative bg-white">
+                  <div key={exp.id} className="border border-gray-300 rounded-lg p-4 relative bg-white">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -532,7 +532,7 @@ const Profile = () => {
                           value={exp.company}
                           onChange={(e) => updateExperience(exp.id, "company", e.target.value)}
                           placeholder="Enter company name"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -541,7 +541,7 @@ const Profile = () => {
                           value={exp.role}
                           onChange={(e) => updateExperience(exp.id, "role", e.target.value)}
                           placeholder="Enter role"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                     </div>
@@ -552,7 +552,7 @@ const Profile = () => {
                           value={exp.startYear}
                           onChange={(e) => updateExperience(exp.id, "startYear", e.target.value)}
                           placeholder="Start year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -561,7 +561,7 @@ const Profile = () => {
                           value={exp.endYear}
                           onChange={(e) => updateExperience(exp.id, "endYear", e.target.value)}
                           placeholder="End year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -570,7 +570,7 @@ const Profile = () => {
                           value={exp.city}
                           onChange={(e) => updateExperience(exp.id, "city", e.target.value)}
                           placeholder="Enter city"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -579,7 +579,7 @@ const Profile = () => {
                           value={exp.country}
                           onChange={(e) => updateExperience(exp.id, "country", e.target.value)}
                           placeholder="Enter country"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                     </div>
@@ -590,7 +590,7 @@ const Profile = () => {
                         onChange={(e) => updateExperience(exp.id, "description", e.target.value)}
                         placeholder="Describe your role and achievements"
                         rows={3}
-                        className="border-black text-black bg-white"
+                        className="border-gray-300 text-black bg-white"
                       />
                     </div>
                   </div>
@@ -599,11 +599,11 @@ const Profile = () => {
             </Card>
 
             {/* Projects Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   Projects
-                  <Button onClick={addProject} variant="outline" size="sm" className="border-black text-black hover:bg-gray-100">
+                  <Button onClick={addProject} variant="outline" size="sm" className="border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Project
                   </Button>
@@ -611,7 +611,7 @@ const Profile = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 {projects.map((project) => (
-                  <div key={project.id} className="border border-black rounded-lg p-4 relative bg-white">
+                  <div key={project.id} className="border border-gray-300 rounded-lg p-4 relative bg-white">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -627,7 +627,7 @@ const Profile = () => {
                           value={project.name}
                           onChange={(e) => updateProject(project.id, "name", e.target.value)}
                           placeholder="Enter project name"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -636,7 +636,7 @@ const Profile = () => {
                           value={project.startYear}
                           onChange={(e) => updateProject(project.id, "startYear", e.target.value)}
                           placeholder="Start year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                       <div>
@@ -645,7 +645,7 @@ const Profile = () => {
                           value={project.endYear}
                           onChange={(e) => updateProject(project.id, "endYear", e.target.value)}
                           placeholder="End year"
-                          className="border-black text-black bg-white"
+                          className="border-gray-300 text-black bg-white"
                         />
                       </div>
                     </div>
@@ -656,7 +656,7 @@ const Profile = () => {
                         onChange={(e) => updateProject(project.id, "description", e.target.value)}
                         placeholder="Describe your project"
                         rows={3}
-                        className="border-black text-black bg-white"
+                        className="border-gray-300 text-black bg-white"
                       />
                     </div>
                   </div>
@@ -665,11 +665,11 @@ const Profile = () => {
             </Card>
 
             {/* Certifications Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   Certifications
-                  <Button onClick={addCertification} variant="outline" size="sm" className="border-black text-black hover:bg-gray-100">
+                  <Button onClick={addCertification} variant="outline" size="sm" className="border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Certification
                   </Button>
@@ -683,7 +683,7 @@ const Profile = () => {
                       onChange={(e) => updateCertification(index, e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter certification name"
-                      className="flex-1 border-black text-black bg-white"
+                      className="flex-1 border-gray-300 text-black bg-white"
                     />
                     <Button
                       variant="ghost"
@@ -699,7 +699,7 @@ const Profile = () => {
             </Card>
 
             {/* Skills Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="text-black">Skills</CardTitle>
                 <p className="text-sm text-black">Type a skill and press Enter to add it</p>
@@ -711,12 +711,12 @@ const Profile = () => {
                     onChange={(e) => setNewSkill(e.target.value)}
                     onKeyPress={handleSkillKeyPress}
                     placeholder="Type a skill and press Enter"
-                    className="border-black text-black bg-white"
+                    className="border-gray-300 text-black bg-white"
                   />
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill, index) => (
-                    <div key={index} className="flex items-center gap-1 bg-white border border-black text-black px-3 py-1 rounded-full">
+                    <div key={index} className="flex items-center gap-1 bg-white border border-gray-300 text-black px-3 py-1 rounded-full">
                       <span className="text-sm">{skill}</span>
                       <Button
                         variant="ghost"
@@ -733,11 +733,11 @@ const Profile = () => {
             </Card>
 
             {/* Profiles Section */}
-            <Card className="mb-6 bg-white border-black">
+            <Card className="mb-6 bg-white border-gray-300 mx-0">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   Profiles
-                  <Button onClick={addProfile} variant="outline" size="sm" className="border-black text-black hover:bg-gray-100">
+                  <Button onClick={addProfile} variant="outline" size="sm" className="border-gray-300 text-black bg-white hover:bg-gray-100">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Profile
                   </Button>
@@ -751,7 +751,7 @@ const Profile = () => {
                       onChange={(e) => updateProfile(index, e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Enter profile URL or username"
-                      className="flex-1 border-black text-black bg-white"
+                      className="flex-1 border-gray-300 text-black bg-white"
                     />
                     <Button
                       variant="ghost"
@@ -767,8 +767,8 @@ const Profile = () => {
             </Card>
 
             {/* Save Button */}
-            <div className="flex justify-end">
-              <Button className="bg-black hover:bg-gray-800 text-white px-8 border border-black">
+            <div className="flex justify-end px-8 pb-8">
+              <Button className="border border-gray-300 text-black bg-white hover:bg-gray-100 px-8">
                 Save Profile
               </Button>
             </div>
