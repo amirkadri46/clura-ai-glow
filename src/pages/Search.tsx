@@ -20,7 +20,7 @@ const Search = () => {
       <div className="flex flex-1 h-0 w-full">
         {/* Sidebar */}
         <div
-          className="transition-all duration-300 relative flex flex-col items-center"
+          className="transition-all duration-300 relative flex flex-col"
           style={{
             width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
             minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
@@ -33,60 +33,66 @@ const Search = () => {
             paddingBottom: 20,
           }}
         >
-          {/* Top section: Logo & Brand */}
+          {/* Top section: Logo & Brand (left-aligned) */}
           <div
-            className={`flex flex-col items-center transition-all duration-200 w-full ${sidebarOpen ? "opacity-100 h-20" : "opacity-0 h-0 overflow-hidden"}`}
+            className={`flex items-center transition-all duration-200 w-full px-4 pt-2 ${
+              sidebarOpen ? "opacity-100 h-16" : "opacity-0 h-0 overflow-hidden"
+            }`}
             style={{
               transitionProperty: "opacity,height",
               marginBottom: sidebarOpen ? 10 : 0,
+              minHeight: 48,
             }}
           >
-            <div className="flex items-center space-x-2 px-4 pt-2">
-              <img
-                src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
-                alt="Clura.ai Icon"
-                className="w-8 h-8"
-                style={{ transition: "opacity 0.2s" }}
-              />
-              <img
-                src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
-                alt="Clura"
-                className="h-6"
-                style={{ transition: "opacity 0.2s" }}
-              />
-            </div>
+            <img
+              src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
+              alt="Clura.ai Icon"
+              className="w-8 h-8"
+              style={{ transition: "opacity 0.2s" }}
+            />
+            <img
+              src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
+              alt="Clura"
+              className="h-6 ml-2"
+              style={{ transition: "opacity 0.2s" }}
+            />
           </div>
 
-          {/* Start New Search button */}
+          {/* Start New Search button (centered below brand) */}
           {sidebarOpen && (
-            <button
-              onClick={startNewSearch}
-              className="uppercase font-semibold tracking-[1px] text-white text-[16px] mt-[-2px]"
-              style={{
-                fontFamily:
-                  "'Inter', 'Montserrat', 'Roboto', 'sans-serif'",
-                background: "#13171f",
-                borderRadius: "25px",
-                width: "200px",
-                height: "50px",
-                marginBottom: "10px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 0 0 0 transparent",
-                transition: "box-shadow 0.2s, background 0.2s",
-              }}
-              onMouseOver={e =>
-                (e.currentTarget.style.boxShadow =
-                  "0px 0px 10px 2px #131A2A, 0px 0px 10px 2px #00A3FF")
-              }
-              onMouseOut={e =>
-                (e.currentTarget.style.boxShadow =
-                  "0 0 0 0 transparent")
-              }
-            >
-              Start New Search
-            </button>
+            <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
+              <button
+                onClick={startNewSearch}
+                className="uppercase font-bold tracking-[1px] text-white text-[16px]"
+                style={{
+                  fontFamily:
+                    "'Montserrat', 'Roboto', 'Inter', 'sans-serif'",
+                  background: "#13171f",
+                  borderRadius: "25px",
+                  width: "200px",
+                  height: "50px",
+                  marginTop: 0,
+                  boxShadow: "0 0 0 0 transparent",
+                  transition: "box-shadow 0.2s, background 0.2s",
+                  letterSpacing: "1px",
+                  outline: "none",
+                  border: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onMouseOver={e =>
+                  (e.currentTarget.style.boxShadow =
+                    "0px 0px 10px 2px #00A3FF")
+                }
+                onMouseOut={e =>
+                  (e.currentTarget.style.boxShadow =
+                    "0 0 0 0 transparent")
+                }
+              >
+                START NEW SEARCH
+              </button>
+            </div>
           )}
 
           {/* Toggle Button always top right of sidebar */}
@@ -95,7 +101,7 @@ const Search = () => {
             style={{
               width: 40,
               height: 40,
-              background: "#23272f", // dark gray bg
+              background: "#23272f", // dark gray bg for visibility
               color: "#fff",
             }}
             aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
