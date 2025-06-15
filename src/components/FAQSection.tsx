@@ -53,7 +53,7 @@ const FAQSection = () => {
                 className={`
                   overflow-hidden
                   transition-[max-height,opacity,padding]
-                  duration-500
+                  duration-300
                   ease-in-out
                   px-6
                   ${openIndex === index ? "max-h-40 py-2 opacity-100" : "max-h-0 py-0 opacity-0"}
