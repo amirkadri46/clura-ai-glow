@@ -89,16 +89,17 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
   return (
     <div
-      className="transition-all duration-300 relative flex flex-col border-r border-black"
+      className="transition-all duration-300 relative flex flex-col border-r"
       style={{
         width: props.sidebarOpen ? 320 : 64,
         minWidth: props.sidebarOpen ? 320 : 64,
         maxWidth: 320,
-        background: "#d1d9ed",
+        background: "#e6eaf6", // match to design - soft light blue, not pure white
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
         paddingBottom: 20,
+        borderColor: "rgba(30,34,61,0.10)"
       }}
     >
       {/* Logo and Brand */}
@@ -126,14 +127,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           />
         )}
       </div>
-
-      {/* Sidebar Menu Items */}
       <nav
         className={`flex flex-col mt-2 w-full ${
           props.sidebarOpen ? "px-2 gap-1" : "items-center"
         } flex-1`}
       >
-        {/* Render sidebar menu buttons */}
         <SidebarMenuButton
           icon={Search}
           label="New Search"
@@ -157,11 +155,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             marginTop: props.sidebarOpen ? 2 : undefined,
           }}
         />
-
-        {/* Spacer to push recent searches lower - now smaller margin */}
         <div style={{ marginTop: props.sidebarOpen ? 6 : 5 }} />
-
-        {/* Recent Searches with grey hover effect */}
         {props.recentSearches && props.recentSearches.length > 0 && (
           <div
             className={`w-full ${
@@ -173,7 +167,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                 props.sidebarOpen ? "" : "text-center"
               }`}
             >
-              Recent Search's
+              Recent Searches
             </div>
             <div className={`${props.sidebarOpen ? "space-y-1" : ""}`}>
               {props.recentSearches.map((q, i) => (
@@ -183,19 +177,16 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   i={i}
                   sidebarOpen={props.sidebarOpen}
                   isEditing={props.editIndex === i}
-                  isMenuOpen={openMenuIdx === i}
+                  isMenuOpen={props.menuOpenIndex === i}
                   editValue={props.editValue}
                   setEditValue={props.setEditValue}
                   onRecentSearchClick={props.onRecentSearchClick}
-                  onMenuToggle={idx => {
-                    setOpenMenuIdx(openMenuIdx === idx ? null : idx);
-                    if (props.onRecentMenuToggle) props.onRecentMenuToggle(idx);
-                  }}
+                  onMenuToggle={props.onRecentMenuToggle}
                   onDeleteRecent={props.onDeleteRecent}
                   onStartRename={props.onStartRename}
                   onRename={props.onRename}
                   onCancelRename={props.onCancelRename}
-                  closeMenu={() => setOpenMenuIdx(null)}
+                  closeMenu={() => {}} // For sidebar this is handled in RecentSearchItem
                 />
               ))}
             </div>

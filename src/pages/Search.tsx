@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
@@ -6,23 +5,14 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import ProfileCard from "@/components/ProfileCard";
 import { dummyProfiles, DummyProfile } from "@/components/dummyProfiles";
 
+// Relevance scoring is unchanged
 function scoreProfile(profile: DummyProfile, query: string): number {
-  // Basic scoring system that can be elaborated
-  // Lower score (1) = best match!
   if (!query.trim()) return profile.relevance;
-
   const lowerQuery = query.toLowerCase();
-
-  // Hard boosting: check for top keywords (order matters)
-  // These words/combos will boost best matches; lower returned value = higher ranking
   if (/ai engineer.*startup|machine learning founder|ai researcher.*healthcare|deep learning engineer|computer vision startup|nlp engineer|ai product manager|robotics ai engineer|fintech ai engineer|healthcare ai researcher/i.test(query)) {
-    // Return actual relevance field (pre-labeled 1-10)
     return profile.relevance;
   }
-
   let score = 10;
-
-  // Name/Title/Company/Description inclusion = strong relevance
   const fields = [
     profile.fullName,
     profile.role,
@@ -31,10 +21,7 @@ function scoreProfile(profile: DummyProfile, query: string): number {
     profile.background.join(" "),
     profile.location
   ].join(" ").toLowerCase();
-
   if (fields.includes(lowerQuery)) score -= 4;
-
-  // Individual tokens
   lowerQuery.split(/\s+/g).forEach(token => {
     if (profile.fullName.toLowerCase().includes(token)) score -= 1;
     if (profile.role.toLowerCase().includes(token)) score -= 2;
@@ -43,8 +30,6 @@ function scoreProfile(profile: DummyProfile, query: string): number {
     if (profile.background.join(" ").toLowerCase().includes(token)) score -= 1;
     if (profile.location.toLowerCase().includes(token)) score -= 1;
   });
-
-  // Clamp between 1–10
   return Math.max(1, Math.min(10, score));
 }
 
@@ -54,62 +39,97 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [searchBarAtTop, setSearchBarAtTop] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  // Recent searches
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
   const [menuOpenIndex, setMenuOpenIndex] = useState<number | null>(null);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Dummy sidebar navigation
+  // To reset for new search
   const startNewSearch = () => {
     setSearchBarAtTop(false);
     setQuery("");
     setResults([]);
-    inputRef.current?.focus();
+    setLoading(false);
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
   };
 
+  // For sidebar navigation (not implemented in this layout)
   const goToProfile = () => {};
 
-  // Sidebar recent search callbacks - not implemented for demo
-  const handleRecentSearchClick = (_recent: string) => {};
-  const handleMenuToggle = (_i: number) => {};
-  const handleDeleteRecent = (_i: number) => {};
-  const handleStartRename = (_i: number) => {};
-  const handleRename = (_i: number) => {};
-  const handleCancelRename = () => {};
+  // Recent searches logic
+  const handleRecentSearchClick = (recent: string) => {
+    setQuery(recent);
+    setSearchBarAtTop(false);
+    setResults([]);
+    setLoading(false);
+    setTimeout(() => {
+      handleSearch(undefined, recent);
+    }, 150);
+  };
+
+  const handleMenuToggle = (i: number) => {
+    setMenuOpenIndex(menuOpenIndex === i ? null : i);
+  };
+  const handleDeleteRecent = (i: number) => {
+    setRecentSearches(prev => prev.filter((_, idx) => idx !== i));
+    setMenuOpenIndex(null);
+  };
+  const handleStartRename = (i: number) => {
+    setEditIndex(i);
+    setEditValue(recentSearches[i]);
+  };
+  const handleRename = (i: number) => {
+    setRecentSearches(prev => prev.map((v, idx) => idx === i ? editValue : v));
+    setEditIndex(null);
+    setEditValue("");
+  };
+  const handleCancelRename = () => setEditIndex(null);
 
   const handleSidebarToggle = () => setSidebarOpen((v) => !v);
 
-  // Animation for bar movement & loading
-  const handleSearch = (evt?: React.FormEvent) => {
+  // Animate bar upwards on search
+  const handleSearch = (evt?: React.FormEvent, directQuery?: string) => {
     if (evt) evt.preventDefault();
-    if (!query.trim()) return;
+    const searchFor = typeof directQuery === "string" ? directQuery : query;
+    if (!searchFor.trim()) return;
     setLoading(true);
     setTimeout(() => {
       // Compute results
       const profilesWithCustomScore = dummyProfiles
         .map((p) => ({
           ...p,
-          __score: scoreProfile(p, query)
+          __score: scoreProfile(p, searchFor)
         }))
         .sort((a, b) => a.__score - b.__score);
 
       setResults(profilesWithCustomScore as DummyProfile[]);
       setSearchBarAtTop(true);
       setLoading(false);
+
+      // Add to recent searches, but not duplicates
+      setRecentSearches(prev => {
+        let arr = prev.filter((q) => q !== searchFor);
+        arr.unshift(searchFor);
+        return arr.slice(0, 8);
+      });
     }, 550);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-neutral-100/90 transition-colors duration-300 relative neural-bg">
+      <div
+        className="min-h-screen flex w-full transition-colors duration-300 relative"
+        style={{ background: "#fff" }} // White background always
+      >
         <Sidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -146,38 +166,54 @@ const Search = () => {
         >
           <span style={{ fontSize: 20, color: "#000" }}>{sidebarOpen ? "<" : ">"}</span>
         </button>
-        {/* Main Search/App Content */}
-        <main className="flex-1 flex flex-col min-h-screen justify-start items-center transition-all pt-0 px-3 md:px-12">
-          {/* Animated Search Bar */}
+        {/* Main Content with responsive adjustments */}
+        <main className="flex-1 flex flex-col min-h-screen items-center bg-transparent p-3 md:px-12">
+          {/* Animated Search Bar - centered, animates up */}
           <div
-            className={`w-full max-w-xl transition-all duration-500 ${
-              searchBarAtTop
-                ? "fixed top-12 left-1/2 -translate-x-1/2 z-40"
-                : "mt-32 relative"
-            }`}
+            className={`w-full transition-all duration-700 max-w-xl
+                ${searchBarAtTop
+                  ? "fixed top-8 left-1/2 -translate-x-1/2 z-40"
+                  : "mt-36 md:mt-40 mx-auto relative"} 
+                flex justify-center`}
+            style={{
+              zIndex: 25,
+              transition: "all 0.65s cubic-bezier(.33,1.01,.61,.99)",
+              alignItems: "center"
+            }}
           >
-            <form onSubmit={handleSearch}>
-              <div className="flex items-center w-full rounded-2xl shadow-2xl border border-gray-300 bg-white p-2 transition-all focus-within:ring-2 ring-indigo-400">
-                <SearchIcon className="w-6 h-6 text-gray-400 ml-2" />
+            <form
+              onSubmit={handleSearch}
+              className="w-full"
+              autoComplete="off"
+              spellCheck={false}
+            >
+              <div className="flex items-center w-full rounded-2xl shadow-2xl border border-gray-200 bg-white p-2 
+                transition-all focus-within:ring-2 ring-indigo-400"
+                style={{ boxShadow: "0 4px 24px 0 rgba(141,148,161,0.14)" }}>
+                <SearchIcon className="w-6 h-6 text-gray-400 ml-2 flex-shrink-0" />
                 <input
                   ref={inputRef}
                   type="text"
                   className="flex-1 bg-transparent outline-none text-xl px-4 py-5 font-light text-black placeholder-[#8d94a1]"
-                  placeholder="Search for AI engineers, founders, or skills..."
+                  placeholder="Who are you looking for?"
                   value={query}
                   onChange={e => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
+                  aria-label="Who are you looking for?"
+                  autoFocus={!searchBarAtTop}
+                  tabIndex={0}
                 />
                 <button
                   aria-label="Search"
                   type="submit"
-                  className="flex items-center rounded-xl p-3 ml-2 bg-indigo-600 hover:bg-indigo-700 transition text-white"
+                  className="flex items-center rounded-xl p-3 ml-2"
                   style={{
+                    background: "linear-gradient(90deg,#6c47ff 8%,#8b5cf6 80%)",
                     boxShadow: "0 2px 16px #6366f15c"
                   }}
                   tabIndex={0}
                 >
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 text-white" />
                 </button>
               </div>
             </form>
@@ -190,19 +226,19 @@ const Search = () => {
           )}
           {/* Results */}
           {!loading && results.length > 0 && (
-            <div className="w-full pt-40 md:pt-32 max-w-7xl mx-auto transition-all">
+            <div className="w-full pt-40 md:pt-36 max-w-7xl mx-auto transition-all">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {results.map((profile, idx) => (
                   <ProfileCard
                     profile={profile}
-                    key={profile.id}
+                    key={profile.id + "_" + idx}
                   />
                 ))}
               </div>
             </div>
           )}
           {!loading && searchBarAtTop && results.length === 0 && (
-            <div className="w-full pt-40 md:pt-32 text-xl text-gray-500 flex items-center justify-center min-h-[300px] animate-fade-in">
+            <div className="w-full pt-40 md:pt-36 text-xl text-gray-500 flex items-center justify-center min-h-[300px] animate-fade-in">
               No results found.
             </div>
           )}
