@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
@@ -17,7 +18,7 @@ interface SidebarProps {
   onRecentMenuToggle?: (i: number) => void;
   menuOpenIndex?: number | null;
   onDeleteRecent?: (i: number) => void;
-  onStartRename?: (i: number) => void;
+  onStartRename?: (i: number, currentValue: string) => void;
   editIndex?: number | null;
   editValue?: string;
   setEditValue?: (v: string) => void;
