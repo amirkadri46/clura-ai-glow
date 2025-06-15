@@ -48,7 +48,10 @@ const Search = () => {
               style={{
                 borderColor: "#8d94a1",
                 background: "#fff",
-                borderRadius: "24px", // Half round
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24,
+                borderBottomLeftRadius: 24,
+                borderBottomRightRadius: 24,
                 boxShadow: "0 4px 32px 0 #0008, 0 2px 8px 0 #23242622",
                 padding: "0",
               }}
@@ -60,22 +63,13 @@ const Search = () => {
                   paddingRight: "32px",
                   paddingTop: "24px",
                   paddingBottom: "24px",
-                  borderRadius: "24px", // Half round
+                  borderRadius: "24px",
                 }}
               >
                 <SearchIcon className="w-6 h-6" style={{ color: "#8d94a1" }} />
                 <input
                   type="text"
-                  className="flex-1 bg-transparent outline-none text-xl font-light"
-                  style={{
-                    color: "#8d94a1",
-                    '::placeholder': {
-                      color: "#8d94a1",
-                      opacity: 1
-                    },
-                    marginLeft: "16px",
-                    marginRight: "16px",
-                  }}
+                  className="flex-1 bg-transparent outline-none text-xl font-light text-[#8d94a1] placeholder-[#8d94a1] ml-4 mr-4"
                   placeholder="who are you looking for"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -107,4 +101,3 @@ const Search = () => {
 };
 
 export default Search;
-
