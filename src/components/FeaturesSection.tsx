@@ -4,22 +4,22 @@ import { Search, Brain, Rocket, Users } from 'lucide-react';
 const FeaturesSection = () => {
   const features = [
     {
-      icon: <Search className="w-6 h-6" />,
+      icon: <Search className="w-8 h-8" />,
       title: "Natural Language Search",
       description: "Search using everyday language, no complex syntax needed"
     },
     {
-      icon: <Brain className="w-6 h-6" />,
+      icon: <Brain className="w-8 h-8" />,
       title: "AI-Powered Matching",
       description: "Our AI understands context and finds perfect matches instantly"
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="w-8 h-8" />,
       title: "200M+ Enriched Profiles",
       description: "Access to the largest enriched professional database"
     },
     {
-      icon: <Rocket className="w-6 h-6" />,
+      icon: <Rocket className="w-8 h-8" />,
       title: "Instant Results",
       description: "Get comprehensive results in seconds, not hours"
     }
@@ -36,14 +36,20 @@ const FeaturesSection = () => {
             Everything you need to find the right people, powered by advanced AI
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="scroll-reveal bg-slate-900/40 backdrop-blur-sm border border-slate-700/50 p-8 rounded-2xl feature-card group hover:scale-105 hover:bg-slate-800/40 hover:border-blue-500/30 transition-all duration-300">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
-                {feature.icon}
+            <div key={index} className="scroll-reveal text-center group">
+              {/* Square Box */}
+              <div className="w-32 h-32 mx-auto bg-slate-900/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl flex items-center justify-center mb-6 feature-card group-hover:scale-105 group-hover:bg-slate-800/40 group-hover:border-blue-500/30 transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center text-blue-400">
+                  {feature.icon}
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
+              {/* Text Content */}
+              <div>
+                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </div>
             </div>
           ))}
         </div>
