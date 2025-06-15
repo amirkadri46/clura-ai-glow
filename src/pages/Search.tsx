@@ -1,11 +1,14 @@
 
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/app-sidebar";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const navigate = useNavigate();
 
   const handleSend = () => {
     if (query.trim()) {
@@ -19,11 +22,26 @@ const Search = () => {
     }
   };
 
+  // "New Search" on the sidebar should reset the query.
+  const startNewSearch = () => {
+    setQuery("");
+    // ...add any additional logic if needed
+  };
+
+  // "Profile" on the sidebar should navigate to the profile page.
+  const goToProfile = () => {
+    navigate("/profile");
+  };
+
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-[#18191A]">
-        {/* Sidebar */}
-        <AppSidebar />
+      <div className="min-h-screen flex w-full bg-white transition-colors duration-300">
+        <Sidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          startNewSearch={startNewSearch}
+          goToProfile={goToProfile}
+        />
         {/* Main Content */}
         <main className="flex flex-1 items-center justify-center">
           <div
@@ -63,3 +81,4 @@ const Search = () => {
 };
 
 export default Search;
+
