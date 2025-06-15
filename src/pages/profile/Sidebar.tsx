@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 
@@ -10,14 +11,13 @@ interface SidebarProps {
   startNewSearch: () => void;
   goToProfile: () => void;
   recentSearches: string[];
-  // the following are now passed from Search.tsx
   onRecentSearchClick?: (search: string) => void;
   onRecentMenuToggle?: (i: number) => void;
   menuOpenIndex?: number | null;
   onDeleteRecent?: (i: number) => void;
   onStartRename?: (i: number) => void;
   editIndex?: number | null;
-  editValue?: string; // temp value in edit mode
+  editValue?: string;
   setEditValue?: (v: string) => void;
   onRename?: (i: number) => void;
   onCancelRename?: () => void;
@@ -27,18 +27,18 @@ const menuItems = [
   {
     label: "New Search",
     icon: Search,
-    key: "search"
+    key: "search",
   },
   {
     label: "Profile",
     icon: User,
-    key: "profile"
+    key: "profile",
   },
   {
     label: "Liked Cards",
     icon: Heart,
-    key: "liked"
-  }
+    key: "liked",
+  },
 ];
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const itemHandlers = {
     search: startNewSearch,
     profile: goToProfile,
-    liked: () => {} // Placeholder, can customize as needed
+    liked: () => {}, // Placeholder, can customize as needed
   };
 
   // To focus input on rename open
@@ -116,32 +116,60 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       </div>
 
       {/* Sidebar Menu Items */}
-      <nav className={`flex flex-col mt-2 w-full ${sidebarOpen ? "px-2 gap-1" : "items-center"} flex-1`}>
+      <nav
+        className={`flex flex-col mt-2 w-full ${
+          sidebarOpen ? "px-2 gap-1" : "items-center"
+        } flex-1`}
+      >
         {menuItems.map(({ label, icon: Icon, key }, idx) => (
           <button
             key={key}
             onClick={itemHandlers[key]}
-            className={`flex ${sidebarOpen ? "flex-row items-center w-full px-4 py-2 rounded-lg" : "flex-col items-center justify-center w-12 h-12 my-1 rounded-lg"} transition-colors duration-150 font-medium`}
+            className={`flex ${
+              sidebarOpen
+                ? "flex-row items-center w-full px-4 py-2 rounded-lg"
+                : "flex-col items-center justify-center w-12 h-12 my-1 rounded-lg"
+            } transition-colors duration-150 font-medium`}
             style={{
               color: "#8d94a1",
               background: "#d1d9ed",
-              marginBottom: key === "profile" ? (sidebarOpen ? "8px" : "6px") : 0, // Small gap under profile for liked
+              marginBottom:
+                key === "profile"
+                  ? 4 // Even smaller gap under profile for liked
+                  : key === "liked"
+                  ? 10 // SMALLER gap under liked
+                  : 0,
             }}
-            onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
-            onMouseOut={e => (e.currentTarget.style.background = "#d1d9ed")}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.background = "#f3f4f6")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.background = "#d1d9ed")
+            }
           >
-            <Icon className={sidebarOpen ? "w-5 h-5 mr-3" : "w-5 h-5"} color="#8d94a1" />
+            <Icon
+              className={sidebarOpen ? "w-5 h-5 mr-3" : "w-5 h-5"}
+              color="#8d94a1"
+            />
             {sidebarOpen && <span>{label}</span>}
           </button>
         ))}
 
-        {/* Spacer to push recent searches lower */}
-        <div style={{ marginTop: sidebarOpen ? 22 : 13 }} />
+        {/* Spacer to push recent searches lower - reduce the margin top */}
+        <div style={{ marginTop: sidebarOpen ? 12 : 8 }} />
 
         {/* Recent Searches with grey hover effect */}
         {props.recentSearches && props.recentSearches.length > 0 && (
-          <div className={`w-full ${sidebarOpen ? "px-4 mt-5" : "flex flex-col items-center mt-4"}`}>
-            <div className={`text-xs font-semibold mb-2 text-gray-500 ${sidebarOpen ? "" : "text-center"}`}>
+          <div
+            className={`w-full ${
+              sidebarOpen ? "px-4 mt-4" : "flex flex-col items-center mt-4"
+            }`}
+          >
+            <div
+              className={`text-xs font-semibold mb-2 text-gray-500 ${
+                sidebarOpen ? "" : "text-center"
+              }`}
+            >
               Recent Search's
             </div>
             <div className={`${sidebarOpen ? "space-y-1" : ""}`}>
@@ -150,7 +178,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   <div
                     key={i}
                     className="flex items-center group"
-                    style={{ background: "transparent", paddingLeft: 8, position: "relative" }}
+                    style={{
+                      background: "transparent",
+                      paddingLeft: 8,
+                      position: "relative",
+                    }}
                   >
                     {props.editIndex === i && props.setEditValue ? (
                       <>
@@ -158,13 +190,18 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                           ref={inputRef}
                           className="text-sm px-2 py-1 border border-gray-300 rounded focus:outline-none mr-2 flex-1 bg-white"
                           value={props.editValue}
-                          onChange={e => props.setEditValue(e.target.value)}
-                          onBlur={() => props.onRename && props.onRename(i)}
-                          onKeyDown={e => {
+                          onChange={(e) =>
+                            props.setEditValue!(e.target.value)
+                          }
+                          onBlur={() =>
+                            props.onRename && props.onRename(i)
+                          }
+                          onKeyDown={(e) => {
                             if (e.key === "Enter") {
                               props.onRename && props.onRename(i);
                             } else if (e.key === "Escape") {
-                              props.onCancelRename && props.onCancelRename();
+                              props.onCancelRename &&
+                                props.onCancelRename();
                             }
                           }}
                         />
@@ -187,7 +224,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <>
                         {/* Recent search clickable with grey on hover */}
                         <div
-                          onClick={() => props.onRecentSearchClick && props.onRecentSearchClick(q)}
+                          onClick={() =>
+                            props.onRecentSearchClick &&
+                            props.onRecentSearchClick(q)
+                          }
                           className="text-sm text-gray-700 truncate cursor-pointer flex-1 hover:underline rounded-lg transition-colors"
                           title={q}
                           style={{
@@ -195,29 +235,58 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                             marginRight: 2,
                             userSelect: "none",
                           }}
-                          onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
-                          onMouseOut={e => (e.currentTarget.style.background = "transparent")}
+                          onMouseOver={(e) =>
+                            (e.currentTarget.style.background = "#f3f4f6")
+                          }
+                          onMouseOut={(e) =>
+                            (e.currentTarget.style.background = "transparent")
+                          }
                         >
                           {q}
                         </div>
                         <button
-                          onClick={() => props.onRecentMenuToggle && props.onRecentMenuToggle(i)}
-                          className="ml-2 p-1 rounded hover:bg-gray-300"
+                          onClick={() =>
+                            props.onRecentMenuToggle &&
+                            props.onRecentMenuToggle(i)
+                          }
+                          className="ml-2 p-1 rounded transition"
+                          style={{
+                            background: "transparent",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
                         >
-                          <MoreVertical size={16} />
+                          <MoreVertical size={18} color="#323232" /> {/* dark grey */}
                         </button>
                         {props.menuOpenIndex === i && (
-                          <div className="absolute z-10 left-36 bg-white rounded shadow border px-2 py-1 flex flex-col min-w-[100px] gap-1"
-                            style={{ top: "50%", transform: "translateY(-50%)" }}>
+                          <div
+                            className="absolute z-20 left-36 top-1/2 -translate-y-1/2 min-w-[120px] shadow-xl border border-gray-100 rounded-xl bg-white px-0.5 py-1 flex flex-col gap-1"
+                            style={{
+                              boxShadow:
+                                "0 2px 10px 0 rgba(0,0,0,0.08), 0 0.5px 1.5px rgba(60,60,60,0.09)",
+                              border: "1px solid #eee",
+                            }}
+                          >
                             <button
-                              onClick={() => props.onStartRename && props.onStartRename(i)}
-                              className="text-xs text-gray-800 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                              onClick={() =>
+                                props.onStartRename &&
+                                props.onStartRename(i)
+                              }
+                              className="modernMenuBtn w-full block text-xs font-semibold text-gray-700 hover:bg-[#f3f4f6] px-4 py-2 leading-6 text-left rounded-t-xl transition"
+                              style={{
+                                borderBottom:
+                                  "1px solid #e5e7eb",
+                              }}
                             >
                               Rename
                             </button>
                             <button
-                              onClick={() => props.onDeleteRecent && props.onDeleteRecent(i)}
-                              className="text-xs text-red-600 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                              onClick={() =>
+                                props.onDeleteRecent &&
+                                props.onDeleteRecent(i)
+                              }
+                              className="modernMenuBtn w-full block text-xs font-semibold text-red-600 hover:bg-[#f3f4f6] px-4 py-2 text-left rounded-b-xl transition"
                             >
                               Delete
                             </button>
@@ -233,29 +302,47 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     style={{ background: "transparent" }}
                   >
                     <button
-                      onClick={() => props.onRecentSearchClick && props.onRecentSearchClick(q)}
+                      onClick={() =>
+                        props.onRecentSearchClick &&
+                        props.onRecentSearchClick(q)
+                      }
                       className="p-0 m-0 rounded hover:bg-gray-200 transition"
                       style={{ width: "100%", height: "100%" }}
                     >
                       <Search className="w-3 h-3 mr-0" />
                     </button>
                     <button
-                      onClick={() => props.onRecentMenuToggle && props.onRecentMenuToggle(i)}
-                      className="absolute right-0 top-0 p-1 rounded hover:bg-gray-300"
+                      onClick={() =>
+                        props.onRecentMenuToggle &&
+                        props.onRecentMenuToggle(i)
+                      }
+                      className="absolute right-0 top-0 p-1 rounded transition"
+                      style={{
+                        background: "transparent",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                     >
-                      <MoreVertical size={12} />
+                      <MoreVertical size={12} color="#323232" /> {/* dark grey */}
                     </button>
                     {props.menuOpenIndex === i && (
-                      <div className="absolute right-full top-0 bg-white rounded shadow border px-2 py-1 flex flex-col min-w-[80px] gap-1 z-20">
+                      <div className="absolute right-full top-0 bg-white rounded-xl shadow-xl border border-gray-100 px-0.5 py-1 flex flex-col min-w-[90px] gap-0.5 z-20">
                         <button
-                          onClick={() => props.onStartRename && props.onStartRename(i)}
-                          className="text-xs text-gray-800 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                          onClick={() =>
+                            props.onStartRename &&
+                            props.onStartRename(i)
+                          }
+                          className="modernMenuBtn w-full block text-xs font-semibold text-gray-700 hover:bg-[#f3f4f6] px-3 py-2 rounded-t-xl transition"
                         >
                           Rename
                         </button>
                         <button
-                          onClick={() => props.onDeleteRecent && props.onDeleteRecent(i)}
-                          className="text-xs text-red-600 hover:bg-gray-100 px-2 py-1 rounded text-left"
+                          onClick={() =>
+                            props.onDeleteRecent &&
+                            props.onDeleteRecent(i)
+                          }
+                          className="modernMenuBtn w-full block text-xs font-semibold text-red-600 hover:bg-[#f3f4f6] px-3 py-2 rounded-b-xl transition"
                         >
                           Delete
                         </button>
@@ -273,3 +360,4 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 };
 
 export default Sidebar;
+
