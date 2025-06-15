@@ -29,7 +29,6 @@ const Search = () => {
             height: "100%",
             borderRight: "1px solid #e5e7eb",
             overflow: "hidden",
-            // Move logo/title up by reducing top padding from 20px to 8px
             paddingTop: 8,
             paddingBottom: 20,
           }}
@@ -71,9 +70,12 @@ const Search = () => {
                   fontFamily:
                     "'Montserrat', 'Roboto', 'Inter', 'sans-serif'",
                   background: "#13171f",
-                  borderRadius: "25px",
-                  width: "200px",
-                  height: "50px",
+-                 borderRadius: "25px",
+-                 width: "200px",
+-                 height: "50px",
++                 borderRadius: "12px",
++                 width: "150px",
++                 height: "40px",
                   marginTop: 0,
                   boxShadow: "none",
                   letterSpacing: "1px",
@@ -96,7 +98,6 @@ const Search = () => {
               </button>
             </div>
           )}
-
           {/* Toggle Button always top right of sidebar */}
           <button
             className="absolute top-3 right-3 z-20 border border-gray-200 rounded-full shadow p-2 transition flex items-center justify-center"
