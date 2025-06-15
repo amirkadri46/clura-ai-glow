@@ -1,256 +1,248 @@
 
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-
-// Animate these words
-const animatedWords = [
-  "Hiring",
-  "Sales",
-  "Student",
-  "Researchers",
-  "Founders",
-  "Networking",
-];
-
-const recentQueries = [
-  "people who started a startup in AI field",
-  "employee who works at top mnc's and has experience of 3years and currently live in mumbai",
-];
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Search as SearchIcon, ArrowRight, Filter, MapPin, Building, Calendar, Phone, Mail, Star } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import SpaceBackground from '@/components/SpaceBackground';
 
 const Search = () => {
-  const [query, setQuery] = useState("");
-  const [animatedIndex, setAnimatedIndex] = useState(0);
-  const [fade, setFade] = useState(true);
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') || '');
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchHistory, setSearchHistory] = useState([
+    "AI engineers in Silicon Valley",
+    "Product managers at startups",
+    "Full stack developers near me"
+  ]);
 
-  // Handle cycling the animated words
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFade(false);
-      setTimeout(() => {
-        setAnimatedIndex((prev) => (prev + 1) % animatedWords.length);
-        setFade(true);
-      }, 500); // duration for fade
-    }, 3000);
-    return () => clearTimeout(timeout);
-  }, [animatedIndex]);
+    if (searchParams.get('q')) {
+      setIsLoading(true);
+      // Simulate search delay
+      setTimeout(() => setIsLoading(false), 1500);
+    }
+  }, [searchParams]);
 
-  // Logo click handler
-  const handleLogoClick = () => navigate("/");
+  const mockResults = [
+    {
+      id: 1,
+      name: "Sarah Chen",
+      title: "Senior AI Engineer",
+      company: "Meta",
+      location: "San Francisco, CA",
+      experience: "5+ years",
+      avatar: "SC",
+      skills: ["Machine Learning", "Python", "TensorFlow"],
+      summary: "Experienced AI engineer with expertise in deep learning and neural networks.",
+      rating: 4.9,
+      phone: "+1 (555) 123-4567",
+      email: "sarah.chen@meta.com",
+      portfolio: "github.com/sarah-chen"
+    },
+    {
+      id: 2,
+      name: "Marcus Rodriguez",
+      title: "Full Stack Developer",
+      company: "Google",
+      location: "Mountain View, CA",
+      experience: "3+ years",
+      avatar: "MR",
+      skills: ["React", "Node.js", "TypeScript"],
+      summary: "Full-stack developer passionate about building scalable applications.",
+      rating: 4.7,
+      phone: "+1 (555) 234-5678",
+      email: "marcus.r@google.com",
+      portfolio: "marcusdev.com"
+    },
+    {
+      id: 3,
+      name: "Emily Watson",
+      title: "Product Designer",
+      company: "Apple",
+      location: "Cupertino, CA",
+      experience: "4+ years",
+      avatar: "EW",
+      skills: ["Figma", "User Research", "Prototyping"],
+      summary: "Creative product designer focused on user-centered design solutions.",
+      rating: 4.8,
+      phone: "+1 (555) 345-6789",
+      email: "emily.watson@apple.com",
+      portfolio: "emilydesign.portfolio"
+    }
+  ];
 
-  // Back arrow click
-  const handleBack = () => navigate("/");
+  const handleSearch = () => {
+    if (query.trim()) {
+      setIsLoading(true);
+      if (!searchHistory.includes(query)) {
+        setSearchHistory([query, ...searchHistory.slice(0, 4)]);
+      }
+      setTimeout(() => setIsLoading(false), 1500);
+    }
+  };
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center"
-      style={{ background: "#2A2A2A", color: "#FFF" }}
-    >
-      {/* Back arrow at top right */}
-      <button
-        className="absolute top-8 right-8 flex items-center justify-center border border-white rounded-full"
-        style={{ width: 40, height: 40, outline: "none" }}
-        onClick={handleBack}
-        aria-label="Go back"
-      >
-        <ArrowLeft size={30} stroke="#FFF" />
-      </button>
-
-      {/* Fixed/floating sidebar at top-left */}
-      <div
-        className="absolute top-8 left-8 flex flex-col items-start"
-        style={{ gap: 32 }}
-      >
-        {/* Logo and Clura name */}
-        <div
-          className="flex items-center"
-          style={{ gap: 10, cursor: "pointer" }}
-          onClick={handleLogoClick}
-        >
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: "50%",
-              background: "linear-gradient(135deg, #6B48FF 0%, #A78BFA 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          ></div>
-          <span
-            style={{
-              color: "#FFF",
-              fontSize: 24,
-              fontWeight: 700,
-              letterSpacing: "1.5px",
-              userSelect: "none",
-            }}
-          >
-            Clura
-          </span>
-        </div>
-        {/* Card buttons */}
-        <div className="flex flex-col" style={{ gap: 10 }}>
-          <button
-            className="transition hover:bg-[#222] active:scale-95"
-            style={{
-              width: 200,
-              height: 50,
-              border: "1px solid #FFF",
-              background: "#2A2A2A",
-              borderRadius: 12,
-              color: "#FFF",
-              fontSize: 16,
-              fontWeight: 700,
-              marginBottom: 0,
-              outline: "none",
-            }}
-          >
-            New Search
-          </button>
-          <button
-            className="transition hover:bg-[#222] active:scale-95"
-            style={{
-              width: 200,
-              height: 50,
-              border: "1px solid #FFF",
-              background: "#2A2A2A",
-              borderRadius: 12,
-              color: "#FFF",
-              fontSize: 16,
-              fontWeight: 700,
-              outline: "none",
-            }}
-          >
-            Profile
-          </button>
-        </div>
-        {/* Recent search */}
-        <div className="flex flex-col" style={{ gap: 10 }}>
-          <h4
-            style={{
-              color: "#CCC",
-              fontWeight: 700,
-              fontSize: 16,
-              marginBottom: 0,
-              marginLeft: 2,
-              marginTop: 0,
-            }}
-          >
-            Recent Search
-          </h4>
-          {recentQueries.map((rq, i) => (
-            <div
-              key={i}
-              className="flex items-center"
-              style={{
-                width: 300,
-                height: 40,
-                background: "#2A2A2A",
-                border: "1px solid #FFF",
-                borderRadius: 5,
-                paddingLeft: 18,
-                fontSize: 14,
-                color: "#D1D5DB",
-                marginBottom: 0,
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-              title={rq}
-            >
-              {rq}
+    <div className="min-h-screen relative">
+      <SpaceBackground />
+      <Navigation />
+      
+      <div className="relative z-10 pt-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Search Card */}
+          <div className="mb-8">
+            <div className="glass-card p-8 bg-slate-900/70 border border-clura-500/40 shadow-2xl shadow-clura-500/30 rounded-3xl backdrop-blur-lg">
+              <div className="flex items-center space-x-4 mb-6">
+                <SearchIcon className="w-6 h-6 text-clura-400 flex-shrink-0" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Describe who you're looking for..."
+                  className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-xl py-3"
+                />
+                <button 
+                  onClick={handleSearch}
+                  className="neuro-button px-6 py-3 text-sm font-medium text-foreground hover:text-clura-400 transition-all duration-300 group"
+                >
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+              
+              {/* Search History */}
+              {searchHistory.length > 0 && (
+                <div>
+                  <h4 className="text-sm text-muted-foreground mb-3">Recent Searches</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {searchHistory.map((search, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setQuery(search)}
+                        className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full border border-clura-500/30 text-sm hover:bg-clura-500/30 transition-colors"
+                      >
+                        {search}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Main content center */}
-      <div className="flex flex-col items-center justify-center w-full" style={{ minHeight: "60vh" }}>
-        {/* Title */}
-        <div className="mb-8 flex flex-col items-center">
-          <span
-            style={{
-              color: "#FFF",
-              fontSize: 36,
-              fontWeight: 700,
-              letterSpacing: "0.5px",
-              lineHeight: 1.13,
-              marginBottom: 2,
-              textAlign: "center",
-            }}
-          >
-            The People Search Engine for{" "}
-            <span
-              className={`inline-block`}
-              style={{
-                position: 'relative',
-                width: "auto",
-                minWidth: 170,
-              }}
-            >
-              <span
-                className={`transition-opacity duration-500 ${fade ? "opacity-100" : "opacity-0"}`}
-                key={animatedIndex}
-                style={{
-                  color: "#FFF",
-                  fontWeight: 700,
-                  fontSize: 36,
-                  position: "absolute",
-                  left: 0,
-                  top: 0,
-                  whiteSpace: "nowrap",
-                  transition: "opacity 0.5s",
-                }}
-              >
-                {animatedWords[animatedIndex]}
-              </span>
-            </span>
-          </span>
-        </div>
-        {/* Search bar */}
-        <div className="flex items-center w-full justify-center" style={{ gap: 0 }}>
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="People who..."
-            style={{
-              width: 600,
-              height: 50,
-              background: "#2A2A2A",
-              border: "1px solid #FFF",
-              borderTopLeftRadius: 12,
-              borderBottomLeftRadius: 12,
-              color: "#FFF",
-              fontSize: 16,
-              paddingLeft: 24,
-              outline: "none",
-              borderRight: "none",
-              transition: "background 0.2s",
-              fontWeight: 500,
-            }}
-            className="placeholder-[#C5C5C5]"
-          />
-          <button
-            className="transition hover:bg-[#222] active:scale-95"
-            style={{
-              width: 120,
-              height: 50,
-              background: "#2A2A2A",
-              border: "1px solid #FFF",
-              borderLeft: "none",
-              borderTopRightRadius: 12,
-              borderBottomRightRadius: 12,
-              color: "#FFF",
-              fontSize: 14,
-              fontWeight: 700,
-              outline: "none",
-            }}
-          >
-            Deep Research
-          </button>
+          {/* Filters */}
+          <div className="mb-6">
+            <div className="flex items-center space-x-4 text-sm">
+              <Filter className="w-4 h-4 text-clura-400" />
+              <button className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full border border-clura-500/30">
+                All Results
+              </button>
+              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
+                Engineers
+              </button>
+              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
+                Designers
+              </button>
+              <button className="px-3 py-1 text-muted-foreground hover:text-foreground transition-colors">
+                Managers
+              </button>
+            </div>
+          </div>
+
+          {/* Results */}
+          {isLoading ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="glass-card p-6 animate-pulse bg-slate-900/50 border border-clura-500/20">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-clura-500/20 rounded-full"></div>
+                    <div className="flex-1 space-y-2">
+                      <div className="h-4 bg-clura-500/20 rounded w-1/4"></div>
+                      <div className="h-3 bg-clura-500/10 rounded w-1/3"></div>
+                      <div className="h-3 bg-clura-500/10 rounded w-1/2"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-6">
+              <div className="text-muted-foreground text-sm mb-4">
+                Found {mockResults.length} results for "{query}"
+              </div>
+              {mockResults.map((result, index) => (
+                <div 
+                  key={result.id} 
+                  className="glass-card p-8 hover:bg-white/10 transition-all duration-300 group cursor-pointer bg-slate-900/50 border border-clura-500/20 backdrop-blur-lg"
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    animation: 'fade-in 0.6s ease-out forwards'
+                  }}
+                >
+                  <div className="flex items-start space-x-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-clura-400 to-clura-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      {result.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-xl font-semibold text-foreground group-hover:text-clura-400 transition-colors">
+                            {result.name}
+                          </h3>
+                          <p className="text-muted-foreground text-lg">{result.title}</p>
+                          <div className="flex items-center space-x-1 mt-1">
+                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                            <span className="text-sm text-muted-foreground">{result.rating}</span>
+                          </div>
+                        </div>
+                        <button className="neuro-button px-6 py-3 text-sm opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          Contact
+                        </button>
+                      </div>
+                      
+                      <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center space-x-1">
+                          <Building className="w-4 h-4" />
+                          <span>{result.company}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <MapPin className="w-4 h-4" />
+                          <span>{result.location}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{result.experience}</span>
+                        </div>
+                      </div>
+
+                      <p className="text-foreground mb-4 leading-relaxed">{result.summary}</p>
+
+                      {/* Contact Details */}
+                      <div className="flex items-center space-x-6 text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center space-x-1">
+                          <Phone className="w-4 h-4" />
+                          <span>{result.phone}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Mail className="w-4 h-4" />
+                          <span>{result.email}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {result.skills.map((skill) => (
+                          <span 
+                            key={skill}
+                            className="px-3 py-1 bg-clura-500/20 text-clura-400 rounded-full text-sm border border-clura-500/30"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -258,4 +250,3 @@ const Search = () => {
 };
 
 export default Search;
-
