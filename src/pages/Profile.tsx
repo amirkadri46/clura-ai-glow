@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Sidebar from "./profile/Sidebar";
 import PersonalInfo from "./profile/PersonalInfo";
 import EducationSection from "./profile/EducationSection";
@@ -185,6 +184,24 @@ const Profile = () => {
     }
   };
 
+  // Add ref for file input
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      // Optionally, you could do something with the file (preview/upload/validate, etc.)
+      console.log("Selected resume file:", file);
+    }
+  };
+
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
       <div className="flex flex-1 h-0 w-full">
@@ -205,12 +222,26 @@ const Profile = () => {
               <CardHeader>
                 <CardTitle className="flex items-center justify-between text-black">
                   My Resume
-                  <Button variant="outline" className="flex items-center border-gray-300 text-black bg-white hover:bg-gray-100">
+                  <Button 
+                    variant="outline"
+                    className="flex items-center border-gray-300 text-black bg-white hover:bg-gray-100"
+                    onClick={handleUploadClick}
+                  >
                     <Upload className="w-4 h-4 mr-2" />
                     Upload Resume
                   </Button>
                 </CardTitle>
-                <p className="text-sm text-black">This information will be shown to companies to help you find opportunities</p>
+                <p className="text-sm text-black">
+                  This information will be shown to companies to help you find opportunities
+                </p>
+                {/* Hidden file input for resume */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                />
               </CardHeader>
             </Card>
 
