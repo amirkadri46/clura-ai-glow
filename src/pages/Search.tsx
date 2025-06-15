@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
@@ -61,17 +60,16 @@ const Search = () => {
             <button
               aria-label="Send"
               onClick={handleSend}
-              className="ml-2 flex items-center justify-center rounded-full bg-white border border-gray-300 hover:bg-gray-100 transition-colors duration-200"
+              className="ml-2 flex items-center justify-center rounded-full bg-black hover:bg-neutral-800 transition-colors duration-200 border-none shadow-md"
               style={{
                 width: 48,
                 height: 48,
-                boxShadow: "0 2px 8px 0 #0002, 0 0.5px 2px 0 #23242622",
               }}
             >
               <ArrowRight
-                size={32}
-                strokeWidth={4}
-                color="#18181b"
+                size={28}
+                strokeWidth={3.5}
+                color="#fff"
                 className="mx-auto"
               />
             </button>
