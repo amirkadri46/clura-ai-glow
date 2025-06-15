@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Sidebar from "./profile/Sidebar";
 import PersonalInfo from "./profile/PersonalInfo";
@@ -14,7 +13,6 @@ import ProfileView from "@/components/profile/ProfileView";
 import { useNavigate } from "react-router-dom";
 import { useProfileData } from "@/hooks/useProfileData";
 import { useToast } from "@/hooks/use-toast";
-import { SidebarProvider } from "@/components/ui/sidebar"; // <-- Add this import
 
 // Main Profile page refactored to support view and edit modes.
 const Profile = () => {
@@ -124,87 +122,74 @@ const Profile = () => {
   };
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen h-screen bg-white flex flex-col">
-        <div className="flex flex-1 h-0 w-full">
-          <Sidebar
-            sidebarOpen={sidebarOpen}
-            setSidebarOpen={setSidebarOpen}
-            startNewSearch={startNewSearch}
-            goToProfile={goToProfile}
-          />
-          <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
-            <div className="w-full">
-              <div className="flex items-center mb-6 px-8 pt-8">
-                <h1 className="text-3xl font-bold text-black">My Profile</h1>
-              </div>
-              <ResumeUploadCard />
-              {mode === "edit" ? (
-                <>
-                  <PersonalInfo
-                    profile={profile}
-                    setProfile={setProfile}
-                    handleKeyPress={handleKeyPress}
-                  />
+    <div className="min-h-screen h-screen bg-white flex flex-col">
+      <div className="flex flex-1 h-0 w-full">
+        <Sidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          startNewSearch={startNewSearch}
+          goToProfile={goToProfile}
+        />
+        <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
+          <div className="w-full">
+            <div className="flex items-center mb-6 px-8 pt-8">
+              <h1 className="text-3xl font-bold text-black">My Profile</h1>
+            </div>
+            <ResumeUploadCard />
+            {mode === "edit" ? (
+              <>
+                <PersonalInfo
+                  profile={profile}
+                  setProfile={setProfile}
+                  handleKeyPress={handleKeyPress}
+                />
 
-                  <EducationSection
-                    education={education}
-                    addEducation={addEducation}
-                    removeEducation={removeEducation}
-                    updateEducation={updateEducation}
-                  />
+                <EducationSection
+                  education={education}
+                  addEducation={addEducation}
+                  removeEducation={removeEducation}
+                  updateEducation={updateEducation}
+                />
 
-                  <ExperienceSection
-                    experience={experience}
-                    addExperience={addExperience}
-                    removeExperience={removeExperience}
-                    updateExperience={updateExperience}
-                  />
+                <ExperienceSection
+                  experience={experience}
+                  addExperience={addExperience}
+                  removeExperience={removeExperience}
+                  updateExperience={updateExperience}
+                />
 
-                  <ProjectsSection
-                    projects={projects}
-                    addProject={addProject}
-                    removeProject={removeProject}
-                    updateProject={updateProject}
-                  />
+                <ProjectsSection
+                  projects={projects}
+                  addProject={addProject}
+                  removeProject={removeProject}
+                  updateProject={updateProject}
+                />
 
-                  <CertificationsSection
-                    certifications={certifications}
-                    addCertification={addCertification}
-                    removeCertification={removeCertification}
-                    updateCertification={updateCertification}
-                    handleKeyPress={handleKeyPress}
-                  />
+                <CertificationsSection
+                  certifications={certifications}
+                  addCertification={addCertification}
+                  removeCertification={removeCertification}
+                  updateCertification={updateCertification}
+                  handleKeyPress={handleKeyPress}
+                />
 
-                  <SkillsSection
-                    skills={skills}
-                    newSkill={newSkill}
-                    setNewSkill={setNewSkill}
-                    handleSkillKeyPress={handleSkillKeyPress}
-                    removeSkill={removeSkill}
-                  />
+                <SkillsSection
+                  skills={skills}
+                  newSkill={newSkill}
+                  setNewSkill={setNewSkill}
+                  handleSkillKeyPress={handleSkillKeyPress}
+                  removeSkill={removeSkill}
+                />
 
-                  <ProfilesSection
-                    profiles={profiles}
-                    addProfile={addProfile}
-                    removeProfile={removeProfile}
-                    updateProfile={updateProfile}
-                    handleKeyPress={handleKeyPress}
-                  />
+                <ProfilesSection
+                  profiles={profiles}
+                  addProfile={addProfile}
+                  removeProfile={removeProfile}
+                  updateProfile={updateProfile}
+                  handleKeyPress={handleKeyPress}
+                />
 
-                  <SaveProfileButton
-                    profile={profile}
-                    education={education}
-                    experience={experience}
-                    projects={projects}
-                    certifications={certifications}
-                    skills={skills}
-                    profiles={profiles}
-                    onSave={handleSaveProfile}
-                  />
-                </>
-              ) : (
-                <ProfileView
+                <SaveProfileButton
                   profile={profile}
                   education={education}
                   experience={experience}
@@ -212,17 +197,27 @@ const Profile = () => {
                   certifications={certifications}
                   skills={skills}
                   profiles={profiles}
-                  onEdit={handleEditProfile}
-                  onDelete={handleDeleteProfile}
+                  onSave={handleSaveProfile}
                 />
-              )}
-            </div>
+              </>
+            ) : (
+              <ProfileView
+                profile={profile}
+                education={education}
+                experience={experience}
+                projects={projects}
+                certifications={certifications}
+                skills={skills}
+                profiles={profiles}
+                onEdit={handleEditProfile}
+                onDelete={handleDeleteProfile}
+              />
+            )}
           </div>
         </div>
       </div>
-    </SidebarProvider>
+    </div>
   );
 };
 
 export default Profile;
-
