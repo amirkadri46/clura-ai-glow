@@ -154,18 +154,26 @@ const DashboardContent: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside, true);
   }, [menuOpenIndex]);
 
-  // Pass handlers/props as before
   const sidebarWidth = sidebarOpen ? 320 : 64;
 
   return (
     <div className="flex w-full min-h-screen transition-colors duration-300 relative bg-white">
+      {/* Sidebar */}
       <Sidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         startNewSearch={startNewSearch}
         goToProfile={goToProfile}
         recentSearches={recentSearches}
-        onRecentSearchClick={handleRecentSearchClick}
+        onRecentSearchClick={(recent) => {
+          setQuery(recent);
+          setSearchBarAtTop(false);
+          setResults([]);
+          setLoading(false);
+          setTimeout(() => {
+            handleSearch(undefined, recent);
+          }, 150);
+        }}
         onRecentMenuToggle={setMenuOpenIndex}
         menuOpenIndex={menuOpenIndex}
         onDeleteRecent={(i) => setRecentSearches(prev => prev.filter((_, idx) => idx !== i))}
@@ -195,33 +203,30 @@ const DashboardContent: React.FC = () => {
       >
         <span style={{ fontSize: 20, color: "#000" }}>{sidebarOpen ? "<" : ">"}</span>
       </button>
-      {/* Main Content */}
+      {/* Main Content (should take full available width after sidebar) */}
       <main
         className="flex-1 flex flex-col min-h-screen items-center bg-white p-3 md:px-12"
-        style={{ minWidth: 0 }}
+        style={{ minWidth: 0, position: "relative", overflow: "hidden" }}
       >
-        {/* Search Bar Component */}
-        <div className={`w-full ${searchBarAtTop ? '' : 'flex items-center justify-center min-h-[60vh]'}`}>
-          <SearchBar
-            query={query}
-            setQuery={setQuery}
-            onSearch={handleSearch}
-            searchBarAtTop={searchBarAtTop}
-            sidebarOpen={sidebarOpen}
-            loading={loading}
-          />
-        </div>
-
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          searchBarAtTop={searchBarAtTop}
+          sidebarOpen={sidebarOpen}
+          loading={loading}
+          onSearch={handleSearch}
+          onKeyDown={handleKeyDown}
+          inputRef={inputRef}
+        />
         {/* Loader */}
         {loading && (
           <div className="flex-1 flex items-center justify-center w-full h-60">
             <div className="text-lg font-medium text-indigo-600 animate-pulse">Searching...</div>
           </div>
         )}
-
         {/* Results */}
         {!loading && results.length > 0 && (
-          <div className="w-full pt-8 max-w-7xl mx-auto transition-all">
+          <div className="w-full pt-40 md:pt-36 max-w-7xl mx-auto transition-all">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {results.map((profile, idx) => (
                 <ProfileCard
@@ -232,9 +237,8 @@ const DashboardContent: React.FC = () => {
             </div>
           </div>
         )}
-
         {!loading && searchBarAtTop && results.length === 0 && (
-          <div className="w-full pt-8 text-xl text-gray-500 flex items-center justify-center min-h-[300px] animate-fade-in">
+          <div className="w-full pt-40 md:pt-36 text-xl text-gray-500 flex items-center justify-center min-h-[300px] animate-fade-in">
             No results found.
           </div>
         )}
