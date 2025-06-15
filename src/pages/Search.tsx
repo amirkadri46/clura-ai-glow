@@ -42,6 +42,7 @@ const Search = () => {
               transitionProperty: "opacity,height",
               marginBottom: sidebarOpen ? 10 : 0,
               minHeight: 48,
+              justifyContent: "flex-start", // ensure left alignment
             }}
           >
             <img
@@ -72,23 +73,22 @@ const Search = () => {
                   width: "200px",
                   height: "50px",
                   marginTop: 0,
-                  boxShadow: "0 0 0 0 transparent",
-                  transition: "box-shadow 0.2s, background 0.2s",
+                  boxShadow: "none",
                   letterSpacing: "1px",
                   outline: "none",
                   border: "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  transition: "transform 0.15s cubic-bezier(.4,0,.2,1)",
+                  // No hover box-shadow
                 }}
-                onMouseOver={e =>
-                  (e.currentTarget.style.boxShadow =
-                    "0px 0px 10px 2px #00A3FF")
-                }
-                onMouseOut={e =>
-                  (e.currentTarget.style.boxShadow =
-                    "0 0 0 0 transparent")
-                }
+                onMouseOver={e => {
+                  e.currentTarget.style.transform = "translateY(-3px)";
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
               >
                 START NEW SEARCH
               </button>
