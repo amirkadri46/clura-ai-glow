@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,7 @@ const Search = () => {
                 height: 48,
               }}
             >
-              <ArrowRight
+              <ChevronRight
                 size={28}
                 strokeWidth={3.5}
                 color="#fff"
