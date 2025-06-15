@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Sidebar from "./profile/Sidebar";
 import PersonalInfo from "./profile/PersonalInfo";
@@ -97,6 +96,31 @@ const Profile = () => {
     setMode("edit");
   };
 
+  // When Delete is clicked: reset all profile state and switch to edit mode
+  const handleDeleteProfile = () => {
+    setProfile({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      city: "",
+      country: "",
+      summary: ""
+    });
+    education.length && education.forEach(e => removeEducation(e.id));
+    experience.length && experience.forEach(e => removeExperience(e.id));
+    projects.length && projects.forEach(p => removeProject(p.id));
+    certifications.length && certifications.forEach((_, i) => removeCertification(0));
+    skills.length && skills.forEach((_, i) => removeSkill(0));
+    profiles.length && profiles.forEach((_, i) => removeProfile(0));
+    toast({
+      title: "Profile Deleted",
+      description: "Your profile has been deleted.",
+      variant: "destructive"
+    });
+    setMode("edit");
+  };
+
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
       <div className="flex flex-1 h-0 w-full">
@@ -111,9 +135,7 @@ const Profile = () => {
             <div className="flex items-center mb-6 px-8 pt-8">
               <h1 className="text-3xl font-bold text-black">My Profile</h1>
             </div>
-
             <ResumeUploadCard />
-
             {mode === "edit" ? (
               <>
                 <PersonalInfo
@@ -188,6 +210,7 @@ const Profile = () => {
                 skills={skills}
                 profiles={profiles}
                 onEdit={handleEditProfile}
+                onDelete={handleDeleteProfile}
               />
             )}
           </div>
