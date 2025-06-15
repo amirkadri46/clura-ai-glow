@@ -129,6 +129,7 @@ const Profile = () => {
           setSidebarOpen={setSidebarOpen}
           startNewSearch={startNewSearch}
           goToProfile={goToProfile}
+          recentSearches={[]} {/* Fix: pass empty array to prevent 'undefined.length' error */}
         />
         <div className="flex-1 h-full w-full bg-white p-0 overflow-y-auto">
           <div className="w-full">
