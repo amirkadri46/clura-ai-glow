@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Upload } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface Education {
   id: string;
@@ -50,6 +51,7 @@ interface ProfileType {
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [newSkill, setNewSkill] = useState("");
   const [profile, setProfile] = useState<ProfileType>({
@@ -202,6 +204,23 @@ const Profile = () => {
     }
   };
 
+  const handleSaveProfile = () => {
+    console.log("Saving profile data:", {
+      profile,
+      education,
+      experience,
+      projects,
+      certifications,
+      skills,
+      profiles
+    });
+    
+    toast({
+      title: "Profile Saved",
+      description: "Your profile has been saved successfully!",
+    });
+  };
+
   return (
     <div className="min-h-screen h-screen bg-white flex flex-col">
       <div className="flex flex-1 h-0 w-full">
@@ -298,7 +317,10 @@ const Profile = () => {
 
             {/* Save Button */}
             <div className="flex justify-end px-8 pb-8">
-              <Button className="border border-gray-300 text-black bg-white hover:bg-gray-100 px-8">
+              <Button 
+                onClick={handleSaveProfile}
+                className="border border-gray-300 text-black bg-white hover:bg-gray-100 px-8"
+              >
                 Save Profile
               </Button>
             </div>
