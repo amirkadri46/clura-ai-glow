@@ -224,7 +224,7 @@ const Profile = () => {
                   My Resume
                   <Button 
                     variant="outline"
-                    className="flex items-center border-gray-300 text-black bg-white hover:bg-gray-100"
+                    className="flex items-center border-gray-300 text-black bg-white hover:bg-gray-100 hover:text-black"
                     onClick={handleUploadClick}
                   >
                     <Upload className="w-4 h-4 mr-2" />
