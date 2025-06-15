@@ -1,10 +1,10 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ToggleLeft, ToggleRight, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 
-const SIDEBAR_WIDTH = 300; // previously 260
-const SIDEBAR_COLLAPSED_WIDTH = 56; // slightly wider when collapsed
+const SIDEBAR_WIDTH = 320; // A bit wider for clarity
+const SIDEBAR_COLLAPSED_WIDTH = 64; // Remains slim when collapsed
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -13,12 +13,24 @@ interface SidebarProps {
   goToProfile: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
-  sidebarOpen,
-  setSidebarOpen,
-  startNewSearch,
-  goToProfile,
-}) => {
+const menuItems = [
+  {
+    label: "Search",
+    icon: Search,
+    onClick: (props: SidebarProps) => props.startNewSearch(),
+    key: "search"
+  },
+  {
+    label: "Profile",
+    icon: User,
+    onClick: (props: SidebarProps) => props.goToProfile(),
+    key: "profile"
+  }
+];
+
+const Sidebar: React.FC<SidebarProps> = (props) => {
+  const { sidebarOpen, setSidebarOpen } = props;
+
   return (
     <div
       className="transition-all duration-300 relative flex flex-col border-r border-black"
@@ -26,21 +38,21 @@ const Sidebar: React.FC<SidebarProps> = ({
         width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         maxWidth: SIDEBAR_WIDTH,
-        background: "#f3f4f6",
+        background: "#fff",
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
         paddingBottom: 20,
       }}
     >
-      {/* Logo & Brand */}
+      {/* Logo */}
       <div
         className={`flex items-center transition-all duration-200 w-full px-4 pt-2 ${
           sidebarOpen ? "opacity-100 h-16" : "opacity-0 h-0 overflow-hidden"
         }`}
         style={{
           transitionProperty: "opacity,height",
-          marginBottom: sidebarOpen ? 10 : 0,
+          marginBottom: sidebarOpen ? 16 : 0,
           minHeight: 48,
           justifyContent: "flex-start",
         }}
@@ -58,76 +70,44 @@ const Sidebar: React.FC<SidebarProps> = ({
           style={{ transition: "opacity 0.2s" }}
         />
       </div>
-
-      {/* Start New Search */}
-      {sidebarOpen && (
-        <div className="w-full flex justify-center mb-2">
+      
+      {/* Sidebar Menu Items */}
+      <nav className="flex flex-col gap-1 mt-2 w-full px-2">
+        {menuItems.map(({ label, icon: Icon, onClick, key }) => (
           <button
-            onClick={startNewSearch}
-            className="text-white text-sm font-medium cursor-pointer transition-colors duration-200"
+            key={key}
+            onClick={() => onClick(props)}
+            className="flex flex-row items-center w-full px-4 py-2 rounded-lg transition-colors duration-150 text-base font-medium"
             style={{
-              background: "#374151",
-              borderRadius: "24px",
-              width: "220px",
-              height: "36px",
-              border: "none",
-              outline: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              color: "#8d94a1",
+              background: "#fff"
             }}
-            // Remove scaling, add subtle grey hover
-            onMouseOver={e => (e.currentTarget.style.background = "#40454e")}
-            onMouseOut={e => (e.currentTarget.style.background = "#374151")}
+            // Subtle grey hover. No scaling!
+            onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
+            onMouseOut={e => (e.currentTarget.style.background = "#fff")}
           >
-            new search
+            <Icon className="w-5 h-5 mr-3" color="#8d94a1" />
+            <span>{sidebarOpen ? label : null}</span>
           </button>
-        </div>
-      )}
+        ))}
+      </nav>
 
-      {/* Profile Button */}
-      {sidebarOpen && (
-        <div className="w-full flex justify-center mb-2">
-          <button
-            onClick={goToProfile}
-            className="flex items-center justify-center text-gray-800 text-sm font-medium cursor-pointer bg-transparent transition-colors duration-200"
-            style={{
-              borderRadius: "24px",
-              width: "220px",
-              height: "36px",
-              border: "1px solid #374151",
-              outline: "none",
-              background: "rgba(255,255,255,0.55)",
-              backdropFilter: "blur(20px)",
-            }}
-            // Remove scaling, add subtle grey hover
-            onMouseOver={e => (e.currentTarget.style.background = "#e5e7eb")}
-            onMouseOut={e => (e.currentTarget.style.background = "rgba(255,255,255,0.55)")}
-          >
-            <User className="w-4 h-4 mr-2" />
-            Profile
-          </button>
-        </div>
-      )}
-
-      {/* Toggle */}
+      {/* Toggle Button */}
       <button
         className="absolute top-3 right-3 z-20 border border-gray-200 rounded-full shadow p-2 transition flex items-center justify-center"
         style={{
           width: 40,
           height: 40,
-          background: "#23272f",
-          color: "#fff",
+          background: "#f3f4f6",
+          color: "#8d94a1",
         }}
         aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
         onClick={() => setSidebarOpen((v) => !v)}
         tabIndex={0}
       >
-        {sidebarOpen ? (
-          <ToggleLeft size={24} />
-        ) : (
-          <ToggleRight size={24} />
-        )}
+        {/* No arrow, collapsed state handled visually by menu items */}
+        {/* You can add an icon if you want */}
+        <span style={{ fontSize: 18 }}>{sidebarOpen ? "<" : ">"}</span>
       </button>
     </div>
   );
