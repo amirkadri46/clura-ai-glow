@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
 import RecentSearchItem from "./RecentSearchItem";
+import { useNavigate } from "react-router-dom";
 
 const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 64;
@@ -43,6 +44,7 @@ const menuItems = [
 ];
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
+  const navigate = useNavigate();
   const {
     sidebarOpen,
     startNewSearch,
@@ -149,7 +151,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           icon={Heart}
           label="Liked Cards"
           sidebarOpen={props.sidebarOpen}
-          onClick={() => {/* future functionality here */}}
+          onClick={() => navigate("/liked")}
           style={{
             marginBottom: props.sidebarOpen ? 8 : 10,
             marginTop: props.sidebarOpen ? 2 : undefined,
