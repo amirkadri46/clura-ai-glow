@@ -1,10 +1,11 @@
+
 import React, { createContext, useContext, useState, useCallback } from "react";
 import { DummyProfile } from "@/components/dummyProfiles";
 
 // Context type
 interface LikedCardsContextValue {
-  likedIds: string[];
-  isLiked: (id: string) => boolean;
+  likedIds: (string | number)[];
+  isLiked: (id: string | number) => boolean;
   toggleLike: (profile: DummyProfile) => void;
   likedProfiles: DummyProfile[];
   syncProfiles: (profiles: DummyProfile[]) => void;
@@ -18,28 +19,32 @@ export const useLikedCards = () => {
   return ctx;
 };
 
-export const LikedCardsProvider: React.FC<{ profiles: DummyProfile[], children: React.ReactNode }> = ({ profiles, children }) => {
-  const [likedIds, setLikedIds] = useState<string[]>([]);
+export const LikedCardsProvider: React.FC<{
+  profiles: DummyProfile[];
+  children: React.ReactNode;
+}> = ({ profiles, children }) => {
+  const [likedIds, setLikedIds] = useState<(string | number)[]>([]);
   const [allProfiles, setAllProfiles] = useState<DummyProfile[]>(profiles);
 
-  // Keep profiles in sync if dummyProfiles update
+  // Sync profiles when updated
   const syncProfiles = useCallback((ps: DummyProfile[]) => setAllProfiles(ps), []);
 
-  const isLiked = (id: string) => likedIds.includes(id);
+  const isLiked = (id: string | number) => likedIds.includes(id);
 
   const toggleLike = (profile: DummyProfile) => {
     setLikedIds((prev) => {
       if (prev.includes(profile.id)) return prev.filter((x) => x !== profile.id);
-      else return [profile.id, ...prev];
+      return [profile.id, ...prev];
     });
-    // allProfiles will be already set from Search or passed as prop
   };
 
   // Find the actual profiles by ID
   const likedProfiles = allProfiles.filter((p) => likedIds.includes(p.id));
 
   return (
-    <LikedCardsContext.Provider value={{ likedIds, isLiked, toggleLike, likedProfiles, syncProfiles }}>
+    <LikedCardsContext.Provider
+      value={{ likedIds, isLiked, toggleLike, likedProfiles, syncProfiles }}
+    >
       {children}
     </LikedCardsContext.Provider>
   );
