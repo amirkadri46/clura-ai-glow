@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { Send } from "lucide-react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/app-sidebar";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const navigate = useNavigate();
 
   const handleSend = () => {
     if (query.trim()) {
@@ -19,12 +22,24 @@ const Search = () => {
     }
   };
 
+  // Consistent sidebar controls
+  const handleNewSearch = () => {
+    setQuery("");
+    // Optionally, you can also focus input or reset more
+  };
+  const goToProfile = () => {
+    navigate("/profile");
+  };
+
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-[#18191A]">
-        {/* Sidebar */}
-        <AppSidebar />
-        {/* Main Content */}
+      <div className="min-h-screen flex w-full bg-white">
+        <AppSidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          onNewSearch={handleNewSearch}
+          onGoProfile={goToProfile}
+        />
         <main className="flex flex-1 items-center justify-center">
           <div
             className="w-full max-w-2xl rounded-2xl bg-[#232426] shadow-xl flex items-center px-8 py-6"
