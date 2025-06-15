@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { showSubmitToast } from "@/components/profile/submitToast";
 
 interface Education {
   id: string;
@@ -27,8 +28,6 @@ const EducationSection: React.FC<Props> = ({
   removeEducation,
   updateEducation,
 }) => {
-  const { showSubmitToast } = require("@/components/profile/submitToast");
-
   const handleInputKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       showSubmitToast();

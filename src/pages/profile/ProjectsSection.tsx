@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { showSubmitToast } from "@/components/profile/submitToast";
 
 interface Project {
   id: string;
@@ -26,8 +27,6 @@ const ProjectsSection: React.FC<Props> = ({
   removeProject,
   updateProject,
 }) => {
-  const { showSubmitToast } = require("@/components/profile/submitToast");
-
   const handleInputKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       showSubmitToast();
