@@ -66,18 +66,17 @@ const Search = () => {
             <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
               <button
                 onClick={startNewSearch}
-                className="text-white text-sm font-medium cursor-pointer"
+                className="text-white text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200"
                 style={{
                   background: "#374151",
                   borderRadius: "24px",
-                  width: "140px",
+                  width: "180px",
                   height: "36px",
                   border: "none",
                   outline: "none",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "none",
                 }}
               >
                 new search
