@@ -1,12 +1,11 @@
 
-import { useState } from 'react';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 
 const Search = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Header with Clura logo and name from home page */}
-      <header className="flex items-center p-4">
+    <div className="min-h-screen h-screen flex flex-col bg-white">
+      {/* Header with Clura logo and name, same as home page */}
+      <header className="flex items-center p-4 border-b border-gray-200">
         <div className="flex items-center space-x-2">
           <img 
             src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png" 
@@ -20,23 +19,16 @@ const Search = () => {
           />
         </div>
       </header>
-
-      {/* Main content area with resizable panels */}
-      <div className="flex-1">
-        <ResizablePanelGroup direction="horizontal" className="h-full">
-          {/* Sidebar */}
+      <div className="flex-1 h-0">
+        <ResizablePanelGroup direction="horizontal" className="h-full w-full">
+          {/* Sidebar - light grey and full height */}
           <ResizablePanel defaultSize={25} minSize={15} maxSize={40}>
-            <div className="h-full bg-gray-100">
-            </div>
+            <div className="bg-gray-100 h-full w-full flex flex-col"></div>
           </ResizablePanel>
-
-          {/* Resize handle */}
           <ResizableHandle withHandle />
-
-          {/* Main content */}
+          {/* Main content (empty for now) */}
           <ResizablePanel defaultSize={75}>
-            <div className="h-full">
-            </div>
+            <div className="h-full w-full"></div>
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
