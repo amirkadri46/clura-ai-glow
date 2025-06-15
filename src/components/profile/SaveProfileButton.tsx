@@ -12,6 +12,7 @@ interface SaveProfileButtonProps {
   certifications: string[];
   skills: string[];
   profiles: string[];
+  onSave?: () => void; // Make onSave optional for backward compatibility
 }
 
 const SaveProfileButton: React.FC<SaveProfileButtonProps> = ({
@@ -21,7 +22,8 @@ const SaveProfileButton: React.FC<SaveProfileButtonProps> = ({
   projects,
   certifications,
   skills,
-  profiles
+  profiles,
+  onSave
 }) => {
   const { toast } = useToast();
 
@@ -35,11 +37,14 @@ const SaveProfileButton: React.FC<SaveProfileButtonProps> = ({
       skills,
       profiles
     });
-    
+
     toast({
       title: "Profile Saved",
       description: "Your profile has been saved successfully!",
     });
+    if (onSave) {
+      onSave();
+    }
   };
 
   return (
