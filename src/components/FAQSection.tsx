@@ -50,9 +50,14 @@ const FAQSection = () => {
                 </span>
               </button>
               <div
-                className={`overflow-hidden transition-all duration-400 ease-in-out px-6 ${
-                  openIndex === index ? "max-h-40 py-2 opacity-100" : "max-h-0 py-0 opacity-0"
-                }`}
+                className={`
+                  overflow-hidden
+                  transition-[max-height,opacity,padding]
+                  duration-500
+                  ease-in-out
+                  px-6
+                  ${openIndex === index ? "max-h-40 py-2 opacity-100" : "max-h-0 py-0 opacity-0"}
+                `}
                 style={{
                   transitionProperty: "max-height, opacity, padding",
                 }}
