@@ -60,11 +60,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     onCancelRename,
   } = props;
 
+  const navigate = require("react-router-dom").useNavigate();
+
   // Assign correct click handlers for menuItems
   const itemHandlers = {
-    search: startNewSearch,
-    profile: goToProfile,
-    liked: () => {}, // Placeholder, can customize as needed
+    search: props.startNewSearch,
+    profile: props.goToProfile,
+    liked: () => navigate("/liked"),
   };
 
   // To focus input on rename open
@@ -149,7 +151,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           icon={Heart}
           label="Liked Cards"
           sidebarOpen={props.sidebarOpen}
-          onClick={() => {/* future functionality here */}}
+          onClick={() => navigate("/liked")}
           style={{
             marginBottom: props.sidebarOpen ? 8 : 10,
             marginTop: props.sidebarOpen ? 2 : undefined,
