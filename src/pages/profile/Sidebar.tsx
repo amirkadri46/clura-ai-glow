@@ -1,9 +1,9 @@
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, User } from "lucide-react";
 
-const SIDEBAR_WIDTH = 320;
-const SIDEBAR_COLLAPSED_WIDTH = 64;
+const SIDEBAR_WIDTH = 320; // A bit wider for clarity
+const SIDEBAR_COLLAPSED_WIDTH = 64; // Remains slim when collapsed
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -37,60 +37,55 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
         maxWidth: SIDEBAR_WIDTH,
-        background: "#c0d1fa", // Updated lighter blue
+        background: "#8cadff", // Updated background color
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
         paddingBottom: 20,
       }}
     >
-      {/* Logo Icon + Wordmark: Always show icon; show wordmark beside it if expanded, below icon if collapsed */}
+      {/* Logo */}
       <div
-        className="flex flex-col items-center transition-all duration-200 w-full px-2 pt-2"
+        className={`flex items-center transition-all duration-200 w-full px-4 pt-2 ${
+          sidebarOpen ? "opacity-100 h-16" : "opacity-0 h-0 overflow-hidden"
+        }`}
         style={{
+          transitionProperty: "opacity,height",
           marginBottom: sidebarOpen ? 16 : 0,
+          minHeight: 48,
+          justifyContent: "flex-start",
         }}
       >
         <img
           src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
           alt="Clura.ai Icon"
-          className={`w-8 h-8 mb-1`}
+          className="w-8 h-8"
           style={{ transition: "opacity 0.2s" }}
         />
-        {sidebarOpen ? (
-          <img
-            src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
-            alt="Clura"
-            className="h-6 ml-2"
-            style={{ transition: "opacity 0.2s" }}
-          />
-        ) : (
-          <img
-            src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
-            alt="Clura"
-            className="h-5 mt-1"
-            style={{ transition: "opacity 0.2s" }}
-          />
-        )}
+        <img
+          src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
+          alt="Clura"
+          className="h-6 ml-2"
+          style={{ transition: "opacity 0.2s" }}
+        />
       </div>
-
+      
       {/* Sidebar Menu Items */}
       <nav className="flex flex-col gap-1 mt-2 w-full px-2">
         {menuItems.map(({ label, icon: Icon, onClick, key }) => (
           <button
             key={key}
             onClick={() => onClick(props)}
-            className="flex items-center w-full px-4 py-2 rounded-lg transition-colors duration-150 text-base font-medium"
+            className="flex flex-row items-center w-full px-4 py-2 rounded-lg transition-colors duration-150 text-base font-medium"
             style={{
               color: "#8d94a1",
               background: "#fff"
             }}
-            // Subtle grey hover effect, as requested
+            // Subtle grey hover. No scaling!
             onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
             onMouseOut={e => (e.currentTarget.style.background = "#fff")}
           >
             <Icon className="w-5 h-5 mr-3" color="#8d94a1" />
-            {/* Always show icon; text label only in expanded mode */}
             <span>{sidebarOpen ? label : null}</span>
           </button>
         ))}
@@ -109,6 +104,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         onClick={() => setSidebarOpen((v) => !v)}
         tabIndex={0}
       >
+        {/* No arrow, collapsed state handled visually by menu items */}
+        {/* You can add an icon if you want */}
         <span style={{ fontSize: 18 }}>{sidebarOpen ? "<" : ">"}</span>
       </button>
     </div>
@@ -116,4 +113,3 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 };
 
 export default Sidebar;
-
