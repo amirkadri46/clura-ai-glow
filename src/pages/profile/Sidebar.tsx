@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Search, User, MoreVertical, Check, X } from "lucide-react";
+import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 
 const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 64;
@@ -33,6 +33,11 @@ const menuItems = [
     label: "Profile",
     icon: User,
     key: "profile"
+  },
+  {
+    label: "Liked Cards",
+    icon: Heart,
+    key: "liked"
   }
 ];
 
@@ -58,6 +63,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const itemHandlers = {
     search: startNewSearch,
     profile: goToProfile,
+    liked: () => {} // Placeholder, can customize as needed
   };
 
   // To focus input on rename open
@@ -73,8 +79,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     <div
       className="transition-all duration-300 relative flex flex-col border-r border-black"
       style={{
-        width: props.sidebarOpen ? 320 : 64,
-        minWidth: props.sidebarOpen ? 320 : 64,
+        width: sidebarOpen ? 320 : 64,
+        minWidth: sidebarOpen ? 320 : 64,
         maxWidth: 320,
         background: "#d1d9ed",
         height: "100%",
@@ -110,31 +116,35 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       </div>
 
       {/* Sidebar Menu Items */}
-      <nav className={`flex flex-col mt-2 w-full ${props.sidebarOpen ? "px-2 gap-1" : "items-center"} flex-1`}>
-        {menuItems.map(({ label, icon: Icon, key }) => (
+      <nav className={`flex flex-col mt-2 w-full ${sidebarOpen ? "px-2 gap-1" : "items-center"} flex-1`}>
+        {menuItems.map(({ label, icon: Icon, key }, idx) => (
           <button
             key={key}
             onClick={itemHandlers[key]}
-            className={`flex ${props.sidebarOpen ? "flex-row items-center w-full px-4 py-2 rounded-lg" : "flex-col items-center justify-center w-12 h-12 my-1 rounded-lg"} transition-colors duration-150 font-medium`}
+            className={`flex ${sidebarOpen ? "flex-row items-center w-full px-4 py-2 rounded-lg" : "flex-col items-center justify-center w-12 h-12 my-1 rounded-lg"} transition-colors duration-150 font-medium`}
             style={{
               color: "#8d94a1",
               background: "#d1d9ed",
+              marginBottom: key === "profile" ? (sidebarOpen ? "8px" : "6px") : 0, // Small gap under profile for liked
             }}
             onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
             onMouseOut={e => (e.currentTarget.style.background = "#d1d9ed")}
           >
-            <Icon className={props.sidebarOpen ? "w-5 h-5 mr-3" : "w-5 h-5"} color="#8d94a1" />
-            {props.sidebarOpen && <span>{label}</span>}
+            <Icon className={sidebarOpen ? "w-5 h-5 mr-3" : "w-5 h-5"} color="#8d94a1" />
+            {sidebarOpen && <span>{label}</span>}
           </button>
         ))}
 
+        {/* Spacer to push recent searches lower */}
+        <div style={{ marginTop: sidebarOpen ? 22 : 13 }} />
+
         {/* Recent Searches with grey hover effect */}
         {props.recentSearches && props.recentSearches.length > 0 && (
-          <div className={`w-full ${props.sidebarOpen ? "px-4 mt-5" : "flex flex-col items-center mt-4"}`}>
-            <div className={`text-xs font-semibold mb-2 text-gray-500 ${props.sidebarOpen ? "" : "text-center"}`}>
+          <div className={`w-full ${sidebarOpen ? "px-4 mt-5" : "flex flex-col items-center mt-4"}`}>
+            <div className={`text-xs font-semibold mb-2 text-gray-500 ${sidebarOpen ? "" : "text-center"}`}>
               Recent Search's
             </div>
-            <div className={`${props.sidebarOpen ? "space-y-1" : ""}`}>
+            <div className={`${sidebarOpen ? "space-y-1" : ""}`}>
               {props.recentSearches.map((q, i) =>
                 props.sidebarOpen ? (
                   <div
@@ -146,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                       <>
                         <input
                           ref={inputRef}
-                          className="text-sm px-2 py-1 border border-gray-300 rounded focus:outline-none mr-2 flex-1"
+                          className="text-sm px-2 py-1 border border-gray-300 rounded focus:outline-none mr-2 flex-1 bg-white"
                           value={props.editValue}
                           onChange={e => props.setEditValue(e.target.value)}
                           onBlur={() => props.onRename && props.onRename(i)}
@@ -157,7 +167,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                               props.onCancelRename && props.onCancelRename();
                             }
                           }}
-                          style={{ background: "#fff" }}
                         />
                         <button
                           onClick={() => props.onRename && props.onRename(i)}

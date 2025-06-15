@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 import Sidebar from "./profile/Sidebar";
@@ -149,12 +148,13 @@ const Search = () => {
                 <SearchIcon className="w-6 h-6" style={{ color: "#8d94a1" }} />
                 <input
                   type="text"
-                  className="flex-1 bg-transparent outline-none text-xl font-light text-[#8d94a1] placeholder-[#8d94a1] ml-4 mr-4"
+                  className="flex-1 bg-transparent outline-none text-xl font-light text-black placeholder-[#8d94a1] ml-4 mr-4"
                   placeholder="who are you looking for"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
                   autoFocus
+                  style={{ color: "#000" }}
                 />
                 {/* Send Button with grey hover effect */}
                 <button
