@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { ToggleLeft, ToggleRight } from "lucide-react";
 
@@ -69,9 +70,12 @@ const Search = () => {
                   fontFamily:
                     "'Montserrat', 'Roboto', 'Inter', 'sans-serif'",
                   background: "#13171f",
-                  borderRadius: "12px",
-                  width: "150px",
-                  height: "40px",
+-                 borderRadius: "25px",
+-                 width: "200px",
+-                 height: "50px",
++                 borderRadius: "12px",
++                 width: "150px",
++                 height: "40px",
                   marginTop: 0,
                   boxShadow: "none",
                   letterSpacing: "1px",
@@ -128,3 +132,4 @@ const Search = () => {
 };
 
 export default Search;
+
