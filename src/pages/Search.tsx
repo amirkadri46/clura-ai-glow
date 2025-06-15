@@ -1,143 +1,57 @@
 
 import React, { useState } from "react";
-import { ToggleLeft, ToggleRight, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-
-const SIDEBAR_WIDTH = 260;
-const SIDEBAR_COLLAPSED_WIDTH = 48;
+import { Send } from "lucide-react";
 
 const Search = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
 
-  // Placeholder new search action
-  const startNewSearch = () => {
-    // Add logic to reset/clear search params here
-    console.log("Starting new search session...");
-    // Example: clear URL params, set state, etc.
+  const handleSend = () => {
+    // logic for sending/searching, e.g., navigate, update state, etc.
+    if (query.trim()) {
+      // Placeholder: you can connect this with your app logic later
+      console.log("Searched:", query);
+    }
   };
 
-  const goToProfile = () => {
-    navigate("/profile");
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
   };
 
   return (
-    <div className="min-h-screen h-screen bg-white flex flex-col">
-      <div className="flex flex-1 h-0 w-full">
-        {/* Sidebar */}
-        <div
-          className="transition-all duration-300 relative flex flex-col"
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#18191A]">
+      {/* Grok-style search bar */}
+      <div
+        className="w-full max-w-2xl rounded-2xl bg-[#232426] shadow-xl flex items-center px-8 py-6"
+        style={{
+          boxShadow: "0 4px 32px 0 #0004, 0 1.5px 8px 0 #23242699",
+        }}
+      >
+        <input
+          type="text"
+          className="flex-1 bg-transparent outline-none text-lg text-neutral-200 placeholder:text-neutral-400 font-normal"
+          placeholder="What do you want to know?"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           style={{
-            width: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
-            minWidth: sidebarOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
-            maxWidth: SIDEBAR_WIDTH,
-            background: "#f3f4f6", // Tailwind bg-gray-100
-            height: "100%",
-            borderRight: "1px solid #e5e7eb",
-            overflow: "hidden",
-            // Move logo/title up by reducing top padding from 20px to 8px
-            paddingTop: 8,
-            paddingBottom: 20,
+            background: "transparent",
+          }}
+        />
+        <button
+          aria-label="Send"
+          onClick={handleSend}
+          className="ml-4 flex items-center justify-center rounded-full bg-[#333436] hover:bg-[#37393C] transition-colors duration-200"
+          style={{
+            width: 48,
+            height: 48,
+            boxShadow:
+              "0 2px 8px 0 #0002, 0 0.5px 2px 0 #23242655",
           }}
         >
-          {/* Top section: Logo & Brand (left-aligned, moved further up) */}
-          <div
-            className={`flex items-center transition-all duration-200 w-full px-4 pt-2 ${
-              sidebarOpen ? "opacity-100 h-16" : "opacity-0 h-0 overflow-hidden"
-            }`}
-            style={{
-              transitionProperty: "opacity,height",
-              marginBottom: sidebarOpen ? 10 : 0,
-              minHeight: 48,
-              justifyContent: "flex-start", // ensure left alignment
-              // Remove extra space above logo/title
-            }}
-          >
-            <img
-              src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
-              alt="Clura.ai Icon"
-              className="w-8 h-8"
-              style={{ transition: "opacity 0.2s" }}
-            />
-            <img
-              src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
-              alt="Clura"
-              className="h-6 ml-2"
-              style={{ transition: "opacity 0.2s" }}
-            />
-          </div>
-
-          {/* Start New Search button (centered below brand) */}
-          {sidebarOpen && (
-            <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
-              <button
-                onClick={startNewSearch}
-                className="text-white text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200"
-                style={{
-                  background: "#374151",
-                  borderRadius: "24px",
-                  width: "180px",
-                  height: "36px",
-                  border: "none",
-                  outline: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                new search
-              </button>
-            </div>
-          )}
-
-          {/* Profile Section */}
-          {sidebarOpen && (
-            <div className="w-full flex justify-center" style={{ marginBottom: "10px" }}>
-              <button
-                onClick={goToProfile}
-                className="flex items-center justify-center text-gray-800 text-sm font-medium cursor-pointer hover:scale-110 transition-transform duration-200 bg-transparent"
-                style={{
-                  borderRadius: "24px",
-                  width: "180px",
-                  height: "36px",
-                  border: "1px solid #374151",
-                  outline: "none",
-                }}
-              >
-                <User className="w-4 h-4 mr-2" />
-                Profile
-              </button>
-            </div>
-          )}
-
-          {/* Toggle Button always top right of sidebar */}
-          <button
-            className="absolute top-3 right-3 z-20 border border-gray-200 rounded-full shadow p-2 transition flex items-center justify-center"
-            style={{
-              width: 40,
-              height: 40,
-              background: "#23272f", // dark gray bg for visibility
-              color: "#fff",
-            }}
-            aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
-            onClick={() => setSidebarOpen((v) => !v)}
-            tabIndex={0}
-          >
-            {sidebarOpen ? (
-              <ToggleLeft size={24} />
-            ) : (
-              <ToggleRight size={24} />
-            )}
-          </button>
-          {/* Sidebar content area, only visible when open */}
-          <div className={`h-full w-full transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-            {/* Add your buttons and features here when open */}
-          </div>
-        </div>
-        {/* Main content */}
-        <div className="flex-1 h-full w-full transition-all duration-300">
-          {/* Placeholder for main content */}
-        </div>
+          <Send className="text-neutral-300" size={24} />
+        </button>
       </div>
     </div>
   );
