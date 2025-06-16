@@ -17,10 +17,10 @@ import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 import LikedCards from "./pages/LikedCards";
+import Settings from "./pages/Settings";
 import { LikedCardsProvider } from "@/hooks/useLikedCards";
 import { dummyProfiles } from "@/components/dummyProfiles";
 
-// Provide at the highest level so all routes have access
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -43,6 +43,7 @@ const App = () => (
             <Route path="/signup" element={<Signup />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/liked" element={<LikedCards />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
@@ -52,4 +53,3 @@ const App = () => (
 );
 
 export default App;
-

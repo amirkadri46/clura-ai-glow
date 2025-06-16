@@ -28,8 +28,9 @@ const UserCreditsBox: React.FC<UserCreditsBoxProps> = ({ sidebarOpen }) => {
               <Info className="w-4 h-4" />
             </button>
             {showTooltip && (
-              <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-50">
                 You have used your daily search credits. Upgrade to pro
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800"></div>
               </div>
             )}
           </div>
@@ -40,10 +41,13 @@ const UserCreditsBox: React.FC<UserCreditsBoxProps> = ({ sidebarOpen }) => {
 
       {/* Settings */}
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center">
+        <button 
+          onClick={() => navigate("/settings")}
+          className="flex items-center w-full p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
           <Settings className="w-4 h-4 text-gray-600 mr-2" />
           <span className="text-sm text-gray-700">Settings</span>
-        </div>
+        </button>
       </div>
 
       {/* Upgrade Button */}

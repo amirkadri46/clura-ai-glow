@@ -27,24 +27,6 @@ interface SidebarProps {
   onCancelRename?: () => void;
 }
 
-const menuItems = [
-  {
-    label: "New Search",
-    icon: Search,
-    key: "search",
-  },
-  {
-    label: "Profile",
-    icon: User,
-    key: "profile",
-  },
-  {
-    label: "Liked Cards",
-    icon: Heart,
-    key: "liked",
-  },
-];
-
 const Sidebar: React.FC<SidebarProps> = (props) => {
   const navigate = useNavigate();
   const {
@@ -64,24 +46,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     onCancelRename,
   } = props;
 
-  // Assign correct click handlers for menuItems
-  const itemHandlers = {
-    search: startNewSearch,
-    profile: goToProfile,
-    liked: () => {}, // Placeholder, can customize as needed
-  };
-
-  // To focus input on rename open
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // For closing menus by click outside
   const [openMenuIdx, setOpenMenuIdx] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     setOpenMenuIdx(props.menuOpenIndex ?? null);
   }, [props.menuOpenIndex]);
-
-  // Handle click outside for closing the menu (moved logic to RecentSearchMenu)
 
   React.useEffect(() => {
     if (editIndex !== null && sidebarOpen) {
@@ -89,43 +59,45 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     }
   }, [editIndex, sidebarOpen]);
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <div
-      className="transition-all duration-300 relative flex flex-col border-r"
+      className="relative flex flex-col border-r h-full overflow-hidden"
       style={{
         width: props.sidebarOpen ? 320 : 64,
         minWidth: props.sidebarOpen ? 320 : 64,
         maxWidth: 320,
         background: "#e6eaf6",
-        height: "100%",
-        overflow: "hidden",
         paddingTop: 8,
         paddingBottom: 0,
-        borderColor: "rgba(30,34,61,0.10)"
+        borderColor: "rgba(30,34,61,0.10)",
+        transition: "width 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
       }}
     >
       {/* Logo and Brand */}
       <div
-        className={`flex items-center transition-all duration-200 w-full px-4 pt-2`}
+        className={`flex items-center w-full px-4 pt-2 cursor-pointer hover:bg-gray-100 rounded-lg mx-2 transition-colors duration-200`}
         style={{
           marginBottom: props.sidebarOpen ? 16 : 0,
           minHeight: 48,
           justifyContent: "flex-start",
           height: "48px",
         }}
+        onClick={handleLogoClick}
       >
         <img
           src="/lovable-uploads/78ab56d9-6ccc-48d5-8802-a52814ec56ee.png"
           alt="Clura.ai Icon"
-          className="w-8 h-8"
-          style={{ transition: "opacity 0.2s" }}
+          className="w-8 h-8 transition-opacity duration-300"
         />
         {props.sidebarOpen && (
           <img
             src="/lovable-uploads/b44114ab-67b3-40dd-9c6f-fb15199406d2.png"
             alt="Clura"
-            className="h-6 ml-2"
-            style={{ transition: "opacity 0.2s" }}
+            className="h-6 ml-2 transition-opacity duration-300"
           />
         )}
       </div>
