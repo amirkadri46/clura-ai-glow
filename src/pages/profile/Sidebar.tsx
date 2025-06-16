@@ -106,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
       <nav
         className={`flex flex-col mt-2 w-full ${
           props.sidebarOpen ? "px-2 gap-1" : "items-center"
-        }`}
+        } flex-1`}
       >
         <SidebarMenuButton
           icon={Search}
@@ -171,7 +171,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         )}
       </nav>
 
-      {/* Credits Box at Bottom - Fixed Position */}
+      {/* Credits Box at Bottom */}
       <UserCreditsBox sidebarOpen={props.sidebarOpen} />
     </div>
   );

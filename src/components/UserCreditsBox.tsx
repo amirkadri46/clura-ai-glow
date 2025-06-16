@@ -14,7 +14,7 @@ const UserCreditsBox: React.FC<UserCreditsBoxProps> = ({ sidebarOpen }) => {
   if (!sidebarOpen) return null;
 
   return (
-    <div className="p-4 border-t border-gray-200 mt-auto">
+    <div className="p-4 border-t border-gray-200">
       {/* Credits Box */}
       <div className="bg-white border border-gray-300 rounded-lg p-4 mb-3">
         <div className="flex items-center justify-between mb-2">
@@ -28,9 +28,9 @@ const UserCreditsBox: React.FC<UserCreditsBoxProps> = ({ sidebarOpen }) => {
               <Info className="w-4 h-4" />
             </button>
             {showTooltip && (
-              <div className="absolute bottom-full right-0 mb-2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-50 max-w-xs">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-50">
                 You have used your daily search credits. Upgrade to pro
-                <div className="absolute top-full right-2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800"></div>
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800"></div>
               </div>
             )}
           </div>
@@ -43,13 +43,10 @@ const UserCreditsBox: React.FC<UserCreditsBoxProps> = ({ sidebarOpen }) => {
       <div className="flex items-center justify-between mb-3">
         <button 
           onClick={() => navigate("/settings")}
-          className="flex items-center w-full px-4 py-2 rounded-lg transition-colors duration-150 font-medium"
-          style={{ background: "#d1d9ed" }}
-          onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
-          onMouseOut={e => (e.currentTarget.style.background = "#d1d9ed")}
+          className="flex items-center w-full p-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
-          <Settings className="w-5 h-5 mr-3" color="#8d94a1" />
-          <span className="text-gray-700">Settings</span>
+          <Settings className="w-4 h-4 text-gray-600 mr-2" />
+          <span className="text-sm text-gray-700">Settings</span>
         </button>
       </div>
 
