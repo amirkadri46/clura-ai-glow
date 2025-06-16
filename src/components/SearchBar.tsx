@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Search as SearchIcon, ArrowRight } from "lucide-react";
 
 interface SearchBarProps {
@@ -25,6 +25,30 @@ const SearchBar: React.FC<SearchBarProps> = ({
   inputRef,
   autoFocus,
 }) => {
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    if (!searchBarAtTop) return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px
+        setIsScrollingUp(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsScrollingUp(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, searchBarAtTop]);
+
   // Calculate the available width and center position
   const availableWidth = `calc(100vw - ${sidebarWidth}px)`;
   const leftOffset = sidebarWidth;
@@ -32,13 +56,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const fixedStyles: React.CSSProperties = searchBarAtTop
     ? {
         position: "fixed" as "fixed",
-        top: 32,
+        top: isScrollingUp || lastScrollY < 100 ? 32 : -100,
         left: leftOffset,
         width: availableWidth,
         zIndex: 40,
         display: "flex",
         justifyContent: "center",
-        transition: "all 0.65s cubic-bezier(.33,1.01,.61,.99), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(.33,1.01,.61,.99)",
+        opacity: isScrollingUp || lastScrollY < 100 ? 1 : 0,
+        transform: `translateY(${isScrollingUp || lastScrollY < 100 ? 0 : -20}px)`,
       }
     : {
         position: "relative" as "relative",
@@ -51,7 +77,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div
-      className="transition-all duration-700"
+      className="transition-all duration-300"
       style={fixedStyles}
     >
       <form
