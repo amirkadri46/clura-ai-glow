@@ -14,20 +14,18 @@ const SidebarToggle: React.FC<SidebarToggleProps> = ({
 }) => {
   return (
     <button
-      className="absolute top-5 z-50 border-none rounded-full p-2 transition flex items-center justify-center"
+      className="absolute top-5 z-50 border-none rounded-full p-2 transition-colors duration-200 flex items-center justify-center hover:bg-gray-200"
       style={{
         width: 40,
         height: 40,
         background: "transparent",
         color: "#000",
         left: sidebarWidth,
-        transition: "left 0.3s, background 0.2s"
+        transition: "left 0.3s"
       }}
       aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
       onClick={onToggle}
       tabIndex={0}
-      onMouseOver={e => (e.currentTarget.style.background = "#f3f4f6")}
-      onMouseOut={e => (e.currentTarget.style.background = "transparent")}
     >
       <span style={{ fontSize: 20, color: "#000" }}>
         {sidebarOpen ? "<" : ">"}

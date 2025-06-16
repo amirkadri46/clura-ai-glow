@@ -81,10 +81,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <button
             aria-label="Search"
             type="submit"
-            className="flex items-center rounded-xl p-3 ml-2"
+            className="flex items-center rounded-xl p-3 ml-2 bg-black hover:bg-gray-800 transition-colors"
             style={{
-              background: "linear-gradient(90deg,#6c47ff 8%,#8b5cf6 80%)",
-              boxShadow: "0 2px 16px #6366f15c"
+              boxShadow: "0 2px 16px rgba(0,0,0,0.2)"
             }}
             tabIndex={0}
           >

@@ -1,8 +1,9 @@
 
 import React, { useRef } from "react";
-import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
+import { Search, User, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
 import RecentSearchItem from "./RecentSearchItem";
+import UserCreditsBox from "@/components/UserCreditsBox";
 import { useNavigate } from "react-router-dom";
 
 const SIDEBAR_WIDTH = 320;
@@ -95,11 +96,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         width: props.sidebarOpen ? 320 : 64,
         minWidth: props.sidebarOpen ? 320 : 64,
         maxWidth: 320,
-        background: "#e6eaf6", // match to design - soft light blue, not pure white
+        background: "#e6eaf6",
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
-        paddingBottom: 20,
+        paddingBottom: 0,
         borderColor: "rgba(30,34,61,0.10)"
       }}
     >
@@ -128,6 +129,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           />
         )}
       </div>
+      
+      {/* Navigation Menu */}
       <nav
         className={`flex flex-col mt-2 w-full ${
           props.sidebarOpen ? "px-2 gap-1" : "items-center"
@@ -156,7 +159,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             marginTop: props.sidebarOpen ? 2 : undefined,
           }}
         />
-        <div style={{ marginTop: props.sidebarOpen ? 6 : 5 }} />
+        
+        {/* Recent Searches */}
         {props.recentSearches && props.recentSearches.length > 0 && (
           <div
             className={`w-full ${
@@ -187,13 +191,16 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   onStartRename={props.onStartRename}
                   onRename={props.onRename}
                   onCancelRename={props.onCancelRename}
-                  closeMenu={() => {}} // For sidebar this is handled in RecentSearchItem
+                  closeMenu={() => {}}
                 />
               ))}
             </div>
           </div>
         )}
       </nav>
+
+      {/* Credits Box at Bottom */}
+      <UserCreditsBox sidebarOpen={props.sidebarOpen} />
     </div>
   );
 };
