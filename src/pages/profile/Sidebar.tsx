@@ -1,6 +1,6 @@
 
 import React, { useRef } from "react";
-import { Search, User, MoreVertical, Check, X, Heart, Settings } from "lucide-react";
+import { Search, User, MoreVertical, Check, X, Heart } from "lucide-react";
 import SidebarMenuButton from "./SidebarMenuButton";
 import RecentSearchItem from "./RecentSearchItem";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,24 @@ interface SidebarProps {
   onCancelRename?: () => void;
 }
 
+const menuItems = [
+  {
+    label: "New Search",
+    icon: Search,
+    key: "search",
+  },
+  {
+    label: "Profile",
+    icon: User,
+    key: "profile",
+  },
+  {
+    label: "Liked Cards",
+    icon: Heart,
+    key: "liked",
+  },
+];
+
 const Sidebar: React.FC<SidebarProps> = (props) => {
   const navigate = useNavigate();
   const {
@@ -45,6 +63,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     onCancelRename,
   } = props;
 
+  // Assign correct click handlers for menuItems
+  const itemHandlers = {
+    search: startNewSearch,
+    profile: goToProfile,
+    liked: () => {}, // Placeholder, can customize as needed
+  };
+
   // To focus input on rename open
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -54,6 +79,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   React.useEffect(() => {
     setOpenMenuIdx(props.menuOpenIndex ?? null);
   }, [props.menuOpenIndex]);
+
+  // Handle click outside for closing the menu (moved logic to RecentSearchMenu)
 
   React.useEffect(() => {
     if (editIndex !== null && sidebarOpen) {
@@ -68,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         width: props.sidebarOpen ? 320 : 64,
         minWidth: props.sidebarOpen ? 320 : 64,
         maxWidth: 320,
-        background: "#e6eaf6",
+        background: "#e6eaf6", // match to design - soft light blue, not pure white
         height: "100%",
         overflow: "hidden",
         paddingTop: 8,
@@ -101,7 +128,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           />
         )}
       </div>
-      
       <nav
         className={`flex flex-col mt-2 w-full ${
           props.sidebarOpen ? "px-2 gap-1" : "items-center"
@@ -130,23 +156,20 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             marginTop: props.sidebarOpen ? 2 : undefined,
           }}
         />
-        
         <div style={{ marginTop: props.sidebarOpen ? 6 : 5 }} />
-        
-        {/* Recent Searches Section - Always visible */}
-        <div
-          className={`w-full ${
-            props.sidebarOpen ? "px-4 mt-2" : "flex flex-col items-center mt-2"
-          }`}
-        >
+        {props.recentSearches && props.recentSearches.length > 0 && (
           <div
-            className={`text-xs font-semibold mb-2 text-gray-500 ${
-              props.sidebarOpen ? "" : "text-center"
+            className={`w-full ${
+              props.sidebarOpen ? "px-4 mt-2" : "flex flex-col items-center mt-2"
             }`}
           >
-            Recent Searches
-          </div>
-          {recentSearches && recentSearches.length > 0 && (
+            <div
+              className={`text-xs font-semibold mb-2 text-gray-500 ${
+                props.sidebarOpen ? "" : "text-center"
+              }`}
+            >
+              Recent Searches
+            </div>
             <div className={`${props.sidebarOpen ? "space-y-1" : ""}`}>
               {props.recentSearches.map((q, i) => (
                 <RecentSearchItem
@@ -164,25 +187,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   onStartRename={props.onStartRename}
                   onRename={props.onRename}
                   onCancelRename={props.onCancelRename}
-                  closeMenu={() => {}}
+                  closeMenu={() => {}} // For sidebar this is handled in RecentSearchItem
                 />
               ))}
             </div>
-          )}
-        </div>
-        
-        {/* Spacer to push settings to bottom */}
-        <div className="flex-1" />
-        
-        {/* Settings Button at Bottom */}
-        <div className={`${props.sidebarOpen ? "px-2" : "flex justify-center"} mb-4`}>
-          <SidebarMenuButton
-            icon={Settings}
-            label="Settings"
-            sidebarOpen={props.sidebarOpen}
-            onClick={() => console.log("Settings clicked")}
-          />
-        </div>
+          </div>
+        )}
       </nav>
     </div>
   );
